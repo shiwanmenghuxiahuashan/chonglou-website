@@ -6,12 +6,9 @@
 import { DataLayer } from './DataLayer'
 import { tokenService, TokenService } from './tokenService'
 import { CachePlugin, RetryPlugin, ErrorHandlerPlugin } from './plugins'
-import {
-  raceGuard,
-  requestCancelManager,
-  throttle,
-  debounce
-} from './utils/performance'
+import debounce from 'lodash/debounce'
+import throttle from 'lodash/throttle'
+import { raceGuard, requestCancelManager } from './utils/performance'
 import type { HttpConfig } from './types'
 
 /**
@@ -53,9 +50,7 @@ export {
   RetryPlugin,
   ErrorHandlerPlugin,
   raceGuard,
-  requestCancelManager,
-  throttle,
-  debounce
+  requestCancelManager
 }
 
 export type * from './types'

@@ -4,7 +4,9 @@
  */
 
 import type { RequestConfig, HttpResponse } from '../types'
-import { raceGuard, requestCancelManager, throttle, debounce } from '../utils/performance'
+import debounce from 'lodash/debounce'
+import throttle from 'lodash/throttle'
+import { raceGuard, requestCancelManager } from '../utils/performance'
 
 export class RequestEnhancer {
   /**

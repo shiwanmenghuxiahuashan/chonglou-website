@@ -3,8 +3,6 @@
  * 包含竞态守卫、节流、防抖等功能
  */
 
-import throttle from 'lodash/throttle'
-import debounce from 'lodash/debounce'
 import type { RequestConfig, PendingRequest } from '../types'
 
 /**
