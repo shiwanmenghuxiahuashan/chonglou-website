@@ -21,6 +21,22 @@ const router = createRouter({
         path: '/articles/:id',
         name: 'article-detail',
         component: () => import('../views/ArticleDetailView.vue')
+    },
+    {
+      path: '/demo/webworker',
+      name: 'webworker-demo',
+      component: () => import('../views/WebWorkerDemo.vue'),
+      meta: {
+        title: 'Web Worker 演示'
+      }
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: () => import('../views/AboutView.vue'),
+      meta: {
+        title: '关于我们'
+      }
     }
   ]
 })

@@ -1,0 +1,317 @@
+<template>
+  <div class="about-page">
+    <div class="hero-section">
+      <div class="hero-content">
+        <h1>关于重楼前端技术分享</h1>
+        <p class="hero-description">
+          专注于现代前端技术分享与交流的个人网站，记录学习过程，分享技术心得。
+        </p>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <el-row :gutter="24">
+        <el-col :xs="24" :md="12">
+          <el-card class="info-card">
+            <template #header>
+              <h3><Icon name="User" /> 关于我</h3>
+            </template>
+            <div class="card-content">
+              <p>我是重楼，一名前端开发工程师，热爱技术，喜欢分享。</p>
+              <p>专注于 Vue.js 生态系统、TypeScript、现代构建工具等前端技术领域。</p>
+              <p>希望通过这个网站记录自己的学习过程，也能帮助到其他开发者。</p>
+            </div>
+          </el-card>
+        </el-col>
+        
+        <el-col :xs="24" :md="12">
+          <el-card class="info-card">
+            <template #header>
+              <h3><Icon name="Monitor" /> 技术栈</h3>
+            </template>
+            <div class="card-content">
+              <div class="tech-stack">
+                <el-tag v-for="tech in techStack" :key="tech" class="tech-tag">
+                  {{ tech }}
+                </el-tag>
+              </div>
+            </div>
+          </el-card>
+        </el-col>
+      </el-row>
+
+      <el-row :gutter="24" class="mt-lg">
+        <el-col :xs="24" :md="12">
+          <el-card class="info-card">
+            <template #header>
+              <h3><Icon name="Target" /> 网站目标</h3>
+            </template>
+            <div class="card-content">
+              <ul class="goal-list">
+                <li>记录前端技术学习心得</li>
+                <li>分享实用的开发技巧</li>
+                <li>探索最新的前端技术趋势</li>
+                <li>构建开发者交流社区</li>
+              </ul>
+            </div>
+          </el-card>
+        </el-col>
+        
+        <el-col :xs="24" :md="12">
+          <el-card class="info-card">
+            <template #header>
+              <h3><Icon name="Link" /> 联系方式</h3>
+            </template>
+            <div class="card-content">
+              <div class="contact-item">
+                <Icon name="Message" />
+                <span>邮箱：contact@example.com</span>
+              </div>
+              <div class="contact-item">
+                <Icon name="Star" />
+                <span>GitHub：github.com/example</span>
+              </div>
+              <div class="contact-item">
+                <Icon name="ChatDotSquare" />
+                <span>微信：example_wechat</span>
+              </div>
+            </div>
+          </el-card>
+        </el-col>
+      </el-row>
+    </div>
+
+    <div class="features-section">
+      <h2>网站特色</h2>
+      <el-row :gutter="24">
+        <el-col :xs="24" :sm="12" :lg="6" v-for="feature in features" :key="feature.title">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <Icon :name="feature.icon" :size="32" />
+            </div>
+            <h4>{{ feature.title }}</h4>
+            <p>{{ feature.description }}</p>
+          </div>
+        </el-col>
+      </el-row>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import Icon from '@/components/common/Icon.vue'
+
+const techStack = ref([
+  'Vue 3', 'TypeScript', 'Vite', 'Pinia', 'Vue Router',
+  'Element Plus', 'SCSS', 'ESLint', 'Prettier', 'PWA'
+])
+
+const features = ref([
+  {
+    icon: 'Lightning',
+    title: '现代技术栈',
+    description: '采用 Vue 3 + TypeScript + Vite 构建，确保最佳的开发体验和性能。'
+  },
+  {
+    icon: 'Mobile',
+    title: '响应式设计',
+    description: '完美适配桌面端和移动端，提供一致的用户体验。'
+  },
+  {
+    icon: 'Moon',
+    title: '深色模式',
+    description: '支持明暗主题切换，保护用户视力，提升阅读体验。'
+  },
+  {
+    icon: 'Trophy',
+    title: 'PWA 支持',
+    description: '支持离线访问和安装到桌面，提供类原生应用体验。'
+  }
+])
+</script>
+
+<style scoped lang="scss">
+@use '@/styles/variables' as vars;
+@use '@/styles/mixins' as mix;
+
+.about-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+}
+
+.hero-section {
+  text-align: center;
+  padding: var(--spacing-3xl) 0;
+  background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
+  border-radius: var(--radius-lg);
+  color: white;
+  margin-bottom: var(--spacing-2xl);
+  
+  .hero-content {
+    max-width: 600px;
+    margin: 0 auto;
+    
+    h1 {
+      font-size: var(--font-size-3xl);
+      font-weight: var(--font-weight-bold);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .hero-description {
+      font-size: var(--font-size-lg);
+      line-height: var(--line-height-relaxed);
+      opacity: 0.9;
+    }
+  }
+}
+
+.content-section {
+  margin-bottom: var(--spacing-2xl);
+}
+
+.info-card {
+  height: 100%;
+  
+  .card-content {
+    line-height: var(--line-height-relaxed);
+    
+    p {
+      margin-bottom: var(--spacing-md);
+      color: var(--text-secondary);
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+  
+  h3 {
+    @include mix.flex-center;
+    gap: var(--spacing-sm);
+    margin: 0;
+    color: var(--color-primary);
+  }
+}
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.tech-tag {
+  margin: 0;
+}
+
+.goal-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  
+  li {
+    @include mix.flex-center;
+    justify-content: flex-start;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    color: var(--text-secondary);
+    
+    &:before {
+      content: '✓';
+      color: var(--color-success);
+      font-weight: var(--font-weight-bold);
+    }
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.contact-item {
+  @include mix.flex-center;
+  justify-content: flex-start;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  color: var(--text-secondary);
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.features-section {
+  text-align: center;
+  
+  h2 {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-2xl);
+    font-size: var(--font-size-2xl);
+  }
+}
+
+.feature-card {
+  padding: var(--spacing-xl);
+  text-align: center;
+  border-radius: var(--radius-md);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-light);
+  transition: all var(--transition-normal);
+  height: 100%;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .feature-icon {
+    @include mix.flex-center;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto var(--spacing-lg);
+    background: var(--color-primary-light);
+    border-radius: var(--radius-round);
+    color: var(--color-primary);
+  }
+  
+  h4 {
+    font-size: var(--font-size-lg);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-md);
+  }
+  
+  p {
+    color: var(--text-secondary);
+    line-height: var(--line-height-relaxed);
+    margin: 0;
+  }
+}
+
+.mt-lg {
+  margin-top: var(--spacing-lg);
+}
+
+// 响应式适配
+@include mix.mobile {
+  .hero-section {
+    padding: var(--spacing-2xl) var(--spacing-lg);
+    
+    .hero-content h1 {
+      font-size: var(--font-size-2xl);
+    }
+    
+    .hero-description {
+      font-size: var(--font-size-base);
+    }
+  }
+  
+  .feature-card {
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .tech-stack {
+    justify-content: center;
+  }
+}
+</style>

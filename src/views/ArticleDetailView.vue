@@ -59,13 +59,13 @@ const articleStore = useArticleStore()
 
 const article = computed(() => {
   const id = Number(route.params.id)
-  return articleStore.getArticleById(id)
+  return articleStore.articles.find(article => article.id === id)
 })
 
 onMounted(() => {
   // 确保文章数据已加载
   if (articleStore.articles.length === 0) {
-    articleStore.getArticles()
+    articleStore.fetchArticles()
   }
 })
 </script>

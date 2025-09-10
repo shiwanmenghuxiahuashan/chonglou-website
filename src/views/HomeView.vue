@@ -5,7 +5,7 @@ import { useArticleStore } from '@/stores/article'
 const articleStore = useArticleStore()
 
 onMounted(() => {
-  articleStore.getArticles()
+  articleStore.fetchArticles()
 })
 </script>
 
