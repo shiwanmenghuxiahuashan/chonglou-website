@@ -196,80 +196,81 @@ html {
   @include mix.custom-scrollbar;
 }
 
-// 工具类
-.sr-only {
+// 通用工具类 - 遵循 chonglou- 前缀 + BEM 命名法
+.chonglou-sr-only {
   @include mix.visually-hidden;
 }
 
-.clearfix {
+.chonglou-clearfix {
   @include mix.clearfix;
 }
 
-.text-center {
+.chonglou-text--center {
   text-align: center;
 }
 
-.text-left {
+.chonglou-text--left {
   text-align: left;
 }
 
-.text-right {
+.chonglou-text--right {
   text-align: right;
 }
 
-.mb-0 {
+// 间距工具类
+.chonglou-margin-bottom--0 {
   margin-bottom: 0;
 }
-.mb-1 {
+.chonglou-margin-bottom--xs {
   margin-bottom: var(--spacing-xs);
 }
-.mb-2 {
+.chonglou-margin-bottom--sm {
   margin-bottom: var(--spacing-sm);
 }
-.mb-3 {
+.chonglou-margin-bottom--md {
   margin-bottom: var(--spacing-md);
 }
-.mb-4 {
+.chonglou-margin-bottom--lg {
   margin-bottom: var(--spacing-lg);
 }
-.mb-5 {
+.chonglou-margin-bottom--xl {
   margin-bottom: var(--spacing-xl);
 }
 
-.mt-0 {
+.chonglou-margin-top--0 {
   margin-top: 0;
 }
-.mt-1 {
+.chonglou-margin-top--xs {
   margin-top: var(--spacing-xs);
 }
-.mt-2 {
+.chonglou-margin-top--sm {
   margin-top: var(--spacing-sm);
 }
-.mt-3 {
+.chonglou-margin-top--md {
   margin-top: var(--spacing-md);
 }
-.mt-4 {
+.chonglou-margin-top--lg {
   margin-top: var(--spacing-lg);
 }
-.mt-5 {
+.chonglou-margin-top--xl {
   margin-top: var(--spacing-xl);
 }
 
-.p-0 {
+.chonglou-padding--0 {
   padding: 0;
 }
-.p-1 {
+.chonglou-padding--xs {
   padding: var(--spacing-xs);
 }
-.p-2 {
+.chonglou-padding--sm {
   padding: var(--spacing-sm);
 }
-.p-3 {
+.chonglou-padding--md {
   padding: var(--spacing-md);
 }
-.p-4 {
+.chonglou-padding--lg {
   padding: var(--spacing-lg);
 }
-.p-5 {
+.chonglou-padding--xl {
   padding: var(--spacing-xl);
 }

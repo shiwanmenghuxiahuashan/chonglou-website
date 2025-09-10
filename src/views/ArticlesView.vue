@@ -1,6 +1,6 @@
 <template>
-  <div class="articles-view">
-    <h1>文章列表</h1>
+  <div class="chonglou-articles">
+    <h1 class="chonglou-articles__title">文章列表</h1>
     
     <el-alert 
       v-if="articleStore.error" 
@@ -13,27 +13,27 @@
       v-loading="articleStore.loading"
       element-loading-text="加载中..."
       element-loading-spinner="el-icon-loading"
-      class="articles-grid"
+      class="chonglou-articles__grid"
     >
       <el-card 
         v-for="article in articleStore.articles" 
         :key="article.id" 
-        class="article-card"
+        class="chonglou-articles__card"
         shadow="hover"
       >
         <template #header>
-          <div class="card-header">
-            <span class="article-title">{{ article.title }}</span>
+          <div class="chonglou-articles__card-header">
+            <span class="chonglou-articles__card-title">{{ article.title }}</span>
           </div>
         </template>
         
-        <div class="article-content">
-          <p class="article-summary">{{ article.summary }}</p>
-          <div class="article-meta">
+        <div class="chonglou-articles__card-content">
+          <p class="chonglou-articles__card-summary">{{ article.summary }}</p>
+          <div class="chonglou-articles__card-meta">
             <el-tag size="small">{{ article.author }}</el-tag>
-            <span class="publish-date">{{ article.publishDate }}</span>
+            <span class="chonglou-articles__card-date">{{ article.publishDate }}</span>
           </div>
-          <div class="article-tags">
+          <div class="chonglou-articles__card-tags">
             <el-tag 
               v-for="tag in article.tags" 
               :key="tag" 
@@ -67,65 +67,72 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
-.articles-view {
-  padding: 20px;
+<style scoped lang="scss">
+@use '@/styles/variables' as vars;
+@use '@/styles/mixins' as mix;
+
+.chonglou-articles {
+  padding: var(--spacing-lg);
 }
 
-.articles-grid {
+.chonglou-articles__title {
+  font-size: var(--font-size-3xl);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+}
+
+.chonglou-articles__grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-lg);
 }
 
-.article-card {
+.chonglou-articles__card {
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform var(--transition-normal);
+  
+  &:hover {
+    transform: translateY(-2px);
+  }
 }
 
-.article-card:hover {
-  transform: translateY(-2px);
+.chonglou-articles__card-header {
+  @include mix.flex-between;
 }
 
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.chonglou-articles__card-title {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
 }
 
-.article-title {
-  font-weight: bold;
-  font-size: 16px;
-}
-
-.article-content {
+.chonglou-articles__card-content {
   text-align: left;
 }
 
-.article-summary {
-  margin-bottom: 15px;
-  color: #666;
-  line-height: 1.5;
+.chonglou-articles__card-summary {
+  margin-bottom: var(--spacing-md);
+  color: var(--text-secondary);
+  line-height: var(--line-height-normal);
 }
 
-.article-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+.chonglou-articles__card-meta {
+  @include mix.flex-between;
+  margin-bottom: var(--spacing-sm);
 }
 
-.publish-date {
-  color: #999;
-  font-size: 12px;
+.chonglou-articles__card-date {
+  color: var(--text-placeholder);
+  font-size: var(--font-size-xs);
 }
 
-.article-tags {
-  margin-bottom: 15px;
-}
-
-.article-tags .el-tag {
-  margin-right: 5px;
+.chonglou-articles__card-tags {
+  margin-bottom: var(--spacing-md);
+  
+  .el-tag {
+    margin-right: var(--spacing-xs);
+  }
 }
 </style>

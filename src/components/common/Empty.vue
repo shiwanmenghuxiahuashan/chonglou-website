@@ -1,6 +1,6 @@
 <template>
-  <div class="empty-container">
-    <div class="empty-image">
+  <div class="chonglou-empty">
+    <div class="chonglou-empty__image">
       <svg
         width="64"
         height="64"
@@ -22,9 +22,9 @@
         />
       </svg>
     </div>
-    <div class="empty-content">
-      <h3 class="empty-title">{{ title }}</h3>
-      <p class="empty-description">{{ description }}</p>
+    <div class="chonglou-empty__content">
+      <h3 class="chonglou-empty__title">{{ title }}</h3>
+      <p class="chonglou-empty__description">{{ description }}</p>
       <slot name="extra"></slot>
     </div>
   </div>
@@ -46,14 +46,14 @@ withDefaults(defineProps<Props>(), {
 @use '@/styles/variables' as vars;
 @use '@/styles/mixins' as mix;
 
-.empty-container {
+.chonglou-empty {
   @include mix.flex-column-center;
   padding: var(--spacing-3xl) var(--spacing-xl);
   text-align: center;
   color: var(--text-secondary);
 }
 
-.empty-image {
+.chonglou-empty__image {
   margin-bottom: var(--spacing-lg);
   opacity: 0.6;
   
@@ -63,18 +63,18 @@ withDefaults(defineProps<Props>(), {
   }
 }
 
-.empty-content {
+.chonglou-empty__content {
   max-width: 300px;
 }
 
-.empty-title {
+.chonglou-empty__title {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-medium);
   color: var(--text-primary);
   margin-bottom: var(--spacing-sm);
 }
 
-.empty-description {
+.chonglou-empty__description {
   font-size: var(--font-size-sm);
   line-height: var(--line-height-normal);
   margin-bottom: var(--spacing-lg);
@@ -82,20 +82,20 @@ withDefaults(defineProps<Props>(), {
 
 // 响应式适配
 @include mix.mobile {
-  .empty-container {
+  .chonglou-empty {
     padding: var(--spacing-2xl) var(--spacing-md);
   }
   
-  .empty-image svg {
+  .chonglou-empty__image svg {
     width: 48px;
     height: 48px;
   }
   
-  .empty-title {
+  .chonglou-empty__title {
     font-size: var(--font-size-base);
   }
   
-  .empty-description {
+  .chonglou-empty__description {
     font-size: var(--font-size-xs);
   }
 }

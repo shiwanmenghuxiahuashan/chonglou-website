@@ -10,34 +10,34 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="home">
-    <div class="hero-section">
-      <h1 class="hero-title">重楼网站</h1>
-      <p class="hero-subtitle">探索重楼的药用价值与种植技术</p>
+  <div class="chonglou-home">
+    <div class="chonglou-home__hero">
+      <h1 class="chonglou-home__hero-title">重楼网站</h1>
+      <p class="chonglou-home__hero-subtitle">探索重楼的药用价值与种植技术</p>
       <el-button type="primary" size="large" @click="$router.push('/articles')">
         浏览文章
       </el-button>
     </div>
     
-    <div class="latest-articles">
-      <h2>最新文章</h2>
+    <div class="chonglou-home__articles">
+      <h2 class="chonglou-home__articles-title">最新文章</h2>
       <div 
         v-loading="articleStore.loading" 
         element-loading-text="加载中..."
         element-loading-spinner="el-icon-loading"
-        class="articles-preview"
+        class="chonglou-home__articles-grid"
       >
         <el-card 
           v-for="article in articleStore.articles.slice(0, 3)" 
           :key="article.id"
-          class="article-preview-card"
+          class="chonglou-home__article-card"
           shadow="hover"
         >
-          <h3>{{ article.title }}</h3>
-          <p class="preview-summary">{{ article.summary }}</p>
-          <div class="preview-meta">
+          <h3 class="chonglou-home__article-title">{{ article.title }}</h3>
+          <p class="chonglou-home__article-summary">{{ article.summary }}</p>
+          <div class="chonglou-home__article-meta">
             <el-tag size="small">{{ article.author }}</el-tag>
-            <span class="preview-date">{{ article.publishDate }}</span>
+            <span class="chonglou-home__article-date">{{ article.publishDate }}</span>
           </div>
           <el-button 
             type="text" 
@@ -51,80 +51,93 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped>
-.home {
-  padding: 40px 20px;
+<style scoped lang="scss">
+@use '@/styles/variables' as vars;
+@use '@/styles/mixins' as mix;
+
+.chonglou-home {
+  padding: var(--spacing-2xl) var(--spacing-lg);
 }
 
-.hero-section {
+.chonglou-home__hero {
   text-align: center;
-  margin-bottom: 60px;
-  padding: 60px 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  margin-bottom: var(--spacing-3xl);
+  padding: var(--spacing-3xl) 0;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
   color: white;
-  border-radius: 12px;
+  border-radius: var(--border-radius-lg);
 }
 
-.hero-title {
-  font-size: 48px;
-  font-weight: bold;
-  margin-bottom: 20px;
+.chonglou-home__hero-title {
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-lg);
+  
+  @include mix.mobile {
+    font-size: var(--font-size-4xl);
+  }
 }
 
-.hero-subtitle {
-  font-size: 20px;
-  margin-bottom: 30px;
+.chonglou-home__hero-subtitle {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-xl);
   opacity: 0.9;
+  
+  @include mix.mobile {
+    font-size: var(--font-size-lg);
+  }
 }
 
-.latest-articles {
+.chonglou-home__articles {
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.latest-articles h2 {
+.chonglou-home__articles-title {
   text-align: center;
-  margin-bottom: 30px;
-  font-size: 32px;
-  color: #333;
+  margin-bottom: var(--spacing-xl);
+  font-size: var(--font-size-3xl);
+  color: var(--text-primary);
+  
+  @include mix.mobile {
+    font-size: var(--font-size-2xl);
+  }
 }
 
-.articles-preview {
+.chonglou-home__articles-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
+  gap: var(--spacing-lg);
 }
 
-.article-preview-card {
+.chonglou-home__article-card {
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform var(--transition-normal);
+  
+  &:hover {
+    transform: translateY(-4px);
+  }
 }
 
-.article-preview-card:hover {
-  transform: translateY(-4px);
+.chonglou-home__article-title {
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-primary);
 }
 
-.article-preview-card h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: #333;
+.chonglou-home__article-summary {
+  color: var(--text-secondary);
+  line-height: var(--line-height-normal);
+  margin-bottom: var(--spacing-md);
 }
 
-.preview-summary {
-  color: #666;
-  line-height: 1.5;
-  margin-bottom: 15px;
+.chonglou-home__article-meta {
+  @include mix.flex-between;
+  margin-bottom: var(--spacing-md);
 }
 
-.preview-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.preview-date {
-  color: #999;
-  font-size: 12px;
+.chonglou-home__article-date {
+  color: var(--text-placeholder);
+  font-size: var(--font-size-xs);
 }
 </style>

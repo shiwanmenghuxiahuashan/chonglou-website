@@ -1,14 +1,14 @@
 <template>
-  <div class="common-layout">
+  <div class="chonglou-layout">
     <el-container>
       <el-header>
-        <nav class="main-nav">
-          <div class="nav-brand">
+        <nav class="chonglou-layout__nav">
+          <div class="chonglou-layout__brand">
             <h3>重楼网站</h3>
           </div>
-          <div class="nav-links">
-            <router-link to="/" class="nav-link">首页</router-link>
-            <router-link to="/articles" class="nav-link">文章</router-link>
+          <div class="chonglou-layout__links">
+            <router-link to="/" class="chonglou-layout__link">首页</router-link>
+            <router-link to="/articles" class="chonglou-layout__link">文章</router-link>
           </div>
         </nav>
       </el-header>
@@ -29,12 +29,12 @@
 @use '@/styles/variables' as vars;
 @use '@/styles/mixins' as mix;
 
-.common-layout {
+.chonglou-layout {
   min-height: 100vh;
   background-color: var(--bg-primary);
 }
 
-.main-nav {
+.chonglou-layout__nav {
   @include mix.flex-between;
   height: 100%;
   max-width: 1200px;
@@ -42,7 +42,7 @@
   width: 100%;
 }
 
-.nav-brand {
+.chonglou-layout__brand {
   h3 {
     color: var(--primary-color);
     font-weight: var(--font-weight-bold);
@@ -54,12 +54,12 @@
   }
 }
 
-.nav-links {
+.chonglou-layout__links {
   @include mix.flex-start;
   gap: var(--spacing-lg);
 }
 
-.nav-link {
+.chonglou-layout__link {
   color: var(--text-primary);
   font-weight: var(--font-weight-medium);
   text-decoration: none;
@@ -86,15 +86,15 @@
 
 // 响应式设计
 @include mix.mobile {
-  .main-nav {
+  .chonglou-layout__nav {
     padding: 0 var(--spacing-md);
   }
   
-  .nav-links {
+  .chonglou-layout__links {
     gap: var(--spacing-sm);
   }
   
-  .nav-link {
+  .chonglou-layout__link {
     padding: var(--spacing-xs) var(--spacing-sm);
     font-size: var(--font-size-sm);
   }

@@ -1,22 +1,22 @@
 <template>
-  <div class="about-page">
-    <div class="hero-section">
-      <div class="hero-content">
+  <div class="chonglou-about">
+    <div class="chonglou-about__hero">
+      <div class="chonglou-about__hero-content">
         <h1>关于重楼前端技术分享</h1>
-        <p class="hero-description">
+        <p class="chonglou-about__hero-description">
           专注于现代前端技术分享与交流的个人网站，记录学习过程，分享技术心得。
         </p>
       </div>
     </div>
 
-    <div class="content-section">
+    <div class="chonglou-about__content">
       <el-row :gutter="24">
         <el-col :xs="24" :md="12">
-          <el-card class="info-card">
+          <el-card class="chonglou-about__card">
             <template #header>
               <h3><Icon name="User" /> 关于我</h3>
             </template>
-            <div class="card-content">
+            <div class="chonglou-about__card-content">
               <p>我是重楼，一名前端开发工程师，热爱技术，喜欢分享。</p>
               <p>专注于 Vue.js 生态系统、TypeScript、现代构建工具等前端技术领域。</p>
               <p>希望通过这个网站记录自己的学习过程，也能帮助到其他开发者。</p>
@@ -25,13 +25,13 @@
         </el-col>
         
         <el-col :xs="24" :md="12">
-          <el-card class="info-card">
+          <el-card class="chonglou-about__card">
             <template #header>
               <h3><Icon name="Monitor" /> 技术栈</h3>
             </template>
-            <div class="card-content">
-              <div class="tech-stack">
-                <el-tag v-for="tech in techStack" :key="tech" class="tech-tag">
+            <div class="chonglou-about__card-content">
+              <div class="chonglou-about__tech-stack">
+                <el-tag v-for="tech in techStack" :key="tech" class="chonglou-about__tech-tag">
                   {{ tech }}
                 </el-tag>
               </div>
@@ -40,14 +40,14 @@
         </el-col>
       </el-row>
 
-      <el-row :gutter="24" class="mt-lg">
+      <el-row :gutter="24" class="chonglou-about__section">
         <el-col :xs="24" :md="12">
-          <el-card class="info-card">
+          <el-card class="chonglou-about__card">
             <template #header>
               <h3><Icon name="Target" /> 网站目标</h3>
             </template>
-            <div class="card-content">
-              <ul class="goal-list">
+            <div class="chonglou-about__card-content">
+              <ul class="chonglou-about__goal-list">
                 <li>记录前端技术学习心得</li>
                 <li>分享实用的开发技巧</li>
                 <li>探索最新的前端技术趋势</li>
@@ -58,20 +58,20 @@
         </el-col>
         
         <el-col :xs="24" :md="12">
-          <el-card class="info-card">
+          <el-card class="chonglou-about__card">
             <template #header>
               <h3><Icon name="Link" /> 联系方式</h3>
             </template>
-            <div class="card-content">
-              <div class="contact-item">
+            <div class="chonglou-about__card-content">
+              <div class="chonglou-about__contact-item">
                 <Icon name="Message" />
                 <span>邮箱：contact@example.com</span>
               </div>
-              <div class="contact-item">
+              <div class="chonglou-about__contact-item">
                 <Icon name="Star" />
                 <span>GitHub：github.com/example</span>
               </div>
-              <div class="contact-item">
+              <div class="chonglou-about__contact-item">
                 <Icon name="ChatDotSquare" />
                 <span>微信：example_wechat</span>
               </div>
@@ -81,12 +81,12 @@
       </el-row>
     </div>
 
-    <div class="features-section">
+    <div class="chonglou-about__features">
       <h2>网站特色</h2>
       <el-row :gutter="24">
         <el-col :xs="24" :sm="12" :lg="6" v-for="feature in features" :key="feature.title">
-          <div class="feature-card">
-            <div class="feature-icon">
+          <div class="chonglou-about__feature-card">
+            <div class="chonglou-about__feature-icon">
               <Icon :name="feature.icon" :size="32" />
             </div>
             <h4>{{ feature.title }}</h4>
@@ -135,21 +135,21 @@ const features = ref([
 @use '@/styles/variables' as vars;
 @use '@/styles/mixins' as mix;
 
-.about-page {
+.chonglou-about {
   max-width: 1200px;
   margin: 0 auto;
   padding: var(--spacing-lg);
 }
 
-.hero-section {
+.chonglou-about__hero {
   text-align: center;
   padding: var(--spacing-3xl) 0;
-  background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
-  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--primary-color-light) 0%, var(--primary-color) 100%);
+  border-radius: var(--border-radius-lg);
   color: white;
   margin-bottom: var(--spacing-2xl);
   
-  .hero-content {
+  .chonglou-about__hero-content {
     max-width: 600px;
     margin: 0 auto;
     
@@ -159,7 +159,7 @@ const features = ref([
       margin-bottom: var(--spacing-lg);
     }
     
-    .hero-description {
+    .chonglou-about__hero-description {
       font-size: var(--font-size-lg);
       line-height: var(--line-height-relaxed);
       opacity: 0.9;
@@ -167,14 +167,14 @@ const features = ref([
   }
 }
 
-.content-section {
+.chonglou-about__content {
   margin-bottom: var(--spacing-2xl);
 }
 
-.info-card {
+.chonglou-about__card {
   height: 100%;
   
-  .card-content {
+  .chonglou-about__card-content {
     line-height: var(--line-height-relaxed);
     
     p {
@@ -191,21 +191,21 @@ const features = ref([
     @include mix.flex-center;
     gap: var(--spacing-sm);
     margin: 0;
-    color: var(--color-primary);
+    color: var(--primary-color);
   }
 }
 
-.tech-stack {
+.chonglou-about__tech-stack {
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-sm);
 }
 
-.tech-tag {
+.chonglou-about__tech-tag {
   margin: 0;
 }
 
-.goal-list {
+.chonglou-about__goal-list {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -219,7 +219,7 @@ const features = ref([
     
     &:before {
       content: '✓';
-      color: var(--color-success);
+      color: var(--success-color);
       font-weight: var(--font-weight-bold);
     }
     
@@ -229,7 +229,7 @@ const features = ref([
   }
 }
 
-.contact-item {
+.chonglou-about__contact-item {
   @include mix.flex-center;
   justify-content: flex-start;
   gap: var(--spacing-sm);
@@ -241,20 +241,20 @@ const features = ref([
   }
 }
 
-.features-section {
+.chonglou-about__features {
   text-align: center;
   
   h2 {
-    color: var(--color-primary);
+    color: var(--primary-color);
     margin-bottom: var(--spacing-2xl);
     font-size: var(--font-size-2xl);
   }
 }
 
-.feature-card {
+.chonglou-about__feature-card {
   padding: var(--spacing-xl);
   text-align: center;
-  border-radius: var(--radius-md);
+  border-radius: var(--border-radius-md);
   background: var(--bg-elevated);
   border: 1px solid var(--border-light);
   transition: all var(--transition-normal);
@@ -265,14 +265,14 @@ const features = ref([
     box-shadow: var(--shadow-lg);
   }
   
-  .feature-icon {
+  .chonglou-about__feature-icon {
     @include mix.flex-center;
     width: 64px;
     height: 64px;
     margin: 0 auto var(--spacing-lg);
-    background: var(--color-primary-light);
-    border-radius: var(--radius-round);
-    color: var(--color-primary);
+    background: var(--primary-color-light);
+    border-radius: var(--border-radius-round);
+    color: var(--primary-color);
   }
   
   h4 {
@@ -288,29 +288,29 @@ const features = ref([
   }
 }
 
-.mt-lg {
+.chonglou-about__section {
   margin-top: var(--spacing-lg);
 }
 
 // 响应式适配
 @include mix.mobile {
-  .hero-section {
+  .chonglou-about__hero {
     padding: var(--spacing-2xl) var(--spacing-lg);
     
-    .hero-content h1 {
+    .chonglou-about__hero-content h1 {
       font-size: var(--font-size-2xl);
     }
     
-    .hero-description {
+    .chonglou-about__hero-description {
       font-size: var(--font-size-base);
     }
   }
   
-  .feature-card {
+  .chonglou-about__feature-card {
     margin-bottom: var(--spacing-lg);
   }
   
-  .tech-stack {
+  .chonglou-about__tech-stack {
     justify-content: center;
   }
 }

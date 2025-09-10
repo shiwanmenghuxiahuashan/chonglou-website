@@ -1,24 +1,24 @@
 <template>
-  <div class="web-worker-demo">
-    <div class="demo-header">
+  <div class="chonglou-worker-demo">
+    <div class="chonglou-worker-demo__header">
       <h2>Web Worker 性能演示</h2>
       <p>演示 Web Worker 在处理计算密集型任务时的性能优势</p>
     </div>
 
-    <div class="demo-controls">
-      <el-card class="demo-card">
+    <div class="chonglou-worker-demo__controls">
+      <el-card class="chonglou-worker-demo__card">
         <template #header>
           <span>斐波那契数列计算</span>
         </template>
         
-        <div class="control-group">
+        <div class="chonglou-worker-demo__control-group">
           <el-input-number 
             v-model="fibNumber" 
             :min="1" 
             :max="45" 
             label="计算第几个斐波那契数"
           />
-          <div class="button-group">
+          <div class="chonglou-worker-demo__button-group">
             <el-button 
               type="primary" 
               @click="calculateInWorker"
@@ -36,7 +36,7 @@
           </div>
         </div>
 
-        <div class="results" v-if="hasResults">
+        <div class="chonglou-worker-demo__results" v-if="hasResults">
           <el-descriptions :column="2" border>
             <el-descriptions-item label="Worker 结果">
               {{ workerResult || '未计算' }}
@@ -63,12 +63,12 @@
         />
       </el-card>
 
-      <el-card class="demo-card">
+      <el-card class="chonglou-worker-demo__card">
         <template #header>
           <span>大数组排序</span>
         </template>
         
-        <div class="control-group">
+        <div class="chonglou-worker-demo__control-group">
           <el-input-number 
             v-model="arraySize" 
             :min="1000" 
@@ -76,7 +76,7 @@
             :step="1000"
             label="数组大小"
           />
-          <div class="button-group">
+          <div class="chonglou-worker-demo__button-group">
             <el-button 
               type="primary" 
               @click="sortArrayInWorker"
@@ -93,7 +93,7 @@
           </div>
         </div>
 
-        <div class="results" v-if="hasSortResults">
+        <div class="chonglou-worker-demo__results" v-if="hasSortResults">
           <el-descriptions :column="2" border>
             <el-descriptions-item label="Worker 耗时">
               {{ sortWorkerTime ? `${sortWorkerTime}ms` : '未计算' }}
@@ -106,7 +106,7 @@
       </el-card>
     </div>
 
-    <div class="demo-info">
+    <div class="chonglou-worker-demo__info">
       <el-card>
         <template #header>
           <span>Web Worker 支持状态</span>
@@ -271,18 +271,18 @@ const clearWorkerError = () => {
 @use '@/styles/variables' as vars;
 @use '@/styles/mixins' as mix;
 
-.web-worker-demo {
+.chonglou-worker-demo {
   max-width: 1000px;
   margin: 0 auto;
   padding: var(--spacing-lg);
 }
 
-.demo-header {
+.chonglou-worker-demo__header {
   text-align: center;
   margin-bottom: var(--spacing-2xl);
   
   h2 {
-    color: var(--color-primary);
+    color: var(--primary-color);
     margin-bottom: var(--spacing-sm);
   }
   
@@ -292,40 +292,40 @@ const clearWorkerError = () => {
   }
 }
 
-.demo-controls {
+.chonglou-worker-demo__controls {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: var(--spacing-xl);
   margin-bottom: var(--spacing-xl);
 }
 
-.demo-card {
-  .control-group {
+.chonglou-worker-demo__card {
+  .chonglou-worker-demo__control-group {
     @include mix.flex-column;
     gap: var(--spacing-lg);
     
-    .button-group {
+    .chonglou-worker-demo__button-group {
       @include mix.flex-center;
       gap: var(--spacing-md);
     }
   }
   
-  .results {
+  .chonglou-worker-demo__results {
     margin-top: var(--spacing-lg);
   }
 }
 
-.demo-info {
+.chonglou-worker-demo__info {
   margin-top: var(--spacing-xl);
 }
 
 // 响应式适配
 @include mix.mobile {
-  .demo-controls {
+  .chonglou-worker-demo__controls {
     grid-template-columns: 1fr;
   }
   
-  .demo-card .control-group .button-group {
+  .chonglou-worker-demo__card .chonglou-worker-demo__control-group .chonglou-worker-demo__button-group {
     flex-direction: column;
     width: 100%;
     

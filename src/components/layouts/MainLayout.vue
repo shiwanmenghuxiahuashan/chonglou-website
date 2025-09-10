@@ -1,38 +1,38 @@
 <template>
-  <div class="main-layout" :class="{ 'sidebar-collapsed': sidebarCollapsed }">
+  <div class="chonglou-main-layout" :class="{ 'chonglou-main-layout--sidebar-collapsed': sidebarCollapsed }">
     <!-- 顶部导航栏 -->
-    <header class="layout-header">
+    <header class="chonglou-main-layout__header">
       <slot name="header">
-        <div class="header-content">
-          <div class="header-left">
+        <div class="chonglou-main-layout__header-content">
+          <div class="chonglou-main-layout__header-left">
             <button 
-              class="sidebar-toggle"
+              class="chonglou-main-layout__sidebar-toggle"
               @click="toggleSidebar"
               v-if="showSidebar"
             >
               <Icon name="Menu" :size="20" />
             </button>
-            <div class="logo">
+            <div class="chonglou-main-layout__logo">
               <slot name="logo">
                 <h1>{{ title }}</h1>
               </slot>
             </div>
           </div>
           
-          <div class="header-center">
+          <div class="chonglou-main-layout__header-center">
             <slot name="nav">
-              <nav class="main-nav">
-                <router-link to="/" class="nav-item">首页</router-link>
-                <router-link to="/articles" class="nav-item">文章</router-link>
-                <router-link to="/about" class="nav-item">关于</router-link>
+              <nav class="chonglou-main-layout__nav">
+                <router-link to="/" class="chonglou-main-layout__nav-item">首页</router-link>
+                <router-link to="/articles" class="chonglou-main-layout__nav-item">文章</router-link>
+                <router-link to="/about" class="chonglou-main-layout__nav-item">关于</router-link>
               </nav>
             </slot>
           </div>
           
-          <div class="header-right">
+          <div class="chonglou-main-layout__header-right">
             <slot name="actions">
-              <div class="header-actions">
-                <button class="theme-toggle" @click="toggleTheme">
+              <div class="chonglou-main-layout__actions">
+                <button class="chonglou-main-layout__theme-toggle" @click="toggleTheme">
                   <Icon :name="isDark ? 'Sunny' : 'Moon'" :size="18" />
                 </button>
               </div>
@@ -44,20 +44,20 @@
 
     <!-- 侧边栏 -->
     <aside 
-      class="layout-sidebar" 
+      class="chonglou-main-layout__sidebar" 
       v-if="showSidebar"
-      :class="{ 'collapsed': sidebarCollapsed }"
+      :class="{ 'chonglou-main-layout__sidebar--collapsed': sidebarCollapsed }"
     >
       <slot name="sidebar">
-        <div class="sidebar-content">
-          <nav class="sidebar-nav">
-            <div class="nav-group">
-              <h3 class="nav-group-title">导航</h3>
-              <router-link to="/" class="sidebar-nav-item">
+        <div class="chonglou-main-layout__sidebar-content">
+          <nav class="chonglou-main-layout__sidebar-nav">
+            <div class="chonglou-main-layout__nav-group">
+              <h3 class="chonglou-main-layout__nav-group-title">导航</h3>
+              <router-link to="/" class="chonglou-main-layout__sidebar-nav-item">
                 <Icon name="House" />
                 <span>首页</span>
               </router-link>
-              <router-link to="/articles" class="sidebar-nav-item">
+              <router-link to="/articles" class="chonglou-main-layout__sidebar-nav-item">
                 <Icon name="Document" />
                 <span>文章列表</span>
               </router-link>
@@ -68,8 +68,8 @@
     </aside>
 
     <!-- 主要内容区域 -->
-    <main class="layout-main">
-      <div class="main-content">
+    <main class="chonglou-main-layout__main">
+      <div class="chonglou-main-layout__content">
         <slot name="content">
           <router-view v-slot="{ Component, route }">
             <transition name="page" mode="out-in">
@@ -83,13 +83,13 @@
     </main>
 
     <!-- 底部 -->
-    <footer class="layout-footer">
+    <footer class="chonglou-main-layout__footer">
       <slot name="footer">
-        <div class="footer-content">
-          <div class="footer-info">
+        <div class="chonglou-main-layout__footer-content">
+          <div class="chonglou-main-layout__footer-info">
             <p>&copy; {{ currentYear }} {{ title }}. 基于 Vue 3 + TypeScript 构建</p>
           </div>
-          <div class="footer-links">
+          <div class="chonglou-main-layout__footer-links">
             <a href="https://github.com" target="_blank">GitHub</a>
             <a href="/privacy" target="_blank">隐私政策</a>
           </div>
@@ -159,7 +159,7 @@ onMounted(() => {
 @use '@/styles/variables' as vars;
 @use '@/styles/mixins' as mix;
 
-.main-layout {
+.chonglou-main-layout {
   min-height: 100vh;
   display: grid;
   grid-template-areas:
@@ -170,13 +170,13 @@ onMounted(() => {
   grid-template-rows: var(--header-height) 1fr auto;
   transition: grid-template-columns var(--transition-normal);
   
-  &.sidebar-collapsed {
+  &.chonglou-main-layout--sidebar-collapsed {
     grid-template-columns: var(--sidebar-collapsed-width) 1fr;
   }
 }
 
 // 头部样式
-.layout-header {
+.chonglou-main-layout__header {
   grid-area: header;
   background: var(--bg-header);
   border-bottom: 1px solid var(--border-light);
@@ -186,7 +186,7 @@ onMounted(() => {
   backdrop-filter: blur(8px);
 }
 
-.header-content {
+.chonglou-main-layout__header-content {
   @include mix.flex-between;
   height: var(--header-height);
   padding: 0 var(--spacing-lg);
@@ -194,61 +194,61 @@ onMounted(() => {
   margin: 0 auto;
 }
 
-.header-left {
+.chonglou-main-layout__header-left {
   @include mix.flex-center;
   gap: var(--spacing-md);
 }
 
-.sidebar-toggle {
+.chonglou-main-layout__sidebar-toggle {
   @include mix.button-ghost;
   padding: var(--spacing-xs);
-  border-radius: var(--radius-sm);
+  border-radius: var(--border-radius-sm);
   
   &:hover {
     background: var(--bg-hover);
   }
 }
 
-.logo h1 {
+.chonglou-main-layout__logo h1 {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
-  color: var(--color-primary);
+  color: var(--primary-color);
   margin: 0;
 }
 
-.header-center {
+.chonglou-main-layout__header-center {
   flex: 1;
   @include mix.flex-center;
 }
 
-.main-nav {
+.chonglou-main-layout__nav {
   @include mix.flex-center;
   gap: var(--spacing-lg);
 }
 
-.nav-item {
+.chonglou-main-layout__nav-item {
   padding: var(--spacing-sm) var(--spacing-md);
   color: var(--text-secondary);
   text-decoration: none;
-  border-radius: var(--radius-sm);
+  border-radius: var(--border-radius-sm);
   transition: all var(--transition-fast);
   
   &:hover,
   &.router-link-active {
-    color: var(--color-primary);
+    color: var(--primary-color);
     background: var(--bg-hover);
   }
 }
 
-.header-right {
+.chonglou-main-layout__header-right {
   @include mix.flex-center;
   gap: var(--spacing-md);
 }
 
-.theme-toggle {
+.chonglou-main-layout__theme-toggle {
   @include mix.button-ghost;
   padding: var(--spacing-xs);
-  border-radius: var(--radius-sm);
+  border-radius: var(--border-radius-sm);
   
   &:hover {
     background: var(--bg-hover);
@@ -256,7 +256,7 @@ onMounted(() => {
 }
 
 // 侧边栏样式
-.layout-sidebar {
+.chonglou-main-layout__sidebar {
   grid-area: sidebar;
   background: var(--bg-sidebar);
   border-right: 1px solid var(--border-light);
@@ -264,20 +264,20 @@ onMounted(() => {
   transition: width var(--transition-normal);
   overflow: hidden;
   
-  &.collapsed {
+  &.chonglou-main-layout__sidebar--collapsed {
     width: var(--sidebar-collapsed-width);
   }
 }
 
-.sidebar-content {
+.chonglou-main-layout__sidebar-content {
   padding: var(--spacing-lg);
 }
 
-.nav-group {
+.chonglou-main-layout__nav-group {
   margin-bottom: var(--spacing-xl);
 }
 
-.nav-group-title {
+.chonglou-main-layout__nav-group-title {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   color: var(--text-placeholder);
@@ -286,50 +286,50 @@ onMounted(() => {
   letter-spacing: 0.5px;
 }
 
-.sidebar-nav-item {
+.chonglou-main-layout__sidebar-nav-item {
   @include mix.flex-center;
   gap: var(--spacing-sm);
   padding: var(--spacing-sm) var(--spacing-md);
   color: var(--text-secondary);
   text-decoration: none;
-  border-radius: var(--radius-sm);
+  border-radius: var(--border-radius-sm);
   margin-bottom: var(--spacing-xs);
   transition: all var(--transition-fast);
   
   &:hover,
   &.router-link-active {
-    color: var(--color-primary);
+    color: var(--primary-color);
     background: var(--bg-hover);
   }
   
   span {
-    .layout.sidebar-collapsed & {
+    .chonglou-main-layout.chonglou-main-layout--sidebar-collapsed & {
       display: none;
     }
   }
 }
 
 // 主内容区域
-.layout-main {
+.chonglou-main-layout__main {
   grid-area: main;
   overflow: hidden;
 }
 
-.main-content {
+.chonglou-main-layout__content {
   height: 100%;
   padding: var(--spacing-lg);
   overflow-y: auto;
 }
 
 // 底部样式
-.layout-footer {
+.chonglou-main-layout__footer {
   grid-area: footer;
   background: var(--bg-footer);
   border-top: 1px solid var(--border-light);
   padding: var(--spacing-lg);
 }
 
-.footer-content {
+.chonglou-main-layout__footer-content {
   @include mix.flex-between;
   max-width: 1400px;
   margin: 0 auto;
@@ -337,7 +337,7 @@ onMounted(() => {
   color: var(--text-secondary);
 }
 
-.footer-links {
+.chonglou-main-layout__footer-links {
   @include mix.flex-center;
   gap: var(--spacing-lg);
   
@@ -346,7 +346,7 @@ onMounted(() => {
     text-decoration: none;
     
     &:hover {
-      color: var(--color-primary);
+      color: var(--primary-color);
     }
   }
 }
@@ -369,19 +369,19 @@ onMounted(() => {
 
 // 响应式适配
 @include mix.mobile {
-  .main-layout {
+  .chonglou-main-layout {
     grid-template-areas:
       "header"
       "main"
       "footer";
     grid-template-columns: 1fr;
     
-    &.sidebar-collapsed {
+    &.chonglou-main-layout--sidebar-collapsed {
       grid-template-columns: 1fr;
     }
   }
   
-  .layout-sidebar {
+  .chonglou-main-layout__sidebar {
     position: fixed;
     top: var(--header-height);
     left: 0;
@@ -390,16 +390,16 @@ onMounted(() => {
     transform: translateX(-100%);
     transition: transform var(--transition-normal);
     
-    &:not(.collapsed) {
+    &:not(.chonglou-main-layout__sidebar--collapsed) {
       transform: translateX(0);
     }
   }
   
-  .header-center {
+  .chonglou-main-layout__header-center {
     display: none;
   }
   
-  .footer-content {
+  .chonglou-main-layout__footer-content {
     flex-direction: column;
     gap: var(--spacing-md);
     text-align: center;

@@ -37,15 +37,15 @@ const emit = defineEmits<Emits>()
 
 // 计算图标类名
 const iconClass = computed(() => {
-  const baseClass = props.clickable ? 'icon-container clickable' : 'icon-container'
+  const baseClass = props.clickable ? 'chonglou-icon chonglou-icon--clickable' : 'chonglou-icon'
   
   switch (props.type) {
     case 'element':
       return `${baseClass} ${props.prefix}-${props.name}`
     case 'custom':
-      return `${baseClass} icon-${props.name}`
+      return `${baseClass} chonglou-icon--${props.name}`
     case 'svg':
-      return `${baseClass} icon-svg`
+      return `${baseClass} chonglou-icon--svg`
     default:
       return `${baseClass} ${props.prefix}-${props.name}`
   }
@@ -84,14 +84,14 @@ const handleClick = (event: MouseEvent) => {
 @use '@/styles/variables' as vars;
 @use '@/styles/mixins' as mix;
 
-.icon-container {
+.chonglou-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   vertical-align: middle;
   transition: all var(--transition-fast);
   
-  &.clickable {
+  &.chonglou-icon--clickable {
     cursor: pointer;
     
     &:hover {
@@ -111,12 +111,12 @@ const handleClick = (event: MouseEvent) => {
 }
 
 // Element Plus 图标兼容
-.icon-container[class*="el-icon-"] {
+.chonglou-icon[class*="el-icon-"] {
   line-height: 1;
 }
 
 // 自定义图标字体兼容
-.icon-container[class*="icon-"] {
+.chonglou-icon[class*="chonglou-icon--"] {
   font-family: 'iconfont', sans-serif;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
