@@ -120,9 +120,7 @@ class RequestCancelManager {
 }
 
 // 导出单例实例
-export const raceGuard = new RaceGuard()
-export const requestCancelManager = new RequestCancelManager()
+const raceGuard = new RaceGuard()
+const requestCancelManager = new RequestCancelManager()
 
-// 导出 lodash 的节流和防抖函数
-export { throttle, debounce }
-export { RaceGuard, RequestCancelManager }
+export { raceGuard, requestCancelManager, RaceGuard, RequestCancelManager }
