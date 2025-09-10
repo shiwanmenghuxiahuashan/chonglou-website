@@ -4,7 +4,7 @@ import type {
   ArticleQueryParams,
   PaginatedResponse
 } from '@/types/article'
-import { httpClient } from '@/lib/chonglouDataLayer'
+import { chonglouDataLayer } from '@/lib/chonglouDataLayer'
 import type { HttpResponse } from '@/lib/chonglouDataLayer'
 
 /**
@@ -18,7 +18,7 @@ export const getArticles = async (
   try {
     // 使用新的 HTTP 客户端，支持缓存和重试
     const response: HttpResponse<PaginatedResponse<Article>> =
-      await httpClient.get('/articles', {
+      await chonglouDataLayer.get('/articles', {
         params,
         cache: true, // 启用缓存
         cacheTime: 5 * 60 * 1000, // 缓存5分钟
@@ -243,7 +243,7 @@ const getMockArticles = async (
 export const getArticleDetail = async (id: number): Promise<ArticleDetail> => {
   try {
     // 使用新的 HTTP 客户端
-    const response: HttpResponse<ArticleDetail> = await httpClient.get(
+    const response: HttpResponse<ArticleDetail> = await chonglouDataLayer.get(
       `/articles/${id}`,
       {
         cache: true,
@@ -432,7 +432,7 @@ Composition API 为 Vue 3 带来了更强大的逻辑复用能力和更好的 Ty
  */
 export const getPopularArticles = async (limit = 5): Promise<Article[]> => {
   try {
-    const response: HttpResponse<Article[]> = await httpClient.get(
+    const response: HttpResponse<Article[]> = await chonglouDataLayer.get(
       '/articles/popular',
       {
         params: { limit },
@@ -461,7 +461,7 @@ export const getPopularArticles = async (limit = 5): Promise<Article[]> => {
  */
 export const getFeaturedArticles = async (limit = 3): Promise<Article[]> => {
   try {
-    const response: HttpResponse<Article[]> = await httpClient.get(
+    const response: HttpResponse<Article[]> = await chonglouDataLayer.get(
       '/articles/featured',
       {
         params: { limit },
@@ -494,7 +494,7 @@ export const searchArticles = async (
 ): Promise<PaginatedResponse<Article>> => {
   try {
     const response: HttpResponse<PaginatedResponse<Article>> =
-      await httpClient.get('/articles/search', {
+      await chonglouDataLayer.get('/articles/search', {
         params: { q: query, ...options },
         debounce: 500, // 500ms防抖
         cache: true,
@@ -512,4 +512,4 @@ export const searchArticles = async (
 }
 
 // 导出 HTTP 客户端实例，供其他服务使用
-export { httpClient as apiClient }
+export { chonglouDataLayer as apiClient }

@@ -21,4 +21,5 @@ app.use(ElementPlus)
 const settingsStore = useSettingsStore()
 settingsStore.initSettings()
 
+
 app.mount('#app')

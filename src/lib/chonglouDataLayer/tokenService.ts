@@ -28,10 +28,11 @@ class TokenService {
       expiresKey: 'token_expires',
       ...config
     }
-    
-    this.storage = this.config.storageType === 'localStorage' 
-      ? window.localStorage 
-      : window.sessionStorage
+
+    this.storage =
+      this.config.storageType === 'localStorage'
+        ? window.localStorage
+        : window.sessionStorage
   }
 
   /**
@@ -40,13 +41,13 @@ class TokenService {
   getToken(): string | null {
     try {
       const token = this.storage.getItem(this.config.tokenKey)
-      
+
       // 检查 Token 是否过期
       if (token && this.isTokenExpired()) {
         this.removeToken()
         return null
       }
-      
+
       return token
     } catch (error) {
       console.error('获取 Token 失败:', error)
@@ -60,13 +61,19 @@ class TokenService {
   setToken(tokenInfo: TokenInfo): void {
     try {
       this.storage.setItem(this.config.tokenKey, tokenInfo.accessToken)
-      
+
       if (tokenInfo.refreshToken) {
-        this.storage.setItem(this.config.refreshTokenKey, tokenInfo.refreshToken)
+        this.storage.setItem(
+          this.config.refreshTokenKey,
+          tokenInfo.refreshToken
+        )
       }
-      
+
       if (tokenInfo.expires) {
-        this.storage.setItem(this.config.expiresKey, tokenInfo.expires.toString())
+        this.storage.setItem(
+          this.config.expiresKey,
+          tokenInfo.expires.toString()
+        )
       }
     } catch (error) {
       console.error('设置 Token 失败:', error)
@@ -105,7 +112,7 @@ class TokenService {
     try {
       const expiresStr = this.storage.getItem(this.config.expiresKey)
       if (!expiresStr) return false
-      
+
       const expires = parseInt(expiresStr, 10)
       return Date.now() > expires
     } catch (error) {
@@ -130,7 +137,7 @@ class TokenService {
 }
 
 // 默认实例
-export const tokenService = new TokenService()
+const tokenService = new TokenService()
 
 // 导出类以支持自定义配置
-export { TokenService }
+export { TokenService, tokenService }
