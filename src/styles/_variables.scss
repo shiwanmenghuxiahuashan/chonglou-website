@@ -1,0 +1,169 @@
+// CSS 变量 - 优先使用 CSS Variables 定义主题色、背景色、边框色等
+:root {
+  // 主题色
+  --primary-color: #667eea;
+  --primary-light: #8497f0;
+  --primary-dark: #4f63d2;
+  
+  // 辅助色
+  --secondary-color: #764ba2;
+  --accent-color: #f093fb;
+  
+  // 中性色
+  --text-primary: #2c3e50;
+  --text-secondary: #7f8c8d;
+  --text-placeholder: #bdc3c7;
+  
+  // 背景色
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #e9ecef;
+  
+  // 边框色
+  --border-light: #e1e8ed;
+  --border-medium: #d1d9e0;
+  --border-dark: #adb5bd;
+  
+  // 状态色
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --info-color: #17a2b8;
+  
+  // 阴影
+  --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.15);
+  --shadow-heavy: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+  // 字体族
+  --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-family-code: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+  
+  // 字体大小
+  --font-size-xs: 0.75rem;   // 12px
+  --font-size-sm: 0.875rem;  // 14px
+  --font-size-base: 1rem;    // 16px
+  --font-size-lg: 1.125rem;  // 18px
+  --font-size-xl: 1.25rem;   // 20px
+  --font-size-2xl: 1.5rem;   // 24px
+  --font-size-3xl: 1.875rem; // 30px
+  --font-size-4xl: 2.25rem;  // 36px
+  --font-size-5xl: 3rem;     // 48px
+  
+  // 字重
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  // 行高
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  
+  // 间距
+  --spacing-xs: 0.25rem;   // 4px
+  --spacing-sm: 0.5rem;    // 8px
+  --spacing-md: 1rem;      // 16px
+  --spacing-lg: 1.5rem;    // 24px
+  --spacing-xl: 2rem;      // 32px
+  --spacing-2xl: 2.5rem;   // 40px
+  --spacing-3xl: 3rem;     // 48px
+  
+  // 圆角
+  --border-radius-sm: 0.25rem;  // 4px
+  --border-radius-md: 0.5rem;   // 8px
+  --border-radius-lg: 0.75rem;  // 12px
+  --border-radius-xl: 1rem;     // 16px
+  
+  // 过渡动画
+  --transition-fast: 0.15s ease-out;
+  --transition-normal: 0.25s ease-out;
+  --transition-slow: 0.35s ease-out;
+}
+
+// 暗黑模式变量
+[data-theme="dark"] {
+  --text-primary: #e8eaed;
+  --text-secondary: #9aa0a6;
+  --text-placeholder: #5f6368;
+  
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --bg-tertiary: #404040;
+  
+  --border-light: #404040;
+  --border-medium: #5f6368;
+  --border-dark: #80868b;
+}
+
+// SCSS 变量 - 用于在 SCSS 中计算和 mixins
+$primary-color: #667eea;
+$primary-light: #8497f0;
+$primary-dark: #4f63d2;
+
+$secondary-color: #764ba2;
+$accent-color: #f093fb;
+
+$text-primary: #2c3e50;
+$text-secondary: #7f8c8d;
+$text-placeholder: #bdc3c7;
+
+$bg-primary: #ffffff;
+$bg-secondary: #f8f9fa;
+$bg-tertiary: #e9ecef;
+
+$border-light: #e1e8ed;
+$border-medium: #d1d9e0;
+$border-dark: #adb5bd;
+
+$success-color: #28a745;
+$warning-color: #ffc107;
+$danger-color: #dc3545;
+$info-color: #17a2b8;
+
+$shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+$shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.15);
+$shadow-heavy: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+// 字体变量
+$font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$font-family-code: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+
+$font-size-xs: 0.75rem;   // 12px
+$font-size-sm: 0.875rem;  // 14px
+$font-size-base: 1rem;    // 16px
+$font-size-lg: 1.125rem;  // 18px
+$font-size-xl: 1.25rem;   // 20px
+$font-size-2xl: 1.5rem;   // 24px
+$font-size-3xl: 1.875rem; // 30px
+$font-size-4xl: 2.25rem;  // 36px
+$font-size-5xl: 3rem;     // 48px
+
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+$line-height-tight: 1.25;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.75;
+
+$spacing-xs: 0.25rem;   // 4px
+$spacing-sm: 0.5rem;    // 8px
+$spacing-md: 1rem;      // 16px
+$spacing-lg: 1.5rem;    // 24px
+$spacing-xl: 2rem;      // 32px
+$spacing-2xl: 2.5rem;   // 40px
+$spacing-3xl: 3rem;     // 48px
+
+$border-radius-sm: 0.25rem;  // 4px
+$border-radius-md: 0.5rem;   // 8px
+$border-radius-lg: 0.75rem;  // 12px
+$border-radius-xl: 1rem;     // 16px
+
+$transition-fast: 0.15s ease-out;
+$transition-normal: 0.25s ease-out;
+$transition-slow: 0.35s ease-out;

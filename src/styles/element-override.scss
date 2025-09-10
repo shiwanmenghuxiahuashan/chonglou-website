@@ -1,0 +1,263 @@
+// 使用 @use 语法导入
+@use './variables' as vars;
+@use './mixins' as mix;
+
+// Element Plus 主题变量覆盖
+:root {
+  // 主色调
+  --el-color-primary: var(--primary-color);
+  --el-color-primary-light-3: var(--primary-light);
+  --el-color-primary-light-5: #a5b4f3;
+  --el-color-primary-light-7: #c2cdf6;
+  --el-color-primary-light-8: #d1daf8;
+  --el-color-primary-light-9: #e0e6fa;
+  --el-color-primary-dark-2: var(--primary-dark);
+  
+  // 成功色
+  --el-color-success: var(--success-color);
+  // 警告色
+  --el-color-warning: var(--warning-color);
+  // 危险色
+  --el-color-danger: var(--danger-color);
+  // 信息色
+  --el-color-info: var(--info-color);
+  
+  // 文本颜色
+  --el-text-color-primary: var(--text-primary);
+  --el-text-color-regular: var(--text-secondary);
+  --el-text-color-secondary: var(--text-placeholder);
+  --el-text-color-placeholder: var(--text-placeholder);
+  
+  // 边框颜色
+  --el-border-color: var(--border-light);
+  --el-border-color-light: var(--border-light);
+  --el-border-color-lighter: var(--border-light);
+  --el-border-color-extra-light: var(--border-light);
+  --el-border-color-dark: var(--border-medium);
+  --el-border-color-darker: var(--border-dark);
+  
+  // 背景色
+  --el-bg-color: var(--bg-primary);
+  --el-bg-color-page: var(--bg-secondary);
+  --el-bg-color-overlay: var(--bg-primary);
+  
+  // 字体
+  --el-font-family: var(--font-family-base);
+  --el-font-size-base: var(--font-size-base);
+  --el-font-size-small: var(--font-size-sm);
+  --el-font-size-large: var(--font-size-lg);
+  --el-font-size-extra-large: var(--font-size-xl);
+  
+  // 圆角
+  --el-border-radius-base: var(--border-radius-md);
+  --el-border-radius-small: var(--border-radius-sm);
+  --el-border-radius-round: 50%;
+  --el-border-radius-circle: 50%;
+  
+  // 阴影
+  --el-box-shadow: var(--shadow-light);
+  --el-box-shadow-light: var(--shadow-light);
+  --el-box-shadow-base: var(--shadow-medium);
+  --el-box-shadow-dark: var(--shadow-heavy);
+  
+  // 过渡
+  --el-transition-duration: 0.3s;
+  --el-transition-duration-fast: 0.2s;
+}
+
+// 暗黑模式下的 Element Plus 变量
+[data-theme="dark"] {
+  --el-text-color-primary: var(--text-primary);
+  --el-text-color-regular: var(--text-secondary);
+  --el-text-color-secondary: var(--text-placeholder);
+  --el-text-color-placeholder: var(--text-placeholder);
+  
+  --el-border-color: var(--border-light);
+  --el-border-color-light: var(--border-light);
+  --el-border-color-lighter: var(--border-light);
+  --el-border-color-extra-light: var(--border-light);
+  --el-border-color-dark: var(--border-medium);
+  --el-border-color-darker: var(--border-dark);
+  
+  --el-bg-color: var(--bg-primary);
+  --el-bg-color-page: var(--bg-secondary);
+  --el-bg-color-overlay: var(--bg-primary);
+}
+
+// 自定义 Element Plus 组件样式
+.el-card {
+  border: 1px solid var(--border-light);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-light);
+  transition: all var(--transition-normal);
+  
+  &:hover {
+    box-shadow: var(--shadow-medium);
+    transform: translateY(-2px);
+  }
+  
+  .el-card__header {
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--border-light);
+    background-color: var(--bg-secondary);
+  }
+  
+  .el-card__body {
+    padding: var(--spacing-lg);
+  }
+}
+
+.el-button {
+  border-radius: var(--border-radius-md);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-normal);
+  
+  &.el-button--primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border: none;
+    
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-medium);
+    }
+  }
+  
+  &.el-button--default {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-medium);
+    color: var(--text-primary);
+    
+    &:hover {
+      background-color: var(--bg-tertiary);
+      border-color: var(--border-dark);
+    }
+  }
+}
+
+.el-input {
+  .el-input__wrapper {
+    border-radius: var(--border-radius-md);
+    box-shadow: none;
+    border: 1px solid var(--border-medium);
+    transition: border-color var(--transition-normal);
+    
+    &:hover {
+      border-color: var(--border-dark);
+    }
+    
+    &.is-focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+    }
+  }
+  
+  .el-input__inner {
+    color: var(--text-primary);
+    
+    &::placeholder {
+      color: var(--text-placeholder);
+    }
+  }
+}
+
+.el-tag {
+  border-radius: var(--border-radius-sm);
+  border: none;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  
+  &.el-tag--info {
+    background-color: var(--bg-tertiary);
+    color: var(--text-secondary);
+  }
+  
+  &.el-tag--primary {
+    background-color: var(--primary-color);
+    color: white;
+  }
+}
+
+.el-container {
+  background-color: var(--bg-primary);
+}
+
+.el-header {
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-light);
+  @include mix.flex-between;
+  padding: 0 var(--spacing-xl);
+}
+
+.el-main {
+  background-color: var(--bg-secondary);
+  padding: var(--spacing-xl);
+  min-height: calc(100vh - 120px);
+}
+
+.el-footer {
+  background-color: var(--bg-primary);
+  border-top: 1px solid var(--border-light);
+  @include mix.flex-center;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.el-alert {
+  border-radius: var(--border-radius-md);
+  border: none;
+  
+  &.el-alert--error {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: var(--danger-color);
+  }
+  
+  &.el-alert--success {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: var(--success-color);
+  }
+  
+  &.el-alert--warning {
+    background-color: rgba(255, 193, 7, 0.1);
+    color: var(--warning-color);
+  }
+  
+  &.el-alert--info {
+    background-color: rgba(23, 162, 184, 0.1);
+    color: var(--info-color);
+  }
+}
+
+// Element Plus Loading 样式定制
+.el-loading-mask {
+  background-color: rgba(255, 255, 255, 0.9);
+  
+  .el-loading-spinner {
+    .circular {
+      color: var(--primary-color);
+    }
+    
+    .el-loading-text {
+      color: var(--text-secondary);
+      font-size: var(--font-size-sm);
+    }
+  }
+}
+
+// 暗黑模式下的 Loading 样式
+[data-theme="dark"] {
+  .el-loading-mask {
+    background-color: rgba(26, 26, 26, 0.9);
+  }
+}
+
+.el-divider {
+  border-color: var(--border-light);
+  margin: var(--spacing-xl) 0;
+}
+
+.el-empty {
+  .el-empty__description {
+    color: var(--text-secondary);
+  }
+}
