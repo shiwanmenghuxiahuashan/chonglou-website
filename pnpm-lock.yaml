@@ -26,6 +26,9 @@ importers:
       vue-router:
         specifier: ^4.5.1
         version: 4.5.1(vue@3.5.21(typescript@5.6.3))
+      web-memcache:
+        specifier: ^1.0.2
+        version: 1.0.2
     devDependencies:
       '@element-plus/eslint-config':
         specifier: ^0.0.20250909
@@ -2913,6 +2916,10 @@ packages:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
 
+  qs@6.14.0:
+    resolution: {integrity: sha512-YWWTjgABSKcvs/nWBi9PycY/JiPJqOD4JA6o9Sej2AtvSGarXxKC3OQSk4pAarbdQlKAh5D4FCQkJNkW+GAn3w==}
+    engines: {node: '>=0.6'}
+
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
@@ -3496,6 +3503,9 @@ packages:
     peerDependenciesMeta:
       typescript:
         optional: true
+
+  web-memcache@1.0.2:
+    resolution: {integrity: sha512-RfOBwVnXt3rhyfPiWqZ4UvU3XbsDt2mxZQgkq1hr8nlB5ETAjjDfT4pgLmAKZRFI07PjqDFWLTS9mX9gy3R39w==}
 
   webidl-conversions@4.0.2:
     resolution: {integrity: sha512-YQ+BmxuTgd6UXZW3+ICGfyqRyHXVlD5GtQr5+qjiNW7bF0cqrzX500HVXPBOvgXb5YnzDd+h0zqyv61KUD7+Sg==}
@@ -6625,6 +6635,10 @@ snapshots:
 
   punycode@2.3.1: {}
 
+  qs@6.14.0:
+    dependencies:
+      side-channel: 1.1.0
+
   queue-microtask@1.2.3: {}
 
   randombytes@2.1.0:
@@ -7304,6 +7318,10 @@ snapshots:
       '@vue/shared': 3.5.21
     optionalDependencies:
       typescript: 5.6.3
+
+  web-memcache@1.0.2:
+    dependencies:
+      qs: 6.14.0
 
   webidl-conversions@4.0.2: {}
 
