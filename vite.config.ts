@@ -9,7 +9,7 @@ export default defineConfig({
     vue(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg'],
+      includeAssets: ['image/icon/favicon.webp'],
       devOptions: {
         enabled: false  // 开发环境禁用 PWA
       },
@@ -25,14 +25,25 @@ export default defineConfig({
         start_url: '/',
         icons: [
           {
-            src: 'favicon.svg',
-            sizes: 'any',
-            type: 'image/svg+xml'
+            src: 'image/icon/favicon.webp',
+            sizes: '128x128',
+            type: 'image/webp'
+          },
+          {
+            src: 'image/icon/favicon.webp',
+            sizes: '192x192',
+            type: 'image/webp'
+          },
+          {
+            src: 'image/icon/favicon.webp',
+            sizes: '512x512',
+            type: 'image/webp',
+            purpose: 'any maskable'
           }
         ]
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,woff2}'],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
