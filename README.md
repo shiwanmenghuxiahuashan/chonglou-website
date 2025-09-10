@@ -25,8 +25,6 @@ src/
 │   └── ArticleDetailView.vue # 文章详情页
 ├── stores/              # Pinia 状态管理
 │   └── article.ts       # 文章相关状态
-├── data/                # 模拟数据
-│   └── mockData.ts      # Mock 文章数据
 ├── styles/              # 样式文件
 │   ├── _variables.scss  # CSS变量和SCSS变量
 │   ├── _mixins.scss     # SCSS混入
@@ -40,28 +38,32 @@ src/
 ## 第一阶段完成情况
 
 ### ✅ 任务 1.1：项目初始化与依赖配置
+
 - 使用 `pnpm` 作为包管理工具
 - 使用 `Vite` 初始化 Vue 3 + TypeScript 项目
 - 集成 `Pinia`、`Vue Router`、`Element Plus`
 - 项目可正常运行 (`pnpm install` 和 `pnpm run dev`)
 
 ### ✅ 任务 1.2：代码规范化与自动化
+
 - 配置 `ESLint`、`Prettier`、`Stylelint`
 - 集成 `Standardjs` 规范和 Vue/Element Plus 相关规则
 - 配置文件：`.eslintrc.cjs`、`.prettierrc`、`.stylelintrc.cjs`
 
 ### ✅ 任务 1.3：基础响应式布局与路由实现
+
 - 实现通用 `Layout` 组件（含导航栏和页脚）
 - 定义三个核心路由：`/`、`/articles`、`/articles/:id`
 - 使用 CSS Flexbox 实现响应式布局
 - 支持移动端适配
 
 ### ✅ 任务 1.4：Mock 数据与 Pinia Store
-- 创建 Mock 文章数据 (`src/data/mockData.ts`)
+
 - 实现 `article` Pinia Store 模块
 - 在文章列表页展示 Mock 数据
 
 ### ✅ 任务 1.5：UI样式
+
 - **优先使用 CSS Variables** 定义主题色、背景色、边框色等
 - **使用 SCSS 预处理器** 编写样式文件
 - **采用官方推荐的 `@use` 语法** 替代 `@import`
@@ -115,4 +117,4 @@ pnpm run lint:style
 
 ---
 
-*第一阶段开发已完成，接下来将进入第二阶段的核心功能开发。*
+_第一阶段开发已完成，接下来将进入第二阶段的核心功能开发。_
