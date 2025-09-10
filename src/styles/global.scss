@@ -17,15 +17,23 @@ html {
 }
 
 body {
+  -webkit-font-smoothing: unset !important;
   font-family: var(--font-family-base);
   font-size: var(--font-size-base);
   color: var(--text-primary);
   background-color: var(--bg-primary);
-  transition: background-color var(--transition-normal), color var(--transition-normal);
+  transition:
+    background-color var(--transition-normal),
+    color var(--transition-normal);
 }
 
 // 标题样式
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-tight);
   margin-bottom: var(--spacing-md);
@@ -34,7 +42,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-size: var(--font-size-4xl);
-  
+
   @include mix.mobile {
     font-size: var(--font-size-3xl);
   }
@@ -42,7 +50,7 @@ h1 {
 
 h2 {
   font-size: var(--font-size-3xl);
-  
+
   @include mix.mobile {
     font-size: var(--font-size-2xl);
   }
@@ -50,7 +58,7 @@ h2 {
 
 h3 {
   font-size: var(--font-size-2xl);
-  
+
   @include mix.mobile {
     font-size: var(--font-size-xl);
   }
@@ -80,7 +88,7 @@ a {
   color: var(--primary-color);
   text-decoration: none;
   transition: color var(--transition-fast);
-  
+
   &:hover {
     color: var(--primary-dark);
     text-decoration: underline;
@@ -88,7 +96,8 @@ a {
 }
 
 // 列表样式
-ul, ol {
+ul,
+ol {
   margin-bottom: var(--spacing-md);
   padding-left: var(--spacing-lg);
 }
@@ -116,7 +125,7 @@ pre {
   overflow-x: auto;
   margin-bottom: var(--spacing-md);
   @include mix.custom-scrollbar;
-  
+
   code {
     background: none;
     padding: 0;
@@ -130,7 +139,8 @@ table {
   margin-bottom: var(--spacing-md);
 }
 
-th, td {
+th,
+td {
   padding: var(--spacing-sm) var(--spacing-md);
   text-align: left;
   border-bottom: 1px solid var(--border-light);
@@ -207,23 +217,59 @@ html {
   text-align: right;
 }
 
-.mb-0 { margin-bottom: 0; }
-.mb-1 { margin-bottom: var(--spacing-xs); }
-.mb-2 { margin-bottom: var(--spacing-sm); }
-.mb-3 { margin-bottom: var(--spacing-md); }
-.mb-4 { margin-bottom: var(--spacing-lg); }
-.mb-5 { margin-bottom: var(--spacing-xl); }
+.mb-0 {
+  margin-bottom: 0;
+}
+.mb-1 {
+  margin-bottom: var(--spacing-xs);
+}
+.mb-2 {
+  margin-bottom: var(--spacing-sm);
+}
+.mb-3 {
+  margin-bottom: var(--spacing-md);
+}
+.mb-4 {
+  margin-bottom: var(--spacing-lg);
+}
+.mb-5 {
+  margin-bottom: var(--spacing-xl);
+}
 
-.mt-0 { margin-top: 0; }
-.mt-1 { margin-top: var(--spacing-xs); }
-.mt-2 { margin-top: var(--spacing-sm); }
-.mt-3 { margin-top: var(--spacing-md); }
-.mt-4 { margin-top: var(--spacing-lg); }
-.mt-5 { margin-top: var(--spacing-xl); }
+.mt-0 {
+  margin-top: 0;
+}
+.mt-1 {
+  margin-top: var(--spacing-xs);
+}
+.mt-2 {
+  margin-top: var(--spacing-sm);
+}
+.mt-3 {
+  margin-top: var(--spacing-md);
+}
+.mt-4 {
+  margin-top: var(--spacing-lg);
+}
+.mt-5 {
+  margin-top: var(--spacing-xl);
+}
 
-.p-0 { padding: 0; }
-.p-1 { padding: var(--spacing-xs); }
-.p-2 { padding: var(--spacing-sm); }
-.p-3 { padding: var(--spacing-md); }
-.p-4 { padding: var(--spacing-lg); }
-.p-5 { padding: var(--spacing-xl); }
+.p-0 {
+  padding: 0;
+}
+.p-1 {
+  padding: var(--spacing-xs);
+}
+.p-2 {
+  padding: var(--spacing-sm);
+}
+.p-3 {
+  padding: var(--spacing-md);
+}
+.p-4 {
+  padding: var(--spacing-lg);
+}
+.p-5 {
+  padding: var(--spacing-xl);
+}

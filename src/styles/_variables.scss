@@ -36,8 +36,9 @@
   --shadow-heavy: 0 8px 16px rgba(0, 0, 0, 0.2);
   // 字体族
   --font-family-base:
-    Optima-Regular, Optima, PingFangSC-light, PingFangTC-light, 'PingFang SC',
-    Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: -apple-system, system-ui, Segoe UI, Roboto, Ubuntu, Cantarell,
+    Noto Sans, sans-serif, BlinkMacSystemFont, Helvetica Neue, PingFang SC,
+    Hiragino Sans GB, Microsoft YaHei, Arial;
   --font-family-code:
     'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 
