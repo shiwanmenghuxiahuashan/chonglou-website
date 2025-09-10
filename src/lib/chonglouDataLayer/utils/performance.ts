@@ -3,6 +3,8 @@
  * 包含竞态守卫、节流、防抖等功能
  */
 
+import throttle from 'lodash/throttle'
+import debounce from 'lodash/debounce'
 import type { RequestConfig, PendingRequest } from '../types'
 
 /**
@@ -54,96 +56,6 @@ class RaceGuard {
    */
   clear(): void {
     this.pendingRequests.clear()
-  }
-}
-
-/**
- * 节流函数
- */
-export function throttle<T extends (...args: any[]) => any>(
-  func: T,
-  delay: number
-): (...args: Parameters<T>) => Promise<ReturnType<T>> {
-  let lastExecution = 0
-  let timeoutId: NodeJS.Timeout | null = null
-  let lastPromise: Promise<ReturnType<T>> | null = null
-
-  return (...args: Parameters<T>): Promise<ReturnType<T>> => {
-    const now = Date.now()
-
-    // 如果还在节流期间，返回上一次的 Promise
-    if (lastPromise && now - lastExecution < delay) {
-      return lastPromise
-    }
-
-    // 清除之前的定时器
-    if (timeoutId) {
-      clearTimeout(timeoutId)
-    }
-
-    // 立即执行或延迟执行
-    if (now - lastExecution >= delay) {
-      lastExecution = now
-      lastPromise = Promise.resolve(func(...args))
-      return lastPromise
-    } else {
-      lastPromise = new Promise((resolve, reject) => {
-        timeoutId = setTimeout(() => {
-          lastExecution = Date.now()
-          try {
-            resolve(func(...args))
-          } catch (error) {
-            reject(error)
-          }
-        }, delay - (now - lastExecution))
-      })
-      return lastPromise
-    }
-  }
-}
-
-/**
- * 防抖函数
- */
-export function debounce<T extends (...args: any[]) => any>(
-  func: T,
-  delay: number
-): (...args: Parameters<T>) => Promise<ReturnType<T>> {
-  let timeoutId: NodeJS.Timeout | null = null
-  let currentPromise: {
-    resolve: (value: ReturnType<T>) => void
-    reject: (reason: any) => void
-  } | null = null
-
-  return (...args: Parameters<T>): Promise<ReturnType<T>> => {
-    // 清除之前的定时器
-    if (timeoutId) {
-      clearTimeout(timeoutId)
-    }
-
-    return new Promise<ReturnType<T>>((resolve, reject) => {
-      // 如果有正在等待的 Promise，取消它
-      if (currentPromise) {
-        currentPromise.reject(new Error('Debounced'))
-      }
-
-      currentPromise = { resolve, reject }
-
-      timeoutId = setTimeout(async () => {
-        try {
-          const result = await func(...args)
-          if (currentPromise) {
-            currentPromise.resolve(result)
-            currentPromise = null
-          }
-        } catch (error) {
-          if (currentPromise) {
-            currentPromise.reject(error)
-            currentPromise = null
-          }
-        }
-      }, delay)
-    })
   }
 }
 
@@ -211,4 +123,6 @@ class RequestCancelManager {
 export const raceGuard = new RaceGuard()
 export const requestCancelManager = new RequestCancelManager()
 
+// 导出 lodash 的节流和防抖函数
+export { throttle, debounce }
 export { RaceGuard, RequestCancelManager }
