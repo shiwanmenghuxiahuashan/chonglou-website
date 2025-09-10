@@ -6,7 +6,7 @@
 import {
     MemCache
 } from 'web-memcache';
-import type { Plugin, RequestConfig, HttpResponse, CacheEntry } from './types'
+import type { Plugin, RequestConfig, HttpResponse, CacheEntry } from '../types'
 
 export interface CacheConfig {
   defaultTTL: number // 默认缓存时间（毫秒）

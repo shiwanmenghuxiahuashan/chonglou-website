@@ -511,5 +511,5 @@ export const searchArticles = async (
   }
 }
 
-// 导出 API 客户端实例，供其他服务使用
-export { apiClient }
+// 导出 HTTP 客户端实例，供其他服务使用
+export { httpClient as apiClient }

@@ -177,7 +177,7 @@ const calculateInWorker = async () => {
     
     ElMessage.success(`Worker 计算完成: ${result}`)
   } catch (error) {
-    ElMessage.error(`Worker 计算失败: ${error.message}`)
+    ElMessage.error(`Worker 计算失败: ${error instanceof Error ? error.message : String(error)}`)
   }
 }
 
@@ -199,7 +199,7 @@ const calculateInMainThread = async () => {
     
     ElMessage.success(`主线程计算完成: ${result}`)
   } catch (error) {
-    ElMessage.error(`主线程计算失败: ${error.message}`)
+    ElMessage.error(`主线程计算失败: ${error instanceof Error ? error.message : String(error)}`)
   } finally {
     mainThreadLoading.value = false
   }
@@ -226,7 +226,7 @@ const sortArrayInWorker = async () => {
     
     ElMessage.success(`Worker 排序完成`)
   } catch (error) {
-    ElMessage.error(`Worker 排序失败: ${error.message}`)
+    ElMessage.error(`Worker 排序失败: ${error instanceof Error ? error.message : String(error)}`)
   } finally {
     sortWorkerLoading.value = false
   }
@@ -250,7 +250,7 @@ const sortArrayInMainThread = async () => {
     
     ElMessage.success(`主线程排序完成`)
   } catch (error) {
-    ElMessage.error(`主线程排序失败: ${error.message}`)
+    ElMessage.error(`主线程排序失败: ${error instanceof Error ? error.message : String(error)}`)
   } finally {
     sortMainThreadLoading.value = false
   }

@@ -218,7 +218,7 @@ export function useWebWorker<T = any, R = any>(
       const originalResolve = resolve
       const originalReject = reject
       
-      resolve = (value: R) => {
+      resolve = (value: R | PromiseLike<R>) => {
         state.value.isRunning = pendingTasks.size > 0
         originalResolve(value)
       }
@@ -357,6 +357,3 @@ export const WorkerFunctions = {
     return result
   }
 }
-
-// 导出类型
-export type { WebWorkerState, WorkerMessage, WebWorkerOptions }

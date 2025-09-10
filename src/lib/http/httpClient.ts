@@ -103,7 +103,7 @@ class HttpClient {
 
     // 响应拦截器
     this.axiosInstance.interceptors.response.use(
-      async (response: AxiosResponse) => {
+      async (response: AxiosResponse): Promise<AxiosResponse> => {
         const httpResponse = this.transformResponse(response)
 
         // 应用插件的响应拦截器
@@ -114,12 +114,18 @@ class HttpClient {
           }
         }
 
-        return processedResponse
+        // 将 HttpResponse 转换回 AxiosResponse 格式
+        return {
+          ...response,
+          data: processedResponse.data,
+          headers: response.headers,
+          config: response.config
+        }
       },
       async (error: AxiosError) => {
         // 处理缓存命中
-        if (error.isCache) {
-          return error.response
+        if ((error as any).isCache) {
+          return (error as any).response
         }
 
         const httpError = this.transformError(error)
@@ -225,7 +231,9 @@ class HttpClient {
       return pendingRequest
     }
 
-    const requestPromise = this.axiosInstance.request(config)
+    const requestPromise = this.axiosInstance.request(config).then(response => {
+      return this.transformResponse<T>(response)
+    })
     raceGuard.setPendingRequest(config, requestPromise)
 
     return requestPromise
@@ -321,11 +329,23 @@ class HttpClient {
    * 转换响应对象
    */
   private transformResponse(response: AxiosResponse): HttpResponse {
+    // 安全地转换 headers
+    const headers: Record<string, string> = {}
+    if (response.headers) {
+      Object.entries(response.headers).forEach(([key, value]) => {
+        if (typeof value === 'string') {
+          headers[key] = value
+        } else if (value != null) {
+          headers[key] = String(value)
+        }
+      })
+    }
+
     return {
       data: response.data,
       status: response.status,
       statusText: response.statusText,
-      headers: response.headers as Record<string, string>,
+      headers,
       config: response.config as RequestConfig
     }
   }
