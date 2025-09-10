@@ -4,7 +4,6 @@
  */
 
 import { DataLayer } from './DataLayer'
-import { HttpClient } from './httpClient'
 import { tokenService, TokenService } from './tokenService'
 import { CachePlugin, RetryPlugin, ErrorHandlerPlugin } from './plugins'
 import {
