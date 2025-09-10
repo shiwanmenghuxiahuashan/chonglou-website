@@ -152,7 +152,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { ElMessage } from 'element-plus'
-import { httpClient, tokenService, requestCancelManager } from '@/lib/http'
+import { httpClient, tokenService, requestCancelManager } from '@/lib/chonglouDataLayer'
 
 // 响应式数据
 const loading = ref({

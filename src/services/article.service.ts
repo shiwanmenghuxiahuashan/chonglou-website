@@ -4,8 +4,8 @@ import type {
   ArticleQueryParams,
   PaginatedResponse
 } from '@/types/article'
-import { httpClient } from '@/lib/http'
-import type { HttpResponse } from '@/lib/http'
+import { httpClient } from '@/lib/chonglouDataLayer'
+import type { HttpResponse } from '@/lib/chonglouDataLayer'
 
 /**
  * 获取文章列表

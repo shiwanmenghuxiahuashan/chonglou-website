@@ -36,7 +36,7 @@
 ### 1. 基础用法
 
 ```typescript
-import { httpClient } from '@/lib/http'
+import { httpClient } from '@/lib/chonglouDataLayer'
 
 // GET 请求
 const response = await httpClient.get('/api/articles')
@@ -100,7 +100,7 @@ httpClient.cancelAllRequests()
 ### 5. Token 管理
 
 ```typescript
-import { tokenService } from '@/lib/http'
+import { tokenService } from '@/lib/chonglouDataLayer'
 
 // 设置 Token
 tokenService.setToken({
@@ -124,7 +124,7 @@ tokenService.removeToken()
 ### 1. 自定义插件
 
 ```typescript
-import { HttpClient, Plugin } from '@/lib/http'
+import { HttpClient, Plugin } from '@/lib/chonglouDataLayer'
 
 const customPlugin: Plugin = {
   name: 'custom',
@@ -149,7 +149,7 @@ client.use(customPlugin)
 ### 2. 创建专用客户端
 
 ```typescript
-import { createHttpClient } from '@/lib/http'
+import { createHttpClient } from '@/lib/chonglouDataLayer'
 
 const apiClient = createHttpClient({
   baseURL: 'https://api.example.com',
@@ -198,7 +198,7 @@ export default {
 ### 2. 自定义错误处理
 
 ```typescript
-import { ErrorHandlerPlugin } from '@/lib/http'
+import { ErrorHandlerPlugin } from '@/lib/chonglouDataLayer'
 
 const errorHandler = new ErrorHandlerPlugin({
   globalHandler: (error) => {
@@ -257,7 +257,7 @@ interface RequestConfig {
 
 ```typescript
 // services/article.service.ts
-import { httpClient } from '@/lib/http'
+import { httpClient } from '@/lib/chonglouDataLayer'
 import type { Article, PaginatedResponse } from '@/types'
 
 export class ArticleService {
