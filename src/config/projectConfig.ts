@@ -10,7 +10,7 @@ const projectConfig = {
   /**
    * 接口地址
    */
-  api: isProd ? 'https://api.lichonglou.com/' : 'http://localhost:8888/', // 测试
+  api: isProd ? 'https://api.lichonglou.com/' : 'http://localhost:4787/', // 测试
   /**
    * 本地服务 端口号
    */
