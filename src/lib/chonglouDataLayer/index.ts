@@ -31,7 +31,7 @@ function createDataLayer(config: HttpConfig = {}): DataLayer {
  * 默认数据层客户端实例
  */
 const chonglouDataLayer = createDataLayer({
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:5173/api',
+  baseURL: __PROJECT_CONFIG__.api,
   timeout: 60000,
   headers: {
     'Content-Type': 'application/json'

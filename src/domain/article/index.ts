@@ -24,12 +24,15 @@ class ArticleService {
   ): Promise<PaginatedResponse<ViewArticleData>> {
     try {
       // 1. 获取 API 原始数据
-      const response = await chonglouDataLayer.get('/article', {
-        params,
-        cache: true,
-        cacheTime: 5 * 60 * 1000,
-        throttle: 500
-      })
+      const response = await chonglouDataLayer.get(
+        __RESOURCE_CONFIG__.ARTICLE,
+        {
+          params,
+          cache: true,
+          cacheTime: 5 * 60 * 1000,
+          throttle: 500
+        }
+      )
 
       // 2. 使用映射器转换数据
       const mappedArticles = this.articleMapper.mapArticleList(
@@ -54,7 +57,7 @@ class ArticleService {
     try {
       // 1. 获取文章详情
       const response: HttpResponse<ApiArticleData> =
-        await chonglouDataLayer.get(`/article/${id}`, {
+        await chonglouDataLayer.get(`${__RESOURCE_CONFIG__.ARTICLE}/${id}`, {
           cache: true,
           cacheTime: 10 * 60 * 1000,
           requestId: `article-detail-${id}`
@@ -62,10 +65,13 @@ class ArticleService {
 
       // 2. 获取相关文章
       const relatedResponse: HttpResponse<ApiArticleData[]> =
-        await chonglouDataLayer.get(`/article/${id}/related`, {
-          cache: true,
-          cacheTime: 15 * 60 * 1000
-        })
+        await chonglouDataLayer.get(
+          `/${__RESOURCE_CONFIG__.ARTICLE}/${id}/related`,
+          {
+            cache: true,
+            cacheTime: 15 * 60 * 1000
+          }
+        )
 
       // 3. 使用映射器转换数据
       const mappedArticle = this.articleMapper.mapArticleDetail(
