@@ -13,7 +13,7 @@ import type {
 } from '../types'
 import type { AxiosError, AxiosInstance, AxiosResponse } from 'axios'
 
-export class CoreClient {
+class CoreClient {
   private axiosInstance: AxiosInstance
   private config: HttpConfig
 
@@ -26,7 +26,6 @@ export class CoreClient {
       },
       ...config
     }
-
     this.axiosInstance = axios.create({
       baseURL: this.config.baseURL,
       timeout: this.config.timeout,
@@ -196,3 +195,5 @@ export class CoreClient {
     return this.axiosInstance
   }
 }
+
+export { CoreClient }

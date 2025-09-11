@@ -34,7 +34,6 @@ export class InterceptorManager {
    */
   private setupInterceptors(): void {
     const axiosInstance = this.coreClient.getAxiosInstance()
-
     // 请求拦截器
     axiosInstance.interceptors.request.use(
       async config => {
@@ -49,8 +48,9 @@ export class InterceptorManager {
         // 竞态守卫检查
         const pendingRequest =
           this.requestEnhancer.checkRaceGuard(enhancedConfig)
+
         if (pendingRequest) {
-          // 这里需要特殊处理，因为拦截器期望返回配置而不是响应
+          // TODO: 这里需要记录下来，当请求完成后返回
           throw { isRaceGuard: true, pendingRequest }
         }
 

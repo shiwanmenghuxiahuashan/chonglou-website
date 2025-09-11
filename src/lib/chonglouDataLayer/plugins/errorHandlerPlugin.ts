@@ -3,7 +3,7 @@
  * 统一处理 HTTP 错误和自定义错误处理逻辑
  */
 
-import type { HttpError, HttpResponse, Plugin } from '../types'
+import type { HttpError, Plugin } from '../types'
 
 export type ErrorHandler = (error: HttpError) => void | Promise<void>
 
