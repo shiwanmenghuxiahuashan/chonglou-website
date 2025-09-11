@@ -80,7 +80,7 @@
 @mixin card-shadow {
   box-shadow: var(--shadow-light);
   transition: box-shadow var(--transition-normal);
-  
+
   &:hover {
     box-shadow: var(--shadow-medium);
   }
@@ -103,7 +103,7 @@
   cursor: pointer;
   transition: all var(--transition-normal);
   text-decoration: none;
-  
+
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
@@ -112,9 +112,13 @@
 
 @mixin button-primary {
   @include button-base;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   color: white;
-  
+
   &:hover:not(:disabled) {
     transform: translateY(-2px);
     box-shadow: var(--shadow-medium);
@@ -126,7 +130,7 @@
   background: var(--bg-secondary);
   color: var(--text-primary);
   border: 1px solid var(--border-medium);
-  
+
   &:hover:not(:disabled) {
     background: var(--bg-tertiary);
     border-color: var(--border-dark);
@@ -144,12 +148,12 @@
   color: var(--text-primary);
   background-color: var(--bg-primary);
   transition: border-color var(--transition-normal);
-  
+
   &:focus {
     outline: none;
     border-color: var(--primary-color);
   }
-  
+
   &::placeholder {
     color: var(--text-placeholder);
   }
@@ -170,16 +174,16 @@
     width: 8px;
     height: 8px;
   }
-  
+
   &::-webkit-scrollbar-track {
     background: var(--bg-tertiary);
     border-radius: var(--border-radius-sm);
   }
-  
+
   &::-webkit-scrollbar-thumb {
     background: var(--border-dark);
     border-radius: var(--border-radius-sm);
-    
+
     &:hover {
       background: var(--text-secondary);
     }
@@ -231,7 +235,7 @@
 
 @mixin clearfix {
   &::after {
-    content: "";
+    content: '';
     display: table;
     clear: both;
   }
