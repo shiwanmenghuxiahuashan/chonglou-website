@@ -3,8 +3,6 @@
  * 提供预配置的客户端实例和自定义配置选项
  */
 
-import debounce from 'lodash/debounce'
-import throttle from 'lodash/throttle'
 import { DataLayer } from './DataLayer'
 import { CachePlugin, ErrorHandlerPlugin, RetryPlugin } from './plugins'
 import { TokenService, tokenService } from './tokenService'

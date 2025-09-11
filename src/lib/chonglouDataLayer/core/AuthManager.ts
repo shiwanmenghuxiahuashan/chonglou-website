@@ -5,7 +5,7 @@
 
 import { tokenService } from '../tokenService'
 
-import type { HttpResponse, RequestConfig } from '../types'
+import type { RequestConfig } from '../types'
 import type { CoreClient } from './CoreClient'
 
 export class AuthManager {

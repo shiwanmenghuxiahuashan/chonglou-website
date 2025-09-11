@@ -3,8 +3,7 @@
  * 负责请求的高级功能：竞态守卫、节流防抖、请求取消等
  */
 
-import debounce from 'lodash/debounce'
-import throttle from 'lodash/throttle'
+import { debounce, throttle } from 'lodash-unified'
 import { raceGuard, requestCancelManager } from '../utils/performance'
 
 import type { HttpResponse, RequestConfig } from '../types'

@@ -15,7 +15,7 @@
   "dependencies": {
     "axios": "^1.11.0",
     "element-plus": "^2.11.2",
-    "lodash": "^4.17.21",
+    "lodash-unified": "^1.0.3",
     "pinia": "^3.0.3",
     "vite-plugin-pwa": "^1.0.3",
     "vue": "^3.5.12",
