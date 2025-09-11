@@ -3,7 +3,7 @@ import { computed, onMounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRoute } from 'vue-router'
 import Icon from '@/components/common/Icon.vue'
-import { useSettingsStore } from '@/stores/settings'
+import { useSettingsStore } from '@/framework/stores/settings'
 
 interface Props {
   title?: string

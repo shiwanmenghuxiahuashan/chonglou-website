@@ -13,12 +13,5 @@ module.exports = {
   rules: {
     // 项目特定需求覆盖
     'vue/multi-word-component-names': 'off'
-  },
-  'prettier/prettier': [
-    'error',
-    {
-      singleQuote: true,
-      parser: 'flow'
-    }
-  ]
+  }
 }

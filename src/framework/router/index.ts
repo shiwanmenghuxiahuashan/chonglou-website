@@ -20,22 +20,6 @@ const router = createRouter({
       component: () => import('../views/ArticleDetailView.vue')
     },
     {
-      path: '/demo/webworker',
-      name: 'webworker-demo',
-      component: () => import('../views/WebWorkerDemo.vue'),
-      meta: {
-        title: 'Web Worker 演示'
-      }
-    },
-    {
-      path: '/demo/data-layer',
-      name: 'data-layer-demo',
-      component: () => import('../views/DataLayerDemo.vue'),
-      meta: {
-        title: '数据层架构演示'
-      }
-    },
-    {
       path: '/about',
       name: 'about',
       component: () => import('../views/AboutView.vue'),

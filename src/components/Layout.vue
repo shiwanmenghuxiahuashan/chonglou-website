@@ -10,7 +10,9 @@
           </div>
           <div class="chonglou-layout__links">
             <router-link to="/" class="chonglou-layout__link">首页</router-link>
-            <router-link to="/articles" class="chonglou-layout__link">文章</router-link>
+            <router-link to="/articles" class="chonglou-layout__link"
+              >文章</router-link
+            >
           </div>
         </nav>
       </el-header>
@@ -46,7 +48,11 @@
     color: var(--primary-color);
     font-weight: var(--font-weight-bold);
     margin: 0;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(
+      135deg,
+      var(--primary-color),
+      var(--secondary-color)
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -73,16 +79,20 @@
   }
 
   &.router-link-active {
-    background: linear-gradient(135deg,
-        var(--primary-color),
-        var(--secondary-color));
+    background: linear-gradient(
+      135deg,
+      var(--primary-color),
+      var(--secondary-color)
+    );
     color: white;
 
     &:hover {
       color: white;
-      background: linear-gradient(135deg,
-          var(--primary-dark),
-          var(--secondary-color));
+      background: linear-gradient(
+        135deg,
+        var(--primary-dark),
+        var(--secondary-color)
+      );
     }
   }
 }
