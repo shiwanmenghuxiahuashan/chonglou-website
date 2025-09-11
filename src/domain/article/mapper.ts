@@ -3,10 +3,9 @@
  * 将API返回的文章数据映射为视图组件需要的格式
  */
 
-import type { Article } from '@/types/article'
+import type { MapperRule } from '@/lib/projectDomain'
 
-import { MapperBase, MapperOptions, MapperRule } from '@/lib/projectDomain'
-
+import { MapperBase } from '@/lib/projectDomain'
 // API 返回的原始文章数据结构
 interface ApiArticleData {
   id: number
@@ -231,14 +230,15 @@ class ArticleMapper extends MapperBase<ApiArticleData, ViewArticleData> {
    * 排序文章
    */
   private sortArticles(
-    articles: ViewArticleData[],
+    article: ViewArticleData[],
     sortBy: string
   ): ViewArticleData[] {
-    return [...articles].sort((a, b) => {
+    return [...article].sort((a, b) => {
       switch (sortBy) {
-        case 'popularity':
+        case 'popularity': {
           const popularityOrder = { high: 3, medium: 2, low: 1 }
           return popularityOrder[b.popularity] - popularityOrder[a.popularity]
+        }
 
         case 'date':
           return (
@@ -264,7 +264,7 @@ class ArticleMapper extends MapperBase<ApiArticleData, ViewArticleData> {
    * 过滤文章
    */
   public filterArticles(
-    articles: ViewArticleData[],
+    article: ViewArticleData[],
     filters: {
       category?: string
       tags?: string[]
@@ -272,7 +272,7 @@ class ArticleMapper extends MapperBase<ApiArticleData, ViewArticleData> {
       featured?: boolean
     }
   ): ViewArticleData[] {
-    return articles.filter(article => {
+    return article.filter(article => {
       if (filters.category && article.category !== filters.category) {
         return false
       }
@@ -302,7 +302,7 @@ class ArticleMapper extends MapperBase<ApiArticleData, ViewArticleData> {
   /**
    * 获取文章统计信息
    */
-  public getArticleStats(articles: ViewArticleData[]): {
+  public getArticleStats(article: ViewArticleData[]): {
     total: number
     byCategory: Record<string, number>
     byStatus: Record<string, number>
@@ -310,14 +310,14 @@ class ArticleMapper extends MapperBase<ApiArticleData, ViewArticleData> {
     featured: number
   } {
     const stats = {
-      total: articles.length,
+      total: article.length,
       byCategory: {} as Record<string, number>,
       byStatus: {} as Record<string, number>,
       byPopularity: {} as Record<string, number>,
       featured: 0
     }
 
-    articles.forEach(article => {
+    article.forEach(article => {
       // 按分类统计
       stats.byCategory[article.category] =
         (stats.byCategory[article.category] || 0) + 1

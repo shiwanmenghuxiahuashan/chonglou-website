@@ -53,7 +53,7 @@ src/
 ### ✅ 任务 1.3：基础响应式布局与路由实现
 
 - 实现通用 `Layout` 组件（含导航栏和页脚）
-- 定义三个核心路由：`/`、`/articles`、`/articles/:id`
+- 定义三个核心路由：`/`、`/article`、`/article/:id`
 - 使用 CSS Flexbox 实现响应式布局
 - 支持移动端适配
 

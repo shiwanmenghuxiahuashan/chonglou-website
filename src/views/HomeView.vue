@@ -1,12 +1,11 @@
 <script setup lang="ts">
-// import { onMounted } from 'vue'
+import { shallowRef } from 'vue'
+import { articleService } from '@/domain/article'
 
-const articleStore = null
-// const articleStore = useArticleStore()
-
-// onMounted(() => {
-//   articleStore.fetchArticles()
-// })
+const articleList: shallowRef<unknown[]> = shallowRef([])
+articleService.getArticles({ page: 1, pageSize: 3 }).then(response => {
+  articleList.value = response.data
+})
 </script>
 
 <template>
@@ -14,21 +13,21 @@ const articleStore = null
     <div class="chonglou-home__hero">
       <h1 class="chonglou-home__hero-title">重楼网站</h1>
       <p class="chonglou-home__hero-subtitle">探索重楼的药用价值与种植技术</p>
-      <el-button type="primary" size="large" @click="$router.push('/articles')">
+      <el-button type="primary" size="large" @click="$router.push('/article')">
         浏览文章
       </el-button>
     </div>
 
-    <div v-if="articleStore" class="chonglou-home__articles">
+    <div class="chonglou-home__articles">
       <h2 class="chonglou-home__articles-title">最新文章</h2>
       <div
-        v-loading="articleStore.loading"
+        v-loading="articleList.length === 0"
         element-loading-text="加载中..."
         element-loading-spinner="el-icon-loading"
         class="chonglou-home__articles-grid"
       >
         <el-card
-          v-for="article in articleStore.articles.slice(0, 3)"
+          v-for="article in articleList"
           :key="article.id"
           class="chonglou-home__article-card"
           shadow="hover"
@@ -37,13 +36,13 @@ const articleStore = null
           <p class="chonglou-home__article-summary">{{ article.summary }}</p>
           <div class="chonglou-home__article-meta">
             <el-tag size="small">{{ article.author }}</el-tag>
-            <span class="chonglou-home__article-date">{{
-              article.publishDate
-            }}</span>
+            <span class="chonglou-home__article-date">
+              {{ article.publishDate }}
+            </span>
           </div>
           <el-button
             type="text"
-            @click="$router.push(`/articles/${article.id}`)"
+            @click="$router.push(`/article/${article.id}`)"
           >
             阅读更多 →
           </el-button>

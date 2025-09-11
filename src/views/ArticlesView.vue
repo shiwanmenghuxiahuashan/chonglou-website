@@ -10,7 +10,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="chonglou-articles">
+  <div class="chonglou-article">
     <h1 class="chonglou-articles__title">文章列表</h1>
 
     <el-alert
@@ -27,7 +27,7 @@ onMounted(() => {
       class="chonglou-articles__grid"
     >
       <el-card
-        v-for="article in articleStore.articles"
+        v-for="article in articleStore.article"
         :key="article.id"
         class="chonglou-articles__card"
         shadow="hover"
@@ -61,7 +61,7 @@ onMounted(() => {
           <el-button
             type="primary"
             size="small"
-            @click="$router.push(`/articles/${article.id}`)"
+            @click="$router.push(`/article/${article.id}`)"
           >
             阅读全文
           </el-button>
@@ -75,7 +75,7 @@ onMounted(() => {
 @use '@/styles/variables' as vars;
 @use '@/styles/mixins' as mix;
 
-.chonglou-articles {
+.chonglou-article {
   padding: var(--spacing-lg);
 }
 

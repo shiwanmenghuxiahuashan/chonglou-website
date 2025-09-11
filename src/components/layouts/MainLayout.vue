@@ -85,7 +85,7 @@ onMounted(() => {
                   >首页</router-link
                 >
                 <router-link
-                  to="/articles"
+                  to="/article"
                   class="chonglou-main-layout__nav-item"
                   >文章</router-link
                 >
@@ -131,7 +131,7 @@ onMounted(() => {
                 <span>首页</span>
               </router-link>
               <router-link
-                to="/articles"
+                to="/article"
                 class="chonglou-main-layout__sidebar-nav-item"
               >
                 <Icon name="Document" />

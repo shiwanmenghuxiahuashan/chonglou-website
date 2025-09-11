@@ -2,8 +2,9 @@
  * 集成映射器的文章服务示例
  * 展示如何在服务层使用映射器进行数据转换
  */
+import { ArticleMapper } from './mapper'
 
-import { ApiArticleData, ArticleMapper, ViewArticleData } from './mapper'
+import type { ApiArticleData, ViewArticleData } from './mapper'
 
 import type { ArticleQueryParams, PaginatedResponse } from '@/types/article'
 
@@ -23,7 +24,7 @@ class ArticleService {
   ): Promise<PaginatedResponse<ViewArticleData>> {
     try {
       // 1. 获取 API 原始数据
-      const response = await chonglouDataLayer.get('/articles', {
+      const response = await chonglouDataLayer.get('/article', {
         params,
         cache: true,
         cacheTime: 5 * 60 * 1000,
@@ -53,7 +54,7 @@ class ArticleService {
     try {
       // 1. 获取文章详情
       const response: HttpResponse<ApiArticleData> =
-        await chonglouDataLayer.get(`/articles/${id}`, {
+        await chonglouDataLayer.get(`/article/${id}`, {
           cache: true,
           cacheTime: 10 * 60 * 1000,
           requestId: `article-detail-${id}`
@@ -61,7 +62,7 @@ class ArticleService {
 
       // 2. 获取相关文章
       const relatedResponse: HttpResponse<ApiArticleData[]> =
-        await chonglouDataLayer.get(`/articles/${id}/related`, {
+        await chonglouDataLayer.get(`/article/${id}/related`, {
           cache: true,
           cacheTime: 15 * 60 * 1000
         })

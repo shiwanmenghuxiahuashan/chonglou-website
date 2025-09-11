@@ -58,7 +58,7 @@ export interface MapperMetadata {
  * 抽象映射器基类
  * 所有具体映射器都应继承此类
  */
-export abstract class MapperBase<TSource = any, TTarget = any> {
+abstract class MapperBase<TSource = any, TTarget = any> {
   protected readonly metadata: MapperMetadata
   protected readonly defaultOptions: MapperOptions
   private readonly cache = new Map<string, any>()
@@ -426,3 +426,6 @@ export abstract class MapperBase<TSource = any, TTarget = any> {
     }
   }
 }
+
+export { MapperBase }
+export type { MapperOptions, MapperRule, MapperMetadata }
