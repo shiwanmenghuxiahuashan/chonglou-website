@@ -1,0 +1,35 @@
+{
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "vue"
+    ],
+    "eslint.workingDirectories": [
+        {
+            "mode": "auto"
+        }
+    ],
+    "typescript.preferences.includePackageJsonAutoImports": "auto",
+    "typescript.suggest.autoImports": true,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "vue.codeActions.enabled": true,
+    "vue.complete.normalizeComponentImportName": true,
+    "vue.updateImportsOnFileMove.enabled": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "source.organizeImports": "explicit"
+    },
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[vue]": {
+        "editor.defaultFormatter": "Vue.volar"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+}

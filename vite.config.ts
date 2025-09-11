@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import { VitePWA } from 'vite-plugin-pwa'
 import { resolve } from 'path'
+import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite'
+import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,7 +11,7 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['image/icon/favicon.webp'],
       devOptions: {
-        enabled: false  // 开发环境禁用 PWA
+        enabled: false // 开发环境禁用 PWA
       },
       manifest: {
         name: '重楼前端技术分享',
