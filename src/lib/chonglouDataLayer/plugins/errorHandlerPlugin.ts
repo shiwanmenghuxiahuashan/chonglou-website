@@ -3,7 +3,7 @@
  * 统一处理 HTTP 错误和自定义错误处理逻辑
  */
 
-import type { Plugin, HttpError, HttpResponse } from '../types'
+import type { HttpError, HttpResponse, Plugin } from '../types'
 
 export type ErrorHandler = (error: HttpError) => void | Promise<void>
 
@@ -52,14 +52,14 @@ class ErrorHandlerPlugin implements Plugin {
   errorInterceptor = async (error: HttpError): Promise<never> => {
     // 处理错误
     await this.handleError(error)
-    
+
     // 继续抛出错误
     throw error
   }
 
   private async handleError(error: HttpError): Promise<void> {
     const status = error.status
-    
+
     try {
       // 1. 优先使用状态码特定处理器
       if (status && this.config.statusHandlers?.[status]) {
@@ -91,7 +91,7 @@ class ErrorHandlerPlugin implements Plugin {
   private showDefaultErrorMessage(error: HttpError): void {
     const status = error.status
     const message = this.getErrorMessage(error)
-    
+
     // 默认使用 console.error，实际使用时会被框架的错误处理器替换
     console.error('HTTP错误:', {
       status,

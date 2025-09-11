@@ -3,7 +3,7 @@
  * 负责管理和执行插件
  */
 
-import type { Plugin, RequestConfig, HttpResponse, HttpError } from '../types'
+import type { HttpError, HttpResponse, Plugin, RequestConfig } from '../types'
 
 export class PluginManager {
   private plugins: Plugin[] = []
@@ -32,9 +32,11 @@ export class PluginManager {
   /**
    * 执行请求拦截器
    */
-  async executeRequestInterceptors(config: RequestConfig): Promise<RequestConfig> {
+  async executeRequestInterceptors(
+    config: RequestConfig
+  ): Promise<RequestConfig> {
     let processedConfig = config
-    
+
     for (const plugin of this.plugins) {
       if (plugin.requestInterceptor) {
         try {
@@ -55,9 +57,11 @@ export class PluginManager {
   /**
    * 执行响应拦截器
    */
-  async executeResponseInterceptors(response: HttpResponse): Promise<HttpResponse> {
+  async executeResponseInterceptors(
+    response: HttpResponse
+  ): Promise<HttpResponse> {
     let processedResponse = response
-    
+
     for (const plugin of this.plugins) {
       if (plugin.responseInterceptor) {
         processedResponse = await plugin.responseInterceptor(processedResponse)

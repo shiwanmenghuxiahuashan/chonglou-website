@@ -3,7 +3,7 @@
  * 包含竞态守卫,请求取消管理等功能
  */
 
-import type { RequestConfig, PendingRequest } from '../types'
+import type { PendingRequest, RequestConfig } from '../types'
 
 /**
  * 竞态守卫

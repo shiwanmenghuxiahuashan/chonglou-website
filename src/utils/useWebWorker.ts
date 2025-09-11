@@ -1,4 +1,4 @@
-import { ref, onUnmounted } from 'vue'
+import { onUnmounted, ref } from 'vue'
 
 // Web Worker 状态类型
 export interface WebWorkerState {
@@ -43,11 +43,14 @@ export function useWebWorker<T = any, R = any>(
   // Worker 实例
   let worker: Worker | null = null
   let messageId = 0
-  const pendingTasks = new Map<string, {
-    resolve: (value: R) => void
-    reject: (reason: Error) => void
-    timer: number
-  }>()
+  const pendingTasks = new Map<
+    string,
+    {
+      resolve: (value: R) => void
+      reject: (reason: Error) => void
+      timer: number
+    }
+  >()
 
   /**
    * 生成唯一消息ID
@@ -117,7 +120,9 @@ export function useWebWorker<T = any, R = any>(
    */
   const initWorker = (fn: Function): boolean => {
     if (!state.value.isSupported) {
-      state.value.error = new Error('Web Workers are not supported in this environment')
+      state.value.error = new Error(
+        'Web Workers are not supported in this environment'
+      )
       return false
     }
 
@@ -146,7 +151,7 @@ export function useWebWorker<T = any, R = any>(
         }
       }
 
-      worker.onerror = (error) => {
+      worker.onerror = error => {
         state.value.error = new Error(`Worker error: ${error.message}`)
         if (enableLogs) {
           console.error('[WebWorker] Error:', error)
@@ -155,11 +160,14 @@ export function useWebWorker<T = any, R = any>(
 
       // 清理 Blob URL
       URL.revokeObjectURL(blobUrl)
-      
+
       state.value.error = null
       return true
     } catch (error) {
-      state.value.error = error instanceof Error ? error : new Error('Failed to initialize worker')
+      state.value.error =
+        error instanceof Error
+          ? error
+          : new Error('Failed to initialize worker')
       return false
     }
   }
@@ -189,7 +197,7 @@ export function useWebWorker<T = any, R = any>(
       }
 
       const messageId = generateMessageId()
-      
+
       // 设置超时
       const timer = window.setTimeout(() => {
         pendingTasks.delete(messageId)
@@ -217,12 +225,12 @@ export function useWebWorker<T = any, R = any>(
       // 监听任务完成
       const originalResolve = resolve
       const originalReject = reject
-      
+
       resolve = (value: R | PromiseLike<R>) => {
         state.value.isRunning = pendingTasks.size > 0
         originalResolve(value)
       }
-      
+
       reject = (reason: Error) => {
         state.value.isRunning = pendingTasks.size > 0
         originalReject(reason)
@@ -265,12 +273,12 @@ export function useWebWorker<T = any, R = any>(
   return {
     // 状态
     state: state.value,
-    
+
     // 方法
     execute,
     terminate,
     clearError,
-    
+
     // 只读计算属性
     get isSupported() {
       return state.value.isSupported
@@ -306,19 +314,26 @@ export const WorkerFunctions = {
   /**
    * 图像处理：模拟像素处理
    */
-  processImageData: (imageData: { width: number; height: number; data: number[] }) => {
+  processImageData: (imageData: {
+    width: number
+    height: number
+    data: number[]
+  }) => {
     const { width, height, data } = imageData
     const processed = [...data]
-    
+
     // 简单的灰度处理
     for (let i = 0; i < processed.length; i += 4) {
-      const gray = processed[i] * 0.299 + processed[i + 1] * 0.587 + processed[i + 2] * 0.114
-      processed[i] = gray     // R
+      const gray =
+        processed[i] * 0.299 +
+        processed[i + 1] * 0.587 +
+        processed[i + 2] * 0.114
+      processed[i] = gray // R
       processed[i + 1] = gray // G
       processed[i + 2] = gray // B
       // processed[i + 3] 保持不变 (Alpha)
     }
-    
+
     return { width, height, data: processed }
   },
 
@@ -328,11 +343,11 @@ export const WorkerFunctions = {
   wordFrequency: (text: string): Record<string, number> => {
     const words = text.toLowerCase().match(/\b\w+\b/g) || []
     const frequency: Record<string, number> = {}
-    
+
     words.forEach(word => {
       frequency[word] = (frequency[word] || 0) + 1
     })
-    
+
     return frequency
   },
 
@@ -342,18 +357,18 @@ export const WorkerFunctions = {
   matrixMultiply: (matrices: { a: number[][]; b: number[][] }): number[][] => {
     const { a, b } = matrices
     const result: number[][] = []
-    
-    for (let i = 0; i < a.length; i++) {
+
+    for (const [i, element] of a.entries()) {
       result[i] = []
       for (let j = 0; j < b[0].length; j++) {
         let sum = 0
-        for (let k = 0; k < b.length; k++) {
-          sum += a[i][k] * b[k][j]
+        for (const [k, element_] of b.entries()) {
+          sum += element[k] * element_[j]
         }
         result[i][j] = sum
       }
     }
-    
+
     return result
   }
 }

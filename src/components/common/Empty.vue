@@ -1,3 +1,15 @@
+<script setup lang="ts">
+interface Props {
+  title?: string
+  description?: string
+}
+
+withDefaults(defineProps<Props>(), {
+  title: '暂无数据',
+  description: '当前没有可显示的内容'
+})
+</script>
+
 <template>
   <div class="chonglou-empty">
     <div class="chonglou-empty__image">
@@ -25,22 +37,10 @@
     <div class="chonglou-empty__content">
       <h3 class="chonglou-empty__title">{{ title }}</h3>
       <p class="chonglou-empty__description">{{ description }}</p>
-      <slot name="extra"></slot>
+      <slot name="extra" />
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-interface Props {
-  title?: string
-  description?: string
-}
-
-withDefaults(defineProps<Props>(), {
-  title: '暂无数据',
-  description: '当前没有可显示的内容'
-})
-</script>
 
 <style scoped lang="scss">
 @use '@/styles/variables' as vars;
@@ -56,7 +56,7 @@ withDefaults(defineProps<Props>(), {
 .chonglou-empty__image {
   margin-bottom: var(--spacing-lg);
   opacity: 0.6;
-  
+
   svg {
     width: 64px;
     height: 64px;
@@ -85,16 +85,16 @@ withDefaults(defineProps<Props>(), {
   .chonglou-empty {
     padding: var(--spacing-2xl) var(--spacing-md);
   }
-  
+
   .chonglou-empty__image svg {
     width: 48px;
     height: 48px;
   }
-  
+
   .chonglou-empty__title {
     font-size: var(--font-size-base);
   }
-  
+
   .chonglou-empty__description {
     font-size: var(--font-size-xs);
   }

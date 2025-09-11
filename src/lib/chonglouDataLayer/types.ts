@@ -41,7 +41,14 @@ export interface HttpError extends Error {
   isNetwork?: boolean
 }
 
-export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | 'OPTIONS'
+export type HttpMethod =
+  | 'GET'
+  | 'POST'
+  | 'PUT'
+  | 'DELETE'
+  | 'PATCH'
+  | 'HEAD'
+  | 'OPTIONS'
 
 export interface RequestInterceptor {
   (config: RequestConfig): RequestConfig | Promise<RequestConfig>

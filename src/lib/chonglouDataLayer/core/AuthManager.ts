@@ -3,8 +3,9 @@
  * 负责 Token 相关的认证逻辑
  */
 
-import type { RequestConfig, HttpResponse } from '../types'
 import { tokenService } from '../tokenService'
+
+import type { HttpResponse, RequestConfig } from '../types'
 import type { CoreClient } from './CoreClient'
 
 export class AuthManager {
@@ -44,7 +45,7 @@ export class AuthManager {
     }
 
     this.refreshTokenPromise = this.performTokenRefresh()
-    
+
     try {
       await this.refreshTokenPromise
     } finally {
@@ -67,8 +68,12 @@ export class AuthManager {
         refreshToken
       })
 
-      const { accessToken, refreshToken: newRefreshToken, expires } = response.data
-      
+      const {
+        accessToken,
+        refreshToken: newRefreshToken,
+        expires
+      } = response.data
+
       tokenService.setToken({
         accessToken,
         refreshToken: newRefreshToken,

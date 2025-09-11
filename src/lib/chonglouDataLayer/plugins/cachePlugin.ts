@@ -3,14 +3,13 @@
  * 基于 web-memcache 的请求缓存实现
  */
 
-import {
-    MemCache
-} from 'web-memcache';
-import type { Plugin, RequestConfig, HttpResponse, CacheEntry } from '../types'
+import { MemCache } from 'web-memcache'
+
+import type { CacheEntry, HttpResponse, Plugin, RequestConfig } from '../types'
 
 export interface CacheConfig {
   defaultTTL: number // 默认缓存时间（毫秒）
-  maxSize: number    // 最大缓存条目数
+  maxSize: number // 最大缓存条目数
   enableGet: boolean // 是否缓存 GET 请求
   enablePost: boolean // 是否缓存 POST 请求
 }
@@ -52,7 +51,7 @@ class CachePlugin implements Plugin {
         headers: { 'x-cache': 'HIT' },
         config
       }
-      
+
       // 通过 Promise.resolve 返回缓存数据
       throw { isCache: true, response }
     }
@@ -62,16 +61,20 @@ class CachePlugin implements Plugin {
 
   responseInterceptor = <T>(response: HttpResponse<T>): HttpResponse<T> => {
     // 缓存成功的响应
-    if (response.status >= 200 && response.status < 300 && this.shouldCache(response.config)) {
+    if (
+      response.status >= 200 &&
+      response.status < 300 &&
+      this.shouldCache(response.config)
+    ) {
       const cacheKey = this.generateCacheKey(response.config)
       const cacheTime = response.config.cacheTime || this.config.defaultTTL
-      
+
       const cacheEntry: CacheEntry<T> = {
         data: response.data,
         timestamp: Date.now(),
         expires: Date.now() + cacheTime
       }
-      
+
       this.cache.set(cacheKey, cacheEntry)
     }
 

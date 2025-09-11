@@ -3,17 +3,18 @@
  * 负责请求的高级功能：竞态守卫、节流防抖、请求取消等
  */
 
-import type { RequestConfig, HttpResponse } from '../types'
 import debounce from 'lodash/debounce'
 import throttle from 'lodash/throttle'
 import { raceGuard, requestCancelManager } from '../utils/performance'
+
+import type { HttpResponse, RequestConfig } from '../types'
 
 export class RequestEnhancer {
   /**
    * 生成请求 ID
    */
   generateRequestId(): string {
-    return `req_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `req_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`
   }
 
   /**
@@ -44,7 +45,10 @@ export class RequestEnhancer {
   /**
    * 设置竞态守卫
    */
-  setRaceGuard<T>(config: RequestConfig, promise: Promise<HttpResponse<T>>): void {
+  setRaceGuard<T>(
+    config: RequestConfig,
+    promise: Promise<HttpResponse<T>>
+  ): void {
     raceGuard.setPendingRequest(config, promise)
   }
 
@@ -52,7 +56,7 @@ export class RequestEnhancer {
    * 应用节流
    */
   applyThrottle<T>(
-    requestFn: () => Promise<HttpResponse<T>>, 
+    requestFn: () => Promise<HttpResponse<T>>,
     delay: number
   ): () => Promise<HttpResponse<T>> {
     return throttle(requestFn, delay)
@@ -62,7 +66,7 @@ export class RequestEnhancer {
    * 应用防抖
    */
   applyDebounce<T>(
-    requestFn: () => Promise<HttpResponse<T>>, 
+    requestFn: () => Promise<HttpResponse<T>>,
     delay: number
   ): () => Promise<HttpResponse<T>> {
     return debounce(requestFn, delay)

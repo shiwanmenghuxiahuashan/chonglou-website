@@ -1,3 +1,45 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import Icon from '@/components/common/Icon.vue'
+
+const techStack = ref([
+  'Vue 3',
+  'TypeScript',
+  'Vite',
+  'Pinia',
+  'Vue Router',
+  'Element Plus',
+  'SCSS',
+  'ESLint',
+  'Prettier',
+  'PWA'
+])
+
+const features = ref([
+  {
+    icon: 'Lightning',
+    title: '现代技术栈',
+    description:
+      '采用 Vue 3 + TypeScript + Vite 构建，确保最佳的开发体验和性能。'
+  },
+  {
+    icon: 'Mobile',
+    title: '响应式设计',
+    description: '完美适配桌面端和移动端，提供一致的用户体验。'
+  },
+  {
+    icon: 'Moon',
+    title: '深色模式',
+    description: '支持明暗主题切换，保护用户视力，提升阅读体验。'
+  },
+  {
+    icon: 'Trophy',
+    title: 'PWA 支持',
+    description: '支持离线访问和安装到桌面，提供类原生应用体验。'
+  }
+])
+</script>
+
 <template>
   <div class="chonglou-about">
     <div class="chonglou-about__hero">
@@ -18,12 +60,14 @@
             </template>
             <div class="chonglou-about__card-content">
               <p>我是重楼，一名前端开发工程师，热爱技术，喜欢分享。</p>
-              <p>专注于 Vue.js 生态系统、TypeScript、现代构建工具等前端技术领域。</p>
+              <p>
+                专注于 Vue.js 生态系统、TypeScript、现代构建工具等前端技术领域。
+              </p>
               <p>希望通过这个网站记录自己的学习过程，也能帮助到其他开发者。</p>
             </div>
           </el-card>
         </el-col>
-        
+
         <el-col :xs="24" :md="12">
           <el-card class="chonglou-about__card">
             <template #header>
@@ -31,7 +75,11 @@
             </template>
             <div class="chonglou-about__card-content">
               <div class="chonglou-about__tech-stack">
-                <el-tag v-for="tech in techStack" :key="tech" class="chonglou-about__tech-tag">
+                <el-tag
+                  v-for="tech in techStack"
+                  :key="tech"
+                  class="chonglou-about__tech-tag"
+                >
                   {{ tech }}
                 </el-tag>
               </div>
@@ -56,7 +104,7 @@
             </div>
           </el-card>
         </el-col>
-        
+
         <el-col :xs="24" :md="12">
           <el-card class="chonglou-about__card">
             <template #header>
@@ -84,7 +132,13 @@
     <div class="chonglou-about__features">
       <h2>网站特色</h2>
       <el-row :gutter="24">
-        <el-col :xs="24" :sm="12" :lg="6" v-for="feature in features" :key="feature.title">
+        <el-col
+          v-for="feature in features"
+          :key="feature.title"
+          :xs="24"
+          :sm="12"
+          :lg="6"
+        >
           <div class="chonglou-about__feature-card">
             <div class="chonglou-about__feature-icon">
               <Icon :name="feature.icon" :size="32" />
@@ -97,39 +151,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-import Icon from '@/components/common/Icon.vue'
-
-const techStack = ref([
-  'Vue 3', 'TypeScript', 'Vite', 'Pinia', 'Vue Router',
-  'Element Plus', 'SCSS', 'ESLint', 'Prettier', 'PWA'
-])
-
-const features = ref([
-  {
-    icon: 'Lightning',
-    title: '现代技术栈',
-    description: '采用 Vue 3 + TypeScript + Vite 构建，确保最佳的开发体验和性能。'
-  },
-  {
-    icon: 'Mobile',
-    title: '响应式设计',
-    description: '完美适配桌面端和移动端，提供一致的用户体验。'
-  },
-  {
-    icon: 'Moon',
-    title: '深色模式',
-    description: '支持明暗主题切换，保护用户视力，提升阅读体验。'
-  },
-  {
-    icon: 'Trophy',
-    title: 'PWA 支持',
-    description: '支持离线访问和安装到桌面，提供类原生应用体验。'
-  }
-])
-</script>
 
 <style scoped lang="scss">
 @use '@/styles/variables' as vars;
@@ -144,21 +165,25 @@ const features = ref([
 .chonglou-about__hero {
   text-align: center;
   padding: var(--spacing-3xl) 0;
-  background: linear-gradient(135deg, var(--primary-color-light) 0%, var(--primary-color) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--primary-color-light) 0%,
+    var(--primary-color) 100%
+  );
   border-radius: var(--border-radius-lg);
   color: white;
   margin-bottom: var(--spacing-2xl);
-  
+
   .chonglou-about__hero-content {
     max-width: 600px;
     margin: 0 auto;
-    
+
     h1 {
       font-size: var(--font-size-3xl);
       font-weight: var(--font-weight-bold);
       margin-bottom: var(--spacing-lg);
     }
-    
+
     .chonglou-about__hero-description {
       font-size: var(--font-size-lg);
       line-height: var(--line-height-relaxed);
@@ -173,20 +198,20 @@ const features = ref([
 
 .chonglou-about__card {
   height: 100%;
-  
+
   .chonglou-about__card-content {
     line-height: var(--line-height-relaxed);
-    
+
     p {
       margin-bottom: var(--spacing-md);
       color: var(--text-secondary);
-      
+
       &:last-child {
         margin-bottom: 0;
       }
     }
   }
-  
+
   h3 {
     @include mix.flex-center;
     gap: var(--spacing-sm);
@@ -209,20 +234,20 @@ const features = ref([
   list-style: none;
   padding: 0;
   margin: 0;
-  
+
   li {
     @include mix.flex-center;
     justify-content: flex-start;
     gap: var(--spacing-sm);
     margin-bottom: var(--spacing-md);
     color: var(--text-secondary);
-    
+
     &:before {
       content: '✓';
       color: var(--success-color);
       font-weight: var(--font-weight-bold);
     }
-    
+
     &:last-child {
       margin-bottom: 0;
     }
@@ -235,7 +260,7 @@ const features = ref([
   gap: var(--spacing-sm);
   margin-bottom: var(--spacing-md);
   color: var(--text-secondary);
-  
+
   &:last-child {
     margin-bottom: 0;
   }
@@ -243,7 +268,7 @@ const features = ref([
 
 .chonglou-about__features {
   text-align: center;
-  
+
   h2 {
     color: var(--primary-color);
     margin-bottom: var(--spacing-2xl);
@@ -259,12 +284,12 @@ const features = ref([
   border: 1px solid var(--border-light);
   transition: all var(--transition-normal);
   height: 100%;
-  
+
   &:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
   }
-  
+
   .chonglou-about__feature-icon {
     @include mix.flex-center;
     width: 64px;
@@ -274,13 +299,13 @@ const features = ref([
     border-radius: var(--border-radius-round);
     color: var(--primary-color);
   }
-  
+
   h4 {
     font-size: var(--font-size-lg);
     color: var(--text-primary);
     margin-bottom: var(--spacing-md);
   }
-  
+
   p {
     color: var(--text-secondary);
     line-height: var(--line-height-relaxed);
@@ -296,20 +321,20 @@ const features = ref([
 @include mix.mobile {
   .chonglou-about__hero {
     padding: var(--spacing-2xl) var(--spacing-lg);
-    
+
     .chonglou-about__hero-content h1 {
       font-size: var(--font-size-2xl);
     }
-    
+
     .chonglou-about__hero-description {
       font-size: var(--font-size-base);
     }
   }
-  
+
   .chonglou-about__feature-card {
     margin-bottom: var(--spacing-lg);
   }
-  
+
   .chonglou-about__tech-stack {
     justify-content: center;
   }

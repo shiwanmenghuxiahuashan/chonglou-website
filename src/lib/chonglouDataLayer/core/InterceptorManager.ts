@@ -3,10 +3,10 @@
  * 负责统一管理所有拦截器逻辑
  */
 
-import type { RequestConfig, HttpResponse, HttpError } from '../types'
+import type { HttpError, HttpResponse, RequestConfig } from '../types'
+import type { AuthManager } from './AuthManager'
 import type { CoreClient } from './CoreClient'
 import type { PluginManager } from './PluginManager'
-import type { AuthManager } from './AuthManager'
 import type { RequestEnhancer } from './RequestEnhancer'
 
 export class InterceptorManager {
@@ -25,7 +25,7 @@ export class InterceptorManager {
     this.pluginManager = pluginManager
     this.authManager = authManager
     this.requestEnhancer = requestEnhancer
-    
+
     this.setupInterceptors()
   }
 
@@ -37,33 +37,37 @@ export class InterceptorManager {
 
     // 请求拦截器
     axiosInstance.interceptors.request.use(
-      async (config) => {
+      async config => {
         // 增强请求配置
-        let enhancedConfig = this.requestEnhancer.enhanceRequest(config as RequestConfig)
-        
+        let enhancedConfig = this.requestEnhancer.enhanceRequest(
+          config as RequestConfig
+        )
+
         // 添加认证信息
         enhancedConfig = this.authManager.addAuthToRequest(enhancedConfig)
 
         // 竞态守卫检查
-        const pendingRequest = this.requestEnhancer.checkRaceGuard(enhancedConfig)
+        const pendingRequest =
+          this.requestEnhancer.checkRaceGuard(enhancedConfig)
         if (pendingRequest) {
           // 这里需要特殊处理，因为拦截器期望返回配置而不是响应
           throw { isRaceGuard: true, pendingRequest }
         }
 
         // 应用插件的请求拦截器
-        enhancedConfig = await this.pluginManager.executeRequestInterceptors(enhancedConfig)
+        enhancedConfig =
+          await this.pluginManager.executeRequestInterceptors(enhancedConfig)
 
         return enhancedConfig
       },
-      (error) => {
+      error => {
         return Promise.reject(error)
       }
     )
 
     // 响应拦截器
     axiosInstance.interceptors.response.use(
-      async (response) => {
+      async response => {
         // 转换为 HttpResponse 格式
         const httpResponse: HttpResponse = {
           data: response.data,
@@ -74,7 +78,8 @@ export class InterceptorManager {
         }
 
         // 应用插件的响应拦截器
-        const processedResponse = await this.pluginManager.executeResponseInterceptors(httpResponse)
+        const processedResponse =
+          await this.pluginManager.executeResponseInterceptors(httpResponse)
 
         // 将 HttpResponse 转换回 AxiosResponse 格式
         return {
@@ -84,7 +89,7 @@ export class InterceptorManager {
           config: response.config
         }
       },
-      async (error) => {
+      async error => {
         return this.handleResponseError(error)
       }
     )
@@ -108,13 +113,15 @@ export class InterceptorManager {
     const httpError: HttpError = {
       ...new Error(error.message),
       config: error.config as RequestConfig,
-      response: error.response ? {
-        data: error.response.data,
-        status: error.response.status,
-        statusText: error.response.statusText,
-        headers: this.normalizeHeaders(error.response.headers),
-        config: error.response.config as RequestConfig
-      } : undefined,
+      response: error.response
+        ? {
+            data: error.response.data,
+            status: error.response.status,
+            statusText: error.response.statusText,
+            headers: this.normalizeHeaders(error.response.headers),
+            config: error.response.config as RequestConfig
+          }
+        : undefined,
       status: error.response?.status,
       isCancel: false, // 这里需要根据实际情况判断
       isTimeout: error.code === 'ECONNABORTED',
@@ -122,14 +129,19 @@ export class InterceptorManager {
     }
 
     // Token 过期处理
-    if (this.authManager.shouldRefreshToken(httpError.status, httpError.config?.url)) {
+    if (
+      this.authManager.shouldRefreshToken(
+        httpError.status,
+        httpError.config?.url
+      )
+    ) {
       try {
         await this.authManager.refreshToken()
         // 重试原请求
         if (httpError.config) {
           return this.coreClient.request(httpError.config)
         }
-      } catch (refreshError) {
+      } catch {
         await this.authManager.handleAuthError()
       }
     }

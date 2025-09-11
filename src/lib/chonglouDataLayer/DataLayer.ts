@@ -3,14 +3,15 @@
  * 基于组合模式，整合各个功能组件
  */
 
-import type { HttpConfig, RequestConfig, HttpResponse, Plugin } from './types'
-import { 
-  CoreClient, 
-  PluginManager, 
-  AuthManager, 
-  RequestEnhancer, 
-  InterceptorManager 
+import {
+  AuthManager,
+  CoreClient,
+  InterceptorManager,
+  PluginManager,
+  RequestEnhancer
 } from './core'
+
+import type { HttpConfig, HttpResponse, Plugin, RequestConfig } from './types'
 
 export class DataLayer {
   private coreClient: CoreClient
@@ -25,7 +26,7 @@ export class DataLayer {
     this.pluginManager = new PluginManager()
     this.authManager = new AuthManager(this.coreClient)
     this.requestEnhancer = new RequestEnhancer()
-    
+
     // 初始化拦截器管理器（它会自动设置拦截器）
     this.interceptorManager = new InterceptorManager(
       this.coreClient,
@@ -48,7 +49,10 @@ export class DataLayer {
   /**
    * GET 请求
    */
-  async get<T = any>(url: string, config: Omit<RequestConfig, 'url' | 'method'> = {}): Promise<HttpResponse<T>> {
+  async get<T = any>(
+    url: string,
+    config: Omit<RequestConfig, 'url' | 'method'> = {}
+  ): Promise<HttpResponse<T>> {
     return this.request<T>({
       ...config,
       url,
@@ -59,7 +63,11 @@ export class DataLayer {
   /**
    * POST 请求
    */
-  async post<T = any>(url: string, data?: any, config: Omit<RequestConfig, 'url' | 'method' | 'data'> = {}): Promise<HttpResponse<T>> {
+  async post<T = any>(
+    url: string,
+    data?: any,
+    config: Omit<RequestConfig, 'url' | 'method' | 'data'> = {}
+  ): Promise<HttpResponse<T>> {
     return this.request<T>({
       ...config,
       url,
@@ -71,7 +79,11 @@ export class DataLayer {
   /**
    * PUT 请求
    */
-  async put<T = any>(url: string, data?: any, config: Omit<RequestConfig, 'url' | 'method' | 'data'> = {}): Promise<HttpResponse<T>> {
+  async put<T = any>(
+    url: string,
+    data?: any,
+    config: Omit<RequestConfig, 'url' | 'method' | 'data'> = {}
+  ): Promise<HttpResponse<T>> {
     return this.request<T>({
       ...config,
       url,
@@ -83,7 +95,10 @@ export class DataLayer {
   /**
    * DELETE 请求
    */
-  async delete<T = any>(url: string, config: Omit<RequestConfig, 'url' | 'method'> = {}): Promise<HttpResponse<T>> {
+  async delete<T = any>(
+    url: string,
+    config: Omit<RequestConfig, 'url' | 'method'> = {}
+  ): Promise<HttpResponse<T>> {
     return this.request<T>({
       ...config,
       url,
@@ -94,7 +109,11 @@ export class DataLayer {
   /**
    * PATCH 请求
    */
-  async patch<T = any>(url: string, data?: any, config: Omit<RequestConfig, 'url' | 'method' | 'data'> = {}): Promise<HttpResponse<T>> {
+  async patch<T = any>(
+    url: string,
+    data?: any,
+    config: Omit<RequestConfig, 'url' | 'method' | 'data'> = {}
+  ): Promise<HttpResponse<T>> {
     return this.request<T>({
       ...config,
       url,

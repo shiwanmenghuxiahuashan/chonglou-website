@@ -4,8 +4,14 @@
  */
 
 import axios from 'axios'
-import type { AxiosInstance, AxiosResponse, AxiosError } from 'axios'
-import type { HttpConfig, RequestConfig, HttpResponse, HttpError } from '../types'
+
+import type {
+  HttpConfig,
+  HttpError,
+  HttpResponse,
+  RequestConfig
+} from '../types'
+import type { AxiosError, AxiosInstance, AxiosResponse } from 'axios'
 
 export class CoreClient {
   private axiosInstance: AxiosInstance
@@ -43,7 +49,10 @@ export class CoreClient {
   /**
    * GET 请求
    */
-  async get<T = any>(url: string, config: Omit<RequestConfig, 'url' | 'method'> = {}): Promise<HttpResponse<T>> {
+  async get<T = any>(
+    url: string,
+    config: Omit<RequestConfig, 'url' | 'method'> = {}
+  ): Promise<HttpResponse<T>> {
     return this.request<T>({
       ...config,
       url,
@@ -54,7 +63,11 @@ export class CoreClient {
   /**
    * POST 请求
    */
-  async post<T = any>(url: string, data?: any, config: Omit<RequestConfig, 'url' | 'method' | 'data'> = {}): Promise<HttpResponse<T>> {
+  async post<T = any>(
+    url: string,
+    data?: any,
+    config: Omit<RequestConfig, 'url' | 'method' | 'data'> = {}
+  ): Promise<HttpResponse<T>> {
     return this.request<T>({
       ...config,
       url,
@@ -66,7 +79,11 @@ export class CoreClient {
   /**
    * PUT 请求
    */
-  async put<T = any>(url: string, data?: any, config: Omit<RequestConfig, 'url' | 'method' | 'data'> = {}): Promise<HttpResponse<T>> {
+  async put<T = any>(
+    url: string,
+    data?: any,
+    config: Omit<RequestConfig, 'url' | 'method' | 'data'> = {}
+  ): Promise<HttpResponse<T>> {
     return this.request<T>({
       ...config,
       url,
@@ -78,7 +95,10 @@ export class CoreClient {
   /**
    * DELETE 请求
    */
-  async delete<T = any>(url: string, config: Omit<RequestConfig, 'url' | 'method'> = {}): Promise<HttpResponse<T>> {
+  async delete<T = any>(
+    url: string,
+    config: Omit<RequestConfig, 'url' | 'method'> = {}
+  ): Promise<HttpResponse<T>> {
     return this.request<T>({
       ...config,
       url,
@@ -89,7 +109,11 @@ export class CoreClient {
   /**
    * PATCH 请求
    */
-  async patch<T = any>(url: string, data?: any, config: Omit<RequestConfig, 'url' | 'method' | 'data'> = {}): Promise<HttpResponse<T>> {
+  async patch<T = any>(
+    url: string,
+    data?: any,
+    config: Omit<RequestConfig, 'url' | 'method' | 'data'> = {}
+  ): Promise<HttpResponse<T>> {
     return this.request<T>({
       ...config,
       url,
@@ -128,13 +152,16 @@ export class CoreClient {
    */
   private transformError(error: AxiosError): HttpError {
     const httpError = new Error(error.message) as HttpError
-    
+
     httpError.config = error.config as RequestConfig
-    httpError.response = error.response ? this.transformResponse(error.response) : undefined
+    httpError.response = error.response
+      ? this.transformResponse(error.response)
+      : undefined
     httpError.status = error.response?.status
     httpError.isCancel = axios.isCancel(error)
     httpError.isTimeout = error.code === 'ECONNABORTED'
-    httpError.isNetwork = !error.response && !httpError.isCancel && !httpError.isTimeout
+    httpError.isNetwork =
+      !error.response && !httpError.isCancel && !httpError.isTimeout
 
     return httpError
   }
@@ -151,11 +178,15 @@ export class CoreClient {
    */
   updateConfig(config: Partial<HttpConfig>): void {
     this.config = { ...this.config, ...config }
-    
+
     // 更新 axios 实例配置
     if (config.baseURL) this.axiosInstance.defaults.baseURL = config.baseURL
     if (config.timeout) this.axiosInstance.defaults.timeout = config.timeout
-    if (config.headers) this.axiosInstance.defaults.headers = { ...this.axiosInstance.defaults.headers, ...config.headers }
+    if (config.headers)
+      this.axiosInstance.defaults.headers = {
+        ...this.axiosInstance.defaults.headers,
+        ...config.headers
+      }
   }
 
   /**

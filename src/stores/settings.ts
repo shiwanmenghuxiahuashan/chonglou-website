@@ -1,5 +1,5 @@
+import { computed, ref, watch } from 'vue'
 import { defineStore } from 'pinia'
-import { ref, computed, watch } from 'vue'
 
 // 主题类型
 export type Theme = 'light' | 'dark' | 'auto'
@@ -61,7 +61,7 @@ export const useSettingsStore = defineStore('settings', () => {
 
     // 应用主题
     applyTheme()
-    
+
     // 监听系统主题变化
     if (settings.value.theme === 'auto') {
       const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
@@ -73,14 +73,17 @@ export const useSettingsStore = defineStore('settings', () => {
   const applyTheme = () => {
     const root = document.documentElement
     const theme = currentTheme.value
-    
-    root.setAttribute('data-theme', theme)
+
+    root.dataset.theme = theme
     root.classList.toggle('dark', theme === 'dark')
-    
+
     // 更新 meta theme-color
     const metaThemeColor = document.querySelector('meta[name="theme-color"]')
     if (metaThemeColor) {
-      metaThemeColor.setAttribute('content', theme === 'dark' ? '#1a1a1a' : '#409eff')
+      metaThemeColor.setAttribute(
+        'content',
+        theme === 'dark' ? '#1a1a1a' : '#409eff'
+      )
     }
   }
 
@@ -118,7 +121,10 @@ export const useSettingsStore = defineStore('settings', () => {
   // 动作：设置字体大小
   const setFontSize = (fontSize: number) => {
     settings.value.fontSize = Math.max(12, Math.min(20, fontSize))
-    document.documentElement.style.setProperty('--base-font-size', `${settings.value.fontSize}px`)
+    document.documentElement.style.setProperty(
+      '--base-font-size',
+      `${settings.value.fontSize}px`
+    )
     saveSettings()
   }
 
@@ -137,7 +143,10 @@ export const useSettingsStore = defineStore('settings', () => {
   // 动作：切换动画
   const toggleAnimations = () => {
     settings.value.animations = !settings.value.animations
-    document.documentElement.classList.toggle('no-animations', !settings.value.animations)
+    document.documentElement.classList.toggle(
+      'no-animations',
+      !settings.value.animations
+    )
     saveSettings()
   }
 
@@ -184,7 +193,7 @@ export const useSettingsStore = defineStore('settings', () => {
   // 动作：更新多个设置
   const updateSettings = (newSettings: Partial<Settings>) => {
     settings.value = { ...settings.value, ...newSettings }
-    
+
     // 应用相关更改
     if ('theme' in newSettings) {
       applyTheme()
@@ -198,7 +207,7 @@ export const useSettingsStore = defineStore('settings', () => {
     if ('animations' in newSettings) {
       setAnimations(newSettings.animations!)
     }
-    
+
     saveSettings()
   }
 
@@ -209,11 +218,11 @@ export const useSettingsStore = defineStore('settings', () => {
     // 状态
     settings,
     loading,
-    
+
     // 计算属性
     isDark,
     currentTheme,
-    
+
     // 动作
     initSettings,
     toggleTheme,

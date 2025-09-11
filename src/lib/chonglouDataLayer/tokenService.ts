@@ -113,7 +113,7 @@ class TokenService {
       const expiresStr = this.storage.getItem(this.config.expiresKey)
       if (!expiresStr) return false
 
-      const expires = parseInt(expiresStr, 10)
+      const expires = Number.parseInt(expiresStr, 10)
       return Date.now() > expires
     } catch (error) {
       console.error('检查 Token 过期状态失败:', error)

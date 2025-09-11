@@ -1,8 +1,7 @@
-
 /**
  * MapperBase - 基础映射器类
  * 基于 DDD 领域驱动设计的映射器模式
- * 
+ *
  * 功能特性：
  * - 提供通用的映射方法
  * - 支持深度映射和浅度映射
@@ -64,14 +63,18 @@ export abstract class MapperBase<TSource = any, TTarget = any> {
   protected readonly defaultOptions: MapperOptions
   private readonly cache = new Map<string, any>()
 
-  constructor(name: string, version = '1.0.0', defaultOptions: MapperOptions = {}) {
+  constructor(
+    name: string,
+    version = '1.0.0',
+    defaultOptions: MapperOptions = {}
+  ) {
     this.metadata = {
       name,
       version,
       createdAt: new Date(),
       mappingCount: 0
     }
-    
+
     this.defaultOptions = {
       deep: true,
       skipNullish: false,
@@ -92,7 +95,9 @@ export abstract class MapperBase<TSource = any, TTarget = any> {
    */
   public map(source: TSource, options?: MapperOptions): TTarget {
     if (!source) {
-      throw new Error(`[${this.metadata.name}] Source object cannot be null or undefined`)
+      throw new Error(
+        `[${this.metadata.name}] Source object cannot be null or undefined`
+      )
     }
 
     const mergedOptions = { ...this.defaultOptions, ...options }
@@ -105,7 +110,7 @@ export abstract class MapperBase<TSource = any, TTarget = any> {
 
     try {
       const target = this.performMapping(source, mergedOptions)
-      
+
       // 验证映射结果
       if (mergedOptions.validate && !mergedOptions.validate(source, target)) {
         throw new Error(`[${this.metadata.name}] Mapping validation failed`)
@@ -129,7 +134,7 @@ export abstract class MapperBase<TSource = any, TTarget = any> {
    */
   public mapArray(sources: TSource[], options?: MapperOptions): TTarget[] {
     if (!Array.isArray(sources)) {
-      throw new Error(`[${this.metadata.name}] Sources must be an array`)
+      throw new TypeError(`[${this.metadata.name}] Sources must be an array`)
     }
 
     return sources.map(source => this.map(source, options))
@@ -140,7 +145,7 @@ export abstract class MapperBase<TSource = any, TTarget = any> {
    */
   public mapBatch(sources: TSource[], options?: MapperOptions): TTarget[] {
     if (!Array.isArray(sources)) {
-      throw new Error(`[${this.metadata.name}] Sources must be an array`)
+      throw new TypeError(`[${this.metadata.name}] Sources must be an array`)
     }
 
     const mergedOptions = { ...this.defaultOptions, ...options }
@@ -163,7 +168,9 @@ export abstract class MapperBase<TSource = any, TTarget = any> {
    * 反向映射（如果支持）
    */
   public mapReverse(target: TTarget, options?: MapperOptions): TSource {
-    throw new Error(`[${this.metadata.name}] Reverse mapping is not implemented`)
+    throw new Error(
+      `[${this.metadata.name}] Reverse mapping is not implemented`
+    )
   }
 
   /**
@@ -178,9 +185,14 @@ export abstract class MapperBase<TSource = any, TTarget = any> {
         this.applyMappingRule(source, target, rule, options)
       } catch (error) {
         if (rule.required) {
-          throw new Error(`[${this.metadata.name}] Required field mapping failed: ${rule.targetField}`)
+          throw new Error(
+            `[${this.metadata.name}] Required field mapping failed: ${rule.targetField}`
+          )
         }
-        console.warn(`[${this.metadata.name}] Optional field mapping failed: ${rule.targetField}`, error)
+        console.warn(
+          `[${this.metadata.name}] Optional field mapping failed: ${rule.targetField}`,
+          error
+        )
       }
     }
 
@@ -191,9 +203,9 @@ export abstract class MapperBase<TSource = any, TTarget = any> {
    * 应用单个映射规则
    */
   protected applyMappingRule(
-    source: TSource, 
-    target: TTarget, 
-    rule: MapperRule<TSource, TTarget>, 
+    source: TSource,
+    target: TTarget,
+    rule: MapperRule<TSource, TTarget>,
     options: MapperOptions
   ): void {
     // 检查条件
@@ -205,7 +217,10 @@ export abstract class MapperBase<TSource = any, TTarget = any> {
     let sourceValue = this.getValueByPath(source, rule.sourceField)
 
     // 检查是否跳过空值
-    if (options.skipNullish && (sourceValue === null || sourceValue === undefined)) {
+    if (
+      options.skipNullish &&
+      (sourceValue === null || sourceValue === undefined)
+    ) {
       return
     }
     if (options.skipUndefined && sourceValue === undefined) {
@@ -220,10 +235,14 @@ export abstract class MapperBase<TSource = any, TTarget = any> {
     }
 
     // 如果值仍然为空且有默认值，使用默认值
-    if ((sourceValue === undefined || sourceValue === null) && rule.defaultValue !== undefined) {
-      sourceValue = typeof rule.defaultValue === 'function' 
-        ? rule.defaultValue(source) 
-        : rule.defaultValue
+    if (
+      (sourceValue === undefined || sourceValue === null) &&
+      rule.defaultValue !== undefined
+    ) {
+      sourceValue =
+        typeof rule.defaultValue === 'function'
+          ? rule.defaultValue(source)
+          : rule.defaultValue
     }
 
     // 设置目标值
@@ -237,7 +256,7 @@ export abstract class MapperBase<TSource = any, TTarget = any> {
     if (!obj) return undefined
 
     const pathArray = Array.isArray(path) ? path : path.split('.')
-    
+
     let current = obj
     for (const key of pathArray) {
       if (current === null || current === undefined) {
@@ -245,17 +264,22 @@ export abstract class MapperBase<TSource = any, TTarget = any> {
       }
       current = current[key]
     }
-    
+
     return current
   }
 
   /**
    * 根据路径设置值
    */
-  protected setValueByPath(obj: any, path: string, value: any, options: MapperOptions): void {
+  protected setValueByPath(
+    obj: any,
+    path: string,
+    value: any,
+    options: MapperOptions
+  ): void {
     const pathArray = path.split('.')
     const lastKey = pathArray.pop()!
-    
+
     let current = obj
     for (const key of pathArray) {
       if (!(key in current)) {
@@ -263,7 +287,7 @@ export abstract class MapperBase<TSource = any, TTarget = any> {
       }
       current = current[key]
     }
-    
+
     // 深度复制处理
     if (options.deep && typeof value === 'object' && value !== null) {
       current[lastKey] = this.deepClone(value)
@@ -314,7 +338,7 @@ export abstract class MapperBase<TSource = any, TTarget = any> {
     let hash = 0
     for (let i = 0; i < str.length; i++) {
       const char = str.charCodeAt(i)
-      hash = ((hash << 5) - hash) + char
+      hash = (hash << 5) - hash + char
       hash = hash & hash // Convert to 32bit integer
     }
     return hash.toString(36)
@@ -368,15 +392,19 @@ export abstract class MapperBase<TSource = any, TTarget = any> {
    */
   protected validateMappingRules(rules: MapperRule<TSource, TTarget>[]): void {
     const targetFields = new Set<string>()
-    
+
     for (const rule of rules) {
       if (targetFields.has(rule.targetField)) {
-        throw new Error(`[${this.metadata.name}] Duplicate target field: ${rule.targetField}`)
+        throw new Error(
+          `[${this.metadata.name}] Duplicate target field: ${rule.targetField}`
+        )
       }
       targetFields.add(rule.targetField)
-      
+
       if (!rule.sourceField || rule.sourceField === '') {
-        throw new Error(`[${this.metadata.name}] Source field cannot be empty for target: ${rule.targetField}`)
+        throw new Error(
+          `[${this.metadata.name}] Source field cannot be empty for target: ${rule.targetField}`
+        )
       }
     }
   }
@@ -387,7 +415,9 @@ export abstract class MapperBase<TSource = any, TTarget = any> {
   protected createRule(
     sourceField: string | string[],
     targetField: string,
-    options: Partial<Omit<MapperRule<TSource, TTarget>, 'sourceField' | 'targetField'>> = {}
+    options: Partial<
+      Omit<MapperRule<TSource, TTarget>, 'sourceField' | 'targetField'>
+    > = {}
   ): MapperRule<TSource, TTarget> {
     return {
       sourceField,

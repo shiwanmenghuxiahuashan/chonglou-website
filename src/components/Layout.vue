@@ -1,3 +1,5 @@
+<script setup lang="ts"></script>
+
 <template>
   <div class="chonglou-layout">
     <el-container>
@@ -21,9 +23,6 @@
     </el-container>
   </div>
 </template>
-
-<script setup lang="ts">
-</script>
 
 <style scoped lang="scss">
 @use '@/styles/variables' as vars;
@@ -66,20 +65,24 @@
   padding: var(--spacing-sm) var(--spacing-md);
   border-radius: var(--border-radius-md);
   transition: all var(--transition-normal);
-  
+
   &:hover {
     background-color: var(--bg-secondary);
     color: var(--primary-color);
     text-decoration: none;
   }
-  
+
   &.router-link-active {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(135deg,
+        var(--primary-color),
+        var(--secondary-color));
     color: white;
-    
+
     &:hover {
       color: white;
-      background: linear-gradient(135deg, var(--primary-dark), var(--secondary-color));
+      background: linear-gradient(135deg,
+          var(--primary-dark),
+          var(--secondary-color));
     }
   }
 }
@@ -89,11 +92,11 @@
   .chonglou-layout__nav {
     padding: 0 var(--spacing-md);
   }
-  
+
   .chonglou-layout__links {
     gap: var(--spacing-sm);
   }
-  
+
   .chonglou-layout__link {
     padding: var(--spacing-xs) var(--spacing-sm);
     font-size: var(--font-size-sm);

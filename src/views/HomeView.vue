@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { useArticleStore } from '@/stores/article'
 
-const articleStore = useArticleStore()
+const articleStore = null
+// const articleStore = useArticleStore()
 
-onMounted(() => {
-  articleStore.fetchArticles()
-})
+// onMounted(() => {
+//   articleStore.fetchArticles()
+// })
 </script>
 
 <template>
@@ -18,17 +18,17 @@ onMounted(() => {
         浏览文章
       </el-button>
     </div>
-    
-    <div class="chonglou-home__articles">
+
+    <div v-if="articleStore" class="chonglou-home__articles">
       <h2 class="chonglou-home__articles-title">最新文章</h2>
-      <div 
-        v-loading="articleStore.loading" 
+      <div
+        v-loading="articleStore.loading"
         element-loading-text="加载中..."
         element-loading-spinner="el-icon-loading"
         class="chonglou-home__articles-grid"
       >
-        <el-card 
-          v-for="article in articleStore.articles.slice(0, 3)" 
+        <el-card
+          v-for="article in articleStore.articles.slice(0, 3)"
           :key="article.id"
           class="chonglou-home__article-card"
           shadow="hover"
@@ -37,10 +37,12 @@ onMounted(() => {
           <p class="chonglou-home__article-summary">{{ article.summary }}</p>
           <div class="chonglou-home__article-meta">
             <el-tag size="small">{{ article.author }}</el-tag>
-            <span class="chonglou-home__article-date">{{ article.publishDate }}</span>
+            <span class="chonglou-home__article-date">{{
+              article.publishDate
+            }}</span>
           </div>
-          <el-button 
-            type="text" 
+          <el-button
+            type="text"
             @click="$router.push(`/articles/${article.id}`)"
           >
             阅读更多 →
@@ -63,7 +65,11 @@ onMounted(() => {
   text-align: center;
   margin-bottom: var(--spacing-3xl);
   padding: var(--spacing-3xl) 0;
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--primary-color) 0%,
+    var(--secondary-color) 100%
+  );
   color: white;
   border-radius: var(--border-radius-lg);
 }
@@ -72,7 +78,7 @@ onMounted(() => {
   font-size: var(--font-size-5xl);
   font-weight: var(--font-weight-bold);
   margin-bottom: var(--spacing-lg);
-  
+
   @include mix.mobile {
     font-size: var(--font-size-4xl);
   }
@@ -82,7 +88,7 @@ onMounted(() => {
   font-size: var(--font-size-xl);
   margin-bottom: var(--spacing-xl);
   opacity: 0.9;
-  
+
   @include mix.mobile {
     font-size: var(--font-size-lg);
   }
@@ -98,7 +104,7 @@ onMounted(() => {
   margin-bottom: var(--spacing-xl);
   font-size: var(--font-size-3xl);
   color: var(--text-primary);
-  
+
   @include mix.mobile {
     font-size: var(--font-size-2xl);
   }
@@ -113,7 +119,7 @@ onMounted(() => {
 .chonglou-home__article-card {
   cursor: pointer;
   transition: transform var(--transition-normal);
-  
+
   &:hover {
     transform: translateY(-4px);
   }

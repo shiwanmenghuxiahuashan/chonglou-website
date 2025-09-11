@@ -3,11 +3,11 @@
  * 实现请求失败时的自动重试机制
  */
 
-import type { Plugin, RequestConfig, HttpError } from '../types'
+import type { HttpError, Plugin, RequestConfig } from '../types'
 
 export interface RetryConfig {
-  retries: number        // 重试次数
-  retryDelay: number     // 重试延迟（毫秒）
+  retries: number // 重试次数
+  retryDelay: number // 重试延迟（毫秒）
   retryCondition: (error: HttpError) => boolean // 重试条件
   exponentialBackoff: boolean // 是否使用指数退避
 }
@@ -94,14 +94,15 @@ class RetryPlugin implements Plugin {
 
   private calculateDelay(config: RequestConfig): number {
     const baseDelay = config.retryDelay ?? this.config.retryDelay
-    
+
     if (!this.config.exponentialBackoff) {
       return baseDelay
     }
 
     // 指数退避：每次重试延迟时间翻倍
-    const retriesUsed = (this.config.retries - (config.retries ?? this.config.retries))
-    return baseDelay * Math.pow(2, retriesUsed)
+    const retriesUsed =
+      this.config.retries - (config.retries ?? this.config.retries)
+    return baseDelay * 2 ** retriesUsed
   }
 
   private sleep(ms: number): Promise<void> {

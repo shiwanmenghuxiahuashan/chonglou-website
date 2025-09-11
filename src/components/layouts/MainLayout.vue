@@ -1,110 +1,9 @@
-<template>
-  <div class="chonglou-main-layout" :class="{ 'chonglou-main-layout--sidebar-collapsed': sidebarCollapsed }">
-    <!-- 顶部导航栏 -->
-    <header class="chonglou-main-layout__header">
-      <slot name="header">
-        <div class="chonglou-main-layout__header-content">
-          <div class="chonglou-main-layout__header-left">
-            <button 
-              class="chonglou-main-layout__sidebar-toggle"
-              @click="toggleSidebar"
-              v-if="showSidebar"
-            >
-              <Icon name="Menu" :size="20" />
-            </button>
-            <div class="chonglou-main-layout__logo">
-              <slot name="logo">
-                <h1>{{ title }}</h1>
-              </slot>
-            </div>
-          </div>
-          
-          <div class="chonglou-main-layout__header-center">
-            <slot name="nav">
-              <nav class="chonglou-main-layout__nav">
-                <router-link to="/" class="chonglou-main-layout__nav-item">首页</router-link>
-                <router-link to="/articles" class="chonglou-main-layout__nav-item">文章</router-link>
-                <router-link to="/about" class="chonglou-main-layout__nav-item">关于</router-link>
-              </nav>
-            </slot>
-          </div>
-          
-          <div class="chonglou-main-layout__header-right">
-            <slot name="actions">
-              <div class="chonglou-main-layout__actions">
-                <button class="chonglou-main-layout__theme-toggle" @click="toggleTheme">
-                  <Icon :name="isDark ? 'Sunny' : 'Moon'" :size="18" />
-                </button>
-              </div>
-            </slot>
-          </div>
-        </div>
-      </slot>
-    </header>
-
-    <!-- 侧边栏 -->
-    <aside 
-      class="chonglou-main-layout__sidebar" 
-      v-if="showSidebar"
-      :class="{ 'chonglou-main-layout__sidebar--collapsed': sidebarCollapsed }"
-    >
-      <slot name="sidebar">
-        <div class="chonglou-main-layout__sidebar-content">
-          <nav class="chonglou-main-layout__sidebar-nav">
-            <div class="chonglou-main-layout__nav-group">
-              <h3 class="chonglou-main-layout__nav-group-title">导航</h3>
-              <router-link to="/" class="chonglou-main-layout__sidebar-nav-item">
-                <Icon name="House" />
-                <span>首页</span>
-              </router-link>
-              <router-link to="/articles" class="chonglou-main-layout__sidebar-nav-item">
-                <Icon name="Document" />
-                <span>文章列表</span>
-              </router-link>
-            </div>
-          </nav>
-        </div>
-      </slot>
-    </aside>
-
-    <!-- 主要内容区域 -->
-    <main class="chonglou-main-layout__main">
-      <div class="chonglou-main-layout__content">
-        <slot name="content">
-          <router-view v-slot="{ Component, route }">
-            <transition name="page" mode="out-in">
-              <keep-alive :include="keepAliveComponents">
-                <component :is="Component" :key="route.path" />
-              </keep-alive>
-            </transition>
-          </router-view>
-        </slot>
-      </div>
-    </main>
-
-    <!-- 底部 -->
-    <footer class="chonglou-main-layout__footer">
-      <slot name="footer">
-        <div class="chonglou-main-layout__footer-content">
-          <div class="chonglou-main-layout__footer-info">
-            <p>&copy; {{ currentYear }} {{ title }}. 基于 Vue 3 + TypeScript 构建</p>
-          </div>
-          <div class="chonglou-main-layout__footer-links">
-            <a href="https://github.com" target="_blank">GitHub</a>
-            <a href="/privacy" target="_blank">隐私政策</a>
-          </div>
-        </div>
-      </slot>
-    </footer>
-  </div>
-</template>
-
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { computed, onMounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useSettingsStore } from '@/stores/settings'
+import { useRoute } from 'vue-router'
 import Icon from '@/components/common/Icon.vue'
+import { useSettingsStore } from '@/stores/settings'
 
 interface Props {
   title?: string
@@ -145,15 +44,138 @@ onMounted(() => {
       sidebarCollapsed.value = true
     }
   }
-  
+
   window.addEventListener('resize', handleResize)
   handleResize()
-  
+
   return () => {
     window.removeEventListener('resize', handleResize)
   }
 })
 </script>
+
+<template>
+  <div
+    class="chonglou-main-layout"
+    :class="{ 'chonglou-main-layout--sidebar-collapsed': sidebarCollapsed }"
+  >
+    <!-- 顶部导航栏 -->
+    <header class="chonglou-main-layout__header">
+      <slot name="header">
+        <div class="chonglou-main-layout__header-content">
+          <div class="chonglou-main-layout__header-left">
+            <button
+              v-if="showSidebar"
+              class="chonglou-main-layout__sidebar-toggle"
+              @click="toggleSidebar"
+            >
+              <Icon name="Menu" :size="20" />
+            </button>
+            <div class="chonglou-main-layout__logo">
+              <slot name="logo">
+                <h1>{{ title }}</h1>
+              </slot>
+            </div>
+          </div>
+
+          <div class="chonglou-main-layout__header-center">
+            <slot name="nav">
+              <nav class="chonglou-main-layout__nav">
+                <router-link to="/" class="chonglou-main-layout__nav-item"
+                  >首页</router-link
+                >
+                <router-link
+                  to="/articles"
+                  class="chonglou-main-layout__nav-item"
+                  >文章</router-link
+                >
+                <router-link to="/about" class="chonglou-main-layout__nav-item"
+                  >关于</router-link
+                >
+              </nav>
+            </slot>
+          </div>
+
+          <div class="chonglou-main-layout__header-right">
+            <slot name="actions">
+              <div class="chonglou-main-layout__actions">
+                <button
+                  class="chonglou-main-layout__theme-toggle"
+                  @click="toggleTheme"
+                >
+                  <Icon :name="isDark ? 'Sunny' : 'Moon'" :size="18" />
+                </button>
+              </div>
+            </slot>
+          </div>
+        </div>
+      </slot>
+    </header>
+
+    <!-- 侧边栏 -->
+    <aside
+      v-if="showSidebar"
+      class="chonglou-main-layout__sidebar"
+      :class="{ 'chonglou-main-layout__sidebar--collapsed': sidebarCollapsed }"
+    >
+      <slot name="sidebar">
+        <div class="chonglou-main-layout__sidebar-content">
+          <nav class="chonglou-main-layout__sidebar-nav">
+            <div class="chonglou-main-layout__nav-group">
+              <h3 class="chonglou-main-layout__nav-group-title">导航</h3>
+              <router-link
+                to="/"
+                class="chonglou-main-layout__sidebar-nav-item"
+              >
+                <Icon name="House" />
+                <span>首页</span>
+              </router-link>
+              <router-link
+                to="/articles"
+                class="chonglou-main-layout__sidebar-nav-item"
+              >
+                <Icon name="Document" />
+                <span>文章列表</span>
+              </router-link>
+            </div>
+          </nav>
+        </div>
+      </slot>
+    </aside>
+
+    <!-- 主要内容区域 -->
+    <main class="chonglou-main-layout__main">
+      <div class="chonglou-main-layout__content">
+        <slot name="content">
+          <router-view v-slot="{ Component, route }">
+            <transition name="page" mode="out-in">
+              <keep-alive :include="keepAliveComponents">
+                <component :is="Component" :key="route.path" />
+              </keep-alive>
+            </transition>
+          </router-view>
+        </slot>
+      </div>
+    </main>
+
+    <!-- 底部 -->
+    <footer class="chonglou-main-layout__footer">
+      <slot name="footer">
+        <div class="chonglou-main-layout__footer-content">
+          <div class="chonglou-main-layout__footer-info">
+            <p>
+              &copy; {{ currentYear }} {{ title }}. 基于 Vue 3 + TypeScript 构建
+            </p>
+          </div>
+          <div class="chonglou-main-layout__footer-links">
+            <a href="https://github.com" target="_blank">GitHub</a>
+            <a href="/privacy" target="_blank">隐私政策</a>
+          </div>
+        </div>
+      </slot>
+    </footer>
+  </div>
+</template>
 
 <style scoped lang="scss">
 @use '@/styles/variables' as vars;
@@ -163,13 +185,13 @@ onMounted(() => {
   min-height: 100vh;
   display: grid;
   grid-template-areas:
-    "header header"
-    "sidebar main"
-    "footer footer";
+    'header header'
+    'sidebar main'
+    'footer footer';
   grid-template-columns: var(--sidebar-width) 1fr;
   grid-template-rows: var(--header-height) 1fr auto;
   transition: grid-template-columns var(--transition-normal);
-  
+
   &.chonglou-main-layout--sidebar-collapsed {
     grid-template-columns: var(--sidebar-collapsed-width) 1fr;
   }
@@ -203,7 +225,7 @@ onMounted(() => {
   @include mix.button-ghost;
   padding: var(--spacing-xs);
   border-radius: var(--border-radius-sm);
-  
+
   &:hover {
     background: var(--bg-hover);
   }
@@ -232,7 +254,7 @@ onMounted(() => {
   text-decoration: none;
   border-radius: var(--border-radius-sm);
   transition: all var(--transition-fast);
-  
+
   &:hover,
   &.router-link-active {
     color: var(--primary-color);
@@ -249,7 +271,7 @@ onMounted(() => {
   @include mix.button-ghost;
   padding: var(--spacing-xs);
   border-radius: var(--border-radius-sm);
-  
+
   &:hover {
     background: var(--bg-hover);
   }
@@ -263,7 +285,7 @@ onMounted(() => {
   width: var(--sidebar-width);
   transition: width var(--transition-normal);
   overflow: hidden;
-  
+
   &.chonglou-main-layout__sidebar--collapsed {
     width: var(--sidebar-collapsed-width);
   }
@@ -295,13 +317,13 @@ onMounted(() => {
   border-radius: var(--border-radius-sm);
   margin-bottom: var(--spacing-xs);
   transition: all var(--transition-fast);
-  
+
   &:hover,
   &.router-link-active {
     color: var(--primary-color);
     background: var(--bg-hover);
   }
-  
+
   span {
     .chonglou-main-layout.chonglou-main-layout--sidebar-collapsed & {
       display: none;
@@ -340,11 +362,11 @@ onMounted(() => {
 .chonglou-main-layout__footer-links {
   @include mix.flex-center;
   gap: var(--spacing-lg);
-  
+
   a {
     color: var(--text-secondary);
     text-decoration: none;
-    
+
     &:hover {
       color: var(--primary-color);
     }
@@ -371,16 +393,16 @@ onMounted(() => {
 @include mix.mobile {
   .chonglou-main-layout {
     grid-template-areas:
-      "header"
-      "main"
-      "footer";
+      'header'
+      'main'
+      'footer';
     grid-template-columns: 1fr;
-    
+
     &.chonglou-main-layout--sidebar-collapsed {
       grid-template-columns: 1fr;
     }
   }
-  
+
   .chonglou-main-layout__sidebar {
     position: fixed;
     top: var(--header-height);
@@ -389,16 +411,16 @@ onMounted(() => {
     z-index: var(--z-sidebar);
     transform: translateX(-100%);
     transition: transform var(--transition-normal);
-    
+
     &:not(.chonglou-main-layout__sidebar--collapsed) {
       transform: translateX(0);
     }
   }
-  
+
   .chonglou-main-layout__header-center {
     display: none;
   }
-  
+
   .chonglou-main-layout__footer-content {
     flex-direction: column;
     gap: var(--spacing-md);
