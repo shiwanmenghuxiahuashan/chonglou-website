@@ -70,29 +70,20 @@ module.exports = {
     }
   ],
   rules: {
-    // 项目特定的规则覆盖
+    // 仅保留项目特定必需的覆盖规则
     'vue/multi-word-component-names': 'off',
-    'vue/no-v-html': 'off',
 
-    // TypeScript 规则
-    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-    '@typescript-eslint/no-explicit-any': 'warn',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-
-    // 通用规则
-    'prefer-const': 'error',
-    'no-var': 'error',
-    'no-console': 'warn',
-    'no-debugger': 'warn',
-
-    // 导入排序规则（保留 Element Plus 的配置）
+    // 导入排序规则（Element Plus 配置的基础上微调）
     'import/order': [
       'error',
       {
         groups: [
           'builtin',
-          ['external', 'internal', 'parent', 'sibling', 'index', 'object'],
+          'external',
+          'internal',
+          ['parent', 'sibling'],
+          'index',
+          'object',
           'type'
         ],
         pathGroups: [
@@ -122,48 +113,6 @@ module.exports = {
           caseInsensitive: true
         }
       }
-    ],
-    'import/first': 'error',
-    'import/no-duplicates': 'error',
-    'import/newline-after-import': ['error', { count: 1 }],
-
-    // Vue 特定规则
-    'vue/padding-line-between-blocks': ['warn', 'always'],
-    'vue/html-self-closing': [
-      'error',
-      {
-        html: {
-          void: 'always',
-          normal: 'always',
-          component: 'always'
-        },
-        svg: 'always',
-        math: 'always'
-      }
-    ],
-
-    // 代码质量规则
-    'sort-imports': [
-      'warn',
-      {
-        ignoreCase: false,
-        ignoreDeclarationSort: true,
-        ignoreMemberSort: false,
-        memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
-        allowSeparatedGroups: false
-      }
-    ],
-
-    // Unicorn 规则（选择性启用）
-    'unicorn/prefer-array-find': 'error',
-    'unicorn/prefer-array-some': 'error',
-    'unicorn/prefer-includes': 'error',
-    'unicorn/prefer-string-starts-ends-with': 'error',
-    'unicorn/prefer-string-trim-start-end': 'error',
-    'unicorn/no-array-push-push': 'error',
-    'unicorn/prefer-modern-dom-apis': 'error',
-
-    // Prettier
-    'prettier/prettier': 'error'
+    ]
   }
 }
