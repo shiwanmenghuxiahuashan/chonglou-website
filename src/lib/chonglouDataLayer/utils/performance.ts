@@ -1,6 +1,6 @@
 /**
  * 性能优化工具
- * 包含竞态守卫、节流、防抖等功能
+ * 包含竞态守卫,请求取消管理等功能
  */
 
 import type { RequestConfig, PendingRequest } from '../types'
