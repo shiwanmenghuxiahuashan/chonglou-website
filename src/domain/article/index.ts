@@ -5,12 +5,7 @@
 
 import { ApiArticleData, ArticleMapper, ViewArticleData } from './mapper'
 
-import type {
-  Article,
-  ArticleDetail,
-  ArticleQueryParams,
-  PaginatedResponse
-} from '@/types/article'
+import type { ArticleQueryParams, PaginatedResponse } from '@/types/article'
 
 import { chonglouDataLayer } from '@/lib/chonglouDataLayer'
 
@@ -47,8 +42,7 @@ class ArticleService {
         pagination: response.data.pagination
       }
     } catch (error) {
-      console.warn('API请求失败，使用模拟数据:', error)
-      return this.getMockArticles(params)
+      console.error('API请求失败，使用模拟数据:', error)
     }
   }
 
@@ -80,8 +74,7 @@ class ArticleService {
 
       return mappedArticle
     } catch (error) {
-      console.warn('API请求失败，使用模拟数据:', error)
-      return this.getMockArticleDetail(id)
+      console.error('API请求失败，使用模拟数据:', error)
     }
   }
 }

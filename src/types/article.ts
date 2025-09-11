@@ -24,20 +24,6 @@ export interface Article {
   status: 'published' | 'draft' | 'archived'
 }
 
-// 文章详情（包含更多信息）
-export interface ArticleDetail extends Article {
-  seo?: {
-    metaTitle: string
-    metaDescription: string
-    keywords: string[]
-  }
-  relatedArticles?: {
-    id: number
-    title: string
-    summary: string
-  }[]
-}
-
 // 文章查询参数
 export interface ArticleQueryParams {
   page?: number
@@ -77,14 +63,4 @@ export interface Tag {
   name: string
   count: number
   color?: string
-}
-
-// 文章统计
-export interface ArticleStats {
-  totalArticles: number
-  totalViews: number
-  totalLikes: number
-  totalComments: number
-  categoriesCount: number
-  tagsCount: number
 }
