@@ -10,9 +10,6 @@
           </div>
           <div class="chonglou-layout__links">
             <router-link to="/" class="chonglou-layout__link">首页</router-link>
-            <router-link to="/article" class="chonglou-layout__link"
-              >文章</router-link
-            >
           </div>
         </nav>
       </el-header>
