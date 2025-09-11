@@ -3,59 +3,11 @@
  * 将API返回的文章数据映射为视图组件需要的格式
  */
 
+import type { ApiArticleData, ViewArticleData } from './types'
+
 import type { MapperRule } from '@/lib/projectDomain'
 
 import { MapperBase } from '@/lib/projectDomain'
-// API 返回的原始文章数据结构
-interface ApiArticleData {
-  id: number
-  title: string
-  content: string
-  summary?: string
-  author_info: {
-    id: number
-    name: string
-    avatar_url?: string
-  }
-  category_name: string
-  tag_list: string[]
-  published_at: string
-  updated_at: string
-  view_count: number
-  like_count: number
-  comment_count: number
-  is_featured: boolean
-  status: string
-}
-
-// 视图组件需要的文章数据结构
-interface ViewArticleData {
-  id: number
-  title: string
-  summary: string
-  content: string
-  author: {
-    id: number
-    name: string
-    avatar: string
-    displayName: string
-  }
-  category: string
-  tags: string[]
-  publishedAt: string
-  updatedAt: string
-  readCount: number
-  likeCount: number
-  commentCount: number
-  featured: boolean
-  status: 'published' | 'draft' | 'archived'
-  // 视图特有的计算属性
-  formattedPublishDate: string
-  readingTime: string
-  isNew: boolean
-  popularity: 'high' | 'medium' | 'low'
-}
-
 /**
  * 文章映射器
  * 实现从 API 数据到视图数据的转换
@@ -213,16 +165,12 @@ class ArticleMapper extends MapperBase<ApiArticleData, ViewArticleData> {
    * 映射单篇文章，添加相关文章
    */
   public mapArticleDetail(
-    apiArticle: ApiArticleData,
-    relatedArticles?: ApiArticleData[]
+    apiArticle: ApiArticleData
   ): ViewArticleData & { relatedArticles?: ViewArticleData[] } {
     const mapped = this.map(apiArticle)
 
     return {
-      ...mapped,
-      relatedArticles: relatedArticles
-        ? this.mapArray(relatedArticles)
-        : undefined
+      ...mapped
     }
   }
 

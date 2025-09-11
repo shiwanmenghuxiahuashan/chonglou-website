@@ -19,7 +19,7 @@ class ArticleService {
   /**
    * 获取文章列表（使用映射器）
    */
-  async getArticles(
+  async getArticle(
     params: ArticleQueryParams = {}
   ): Promise<PaginatedResponse<ViewArticleData>> {
     try {
@@ -33,10 +33,9 @@ class ArticleService {
           throttle: 500
         }
       )
-
       // 2. 使用映射器转换数据
       const mappedArticles = this.articleMapper.mapArticleList(
-        response.data.data,
+        response.data,
         params.sortBy as any
       )
 
@@ -63,22 +62,12 @@ class ArticleService {
           requestId: `article-detail-${id}`
         })
 
-      // 2. 获取相关文章
-      const relatedResponse: HttpResponse<ApiArticleData[]> =
-        await chonglouDataLayer.get(
-          `/${__RESOURCE_CONFIG__.ARTICLE}/${id}/related`,
-          {
-            cache: true,
-            cacheTime: 15 * 60 * 1000
-          }
-        )
-
-      // 3. 使用映射器转换数据
-      const mappedArticle = this.articleMapper.mapArticleDetail(
-        response.data,
-        relatedResponse.data
-      )
-
+      // 2. 使用映射器转换数据
+      const mappedArticle = this.articleMapper.mapArticleDetail(response.data)
+      // TODO 统一返回格式
+      return {
+        data: mappedArticle
+      }
       return mappedArticle
     } catch (error) {
       console.error('API请求失败，使用模拟数据:', error)

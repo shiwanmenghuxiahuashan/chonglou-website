@@ -3,7 +3,7 @@ import { shallowRef } from 'vue'
 import { articleService } from '@/domain/article'
 
 const articleList: shallowRef<unknown[]> = shallowRef([])
-articleService.getArticles({ page: 1, pageSize: 3 }).then(response => {
+articleService.getArticle({ page: 1, pageSize: 3 }).then(response => {
   articleList.value = response.data
 })
 </script>

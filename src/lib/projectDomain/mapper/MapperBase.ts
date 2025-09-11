@@ -133,6 +133,7 @@ abstract class MapperBase<TSource = any, TTarget = any> {
    * 映射对象数组
    */
   public mapArray(sources: TSource[], options?: MapperOptions): TTarget[] {
+    console.log('mapArray', sources, options)
     if (!Array.isArray(sources)) {
       throw new TypeError(`[${this.metadata.name}] Sources must be an array`)
     }

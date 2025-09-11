@@ -1,21 +1,14 @@
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { shallowRef } from 'vue'
 import { useRoute } from 'vue-router'
-import { useArticleStore } from '@/stores/article'
+import { articleService } from '@/domain/article'
 
 const route = useRoute()
-const articleStore = useArticleStore()
+const article = shallowRef(null)
 
-const article = computed(() => {
-  const id = Number(route.params.id)
-  return articleStore.article.find(article => article.id === id)
-})
-
-onMounted(() => {
-  // 确保文章数据已加载
-  if (articleStore.article.length === 0) {
-    articleStore.fetchArticles()
-  }
+articleService.getArticleDetail(route.params.id).then(response => {
+  console.log('response', response)
+  article.value = response.data
 })
 </script>
 
@@ -29,7 +22,6 @@ onMounted(() => {
     >
       返回
     </el-button>
-
     <div v-if="article" class="chonglou-article__content">
       <h1 class="chonglou-article__title">{{ article.title }}</h1>
 
