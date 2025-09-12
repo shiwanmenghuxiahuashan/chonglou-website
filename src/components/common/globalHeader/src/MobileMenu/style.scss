@@ -1,0 +1,144 @@
+/* ========== Mobile Menu ========== */
+
+// ========== 变量定义 ==========
+$header-height: 46px;
+$mobile-menu-bg: rgba(0, 0, 0, 0.4);
+$mobile-menu-content-bg: rgba(255, 255, 255, 0.95);
+$mobile-menu-content-bg-dark: rgba(0, 0, 0, 0.9);
+$mobile-menu-margin: 20px;
+$mobile-menu-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+
+$nav-item-padding: 16px 24px;
+$nav-item-font-size: 17px;
+$nav-item-line-height: 1.2;
+$nav-item-border-color: rgba(0, 0, 0, 0.1);
+$nav-item-border-color-dark: rgba(255, 255, 255, 0.1);
+
+$transition-duration: 0.3s;
+$transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
+
+// ========== 移动端全屏菜单 ==========
+.chonglou-global__header-mobile-menu {
+  position: fixed;
+  top: $header-height;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: $mobile-menu-bg;
+  backdrop-filter: blur(20px);
+  z-index: 999;
+  display: none;
+
+  &-content {
+    height: calc(100vh - $header-height + 1px);
+    background: $mobile-menu-content-bg;
+    backdrop-filter: saturate(180%) blur(20px);
+    overflow: hidden;
+    box-shadow: $mobile-menu-shadow;
+  }
+}
+
+.chonglou-global__header-mobile-nav {
+  padding: 20px 0;
+
+  &-item {
+    display: block;
+    padding: $nav-item-padding;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 400;
+    font-size: $nav-item-font-size;
+    line-height: $nav-item-line-height;
+    transition: all $transition-duration ease;
+    border-bottom: 1px solid $nav-item-border-color;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      color: var(--primary-color);
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    &--active {
+      color: var(--primary-color);
+      background: rgba(0, 0, 0, 0.05);
+    }
+  }
+}
+
+// ========== 响应式设计 ==========
+@media (max-width: 768px) {
+  .chonglou-global__header-mobile-menu {
+    display: block;
+  }
+}
+
+// ========== 动画效果 ==========
+.mobile-menu-enter-active,
+.mobile-menu-leave-active {
+  transition: all $transition-duration $transition-easing;
+}
+
+.mobile-menu-enter-from {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.mobile-menu-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+// ========== 暗黑模式支持 ==========
+.dark .chonglou-global__header-mobile-menu {
+  background: rgba(0, 0, 0, 0.6);
+
+  &-content {
+    background: $mobile-menu-content-bg-dark;
+    backdrop-filter: saturate(180%) blur(20px);
+  }
+}
+
+.dark .chonglou-global__header-mobile-nav-item {
+  color: #ffffff;
+  border-bottom-color: $nav-item-border-color-dark;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--primary-color);
+  }
+
+  &--active {
+    color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+// ========== 移动端暗黑模式 ==========
+@media (max-width: 768px) {
+  .dark .chonglou-global__header-mobile-menu {
+    background: rgba(0, 0, 0, 0.8);
+
+    &-content {
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: saturate(180%) blur(20px);
+    }
+  }
+
+  .dark .chonglou-global__header-mobile-nav-item {
+    color: #ffffff;
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--primary-color);
+    }
+
+    &--active {
+      color: var(--primary-color);
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+}

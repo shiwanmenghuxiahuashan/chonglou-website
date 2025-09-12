@@ -1,180 +1,290 @@
-/* ========== Global Header - 横向撑满，顶部固定，高度50px ========== */
+/* ========== Global Header ========== */
+
+// ========== 变量定义 ==========
+$header-height: 44px;
+$header-z-index: 1000;
+$header-max-width: 1280px;
+$header-padding: 22px;
+$header-padding-mobile: 16px;
+$header-padding-small: 12px;
+
+$logo-font-size: 21px;
+$logo-font-size-mobile: 18px;
+$logo-font-size-small: 16px;
+
+$nav-font-size: 12px;
+$nav-font-size-mobile: 11px;
+$nav-item-padding: 9px;
+$nav-item-padding-mobile: 8px;
+
+$button-size: 32px;
+$button-border-radius: 6px;
+
+$transition-duration: 0.3s;
+$transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
+
+// ========== 基础样式 ==========
 .chonglou-global__header {
+  // 定位和尺寸
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   width: 100%;
-  height: 50px;
-  z-index: 1000;
-  background: transparent;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  pointer-events: none;
-  &-content {
-    max-width: 1280px;
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    padding: 0 24px;
+  height: $header-height;
+  z-index: $header-z-index;
+
+  // 背景和效果
+  background: var(--header-bg, rgba(255, 255, 255, 0.95));
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--header-border, rgba(0, 0, 0, 0.1));
+  box-shadow: 0 1px 0 0 var(--header-shadow, rgba(0, 0, 0, 0.1));
+}
+
+// ========== 内容容器 ==========
+.chonglou-global__header-content {
+  max-width: $header-max-width;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 $header-padding;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+}
+
+// ========== Logo 区域 ==========
+.chonglou-global__header-logo {
+  flex-shrink: 0;
+  z-index: 10;
+
+  // 使用 &-xxx 因为这是 element
+  &-link {
+    text-decoration: none;
+    color: inherit;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-  }
+    height: $header-height;
+    transition: opacity $transition-duration ease;
 
-  &-logo {
-    flex-shrink: 0;
-
-    &-link {
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      align-items: center;
-      height: 50px;
-
-      &:hover .chonglou-global__header-logo-text {
-        color: var(--primary-color);
-        user-select: none;
-      }
-    }
-
-    &-text {
-      font-size: var(--font-size-base);
-      font-weight: var(--font-weight-semibold);
-      color: var(--text-color);
-      transition: color 0.3s ease;
-    }
-  }
-
-  &-nav {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex: 1;
-    justify-content: center;
-    min-width: 0; /* 允许导航菜单收缩 */
-
-    &-item {
-      padding: 6px 12px;
-      text-decoration: none;
-      color: var(--text-secondary);
-      font-weight: 500;
-      font-size: var(--font-size-xs);
-      border-radius: 6px;
-      transition: all 0.3s ease;
-      position: relative;
-      height: 40px;
-      display: flex;
-      align-items: center;
-
-      &:hover {
-        color: var(--primary-color);
-        background: var(--bg-hover);
-      }
-
-      &--active {
-        color: var(--primary-color);
-        background: var(--bg-hover);
-      }
+    &:hover {
+      opacity: 0.7;
     }
   }
 
-  &-actions {
+  // 使用 &-xxx 因为这是 element
+  &-text {
+    font-size: $logo-font-size;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+    transition: color $transition-duration ease;
+  }
+}
+
+// ========== 导航菜单 ==========
+.chonglou-global__header-nav {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  // position: absolute;
+  // left: 50%;
+  // transform: translateX(-50%);
+  z-index: 10;
+
+  // 使用 &-xxx 因为这是 element
+  &-item {
+    padding: 0 $nav-item-padding;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 400;
+    font-size: $nav-font-size;
+    line-height: 1;
+    height: $header-height;
     display: flex;
     align-items: center;
-    gap: 8px;
-    flex-shrink: 0;
+    transition: all $transition-duration ease;
+    position: relative;
+    letter-spacing: -0.01em;
 
-    &-theme-toggle {
-      // Element Plus 按钮样式覆盖
-      --el-button-bg-color: transparent;
-      --el-button-border-color: transparent;
-      --el-button-text-color: var(--text-secondary);
-      --el-button-hover-bg-color: var(--bg-hover);
-      --el-button-hover-text-color: var(--primary-color);
-      --el-button-hover-border-color: transparent;
-      --el-button-active-bg-color: var(--bg-hover);
-      --el-button-active-text-color: var(--primary-color);
-      --el-button-active-border-color: transparent;
+    &:hover {
+      color: var(--primary-color);
+    }
 
-      &:hover {
-        --el-button-bg-color: var(--bg-hover);
-        --el-button-text-color: var(--primary-color);
-      }
+    // 使用 &-xxx 因为这是 modifier
+    &--active {
+      color: var(--primary-color);
+    }
 
-      &:focus {
-        --el-button-bg-color: var(--bg-hover);
-        --el-button-text-color: var(--primary-color);
-        outline: none;
-      }
+    // Apple风格悬停下划线效果
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--primary-color);
+      transform: translateX(-50%);
+      transition: width $transition-duration ease;
+    }
+
+    &:hover::after {
+      width: 20px;
     }
   }
 }
 
-/* ========== 响应式设计 ========== */
+// ========== 操作按钮区域 ==========
+.chonglou-global__header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  z-index: 10;
+
+  // 使用 &-xxx 因为这是 element
+  &-mobile-menu {
+    display: none;
+    width: $button-size;
+    height: $button-size;
+    border-radius: $button-border-radius;
+
+    // Element Plus 按钮样式覆盖
+    --el-button-bg-color: transparent;
+    --el-button-border-color: transparent;
+    --el-button-text-color: var(--text-primary);
+    --el-button-hover-bg-color: rgba(0, 0, 0, 0.05);
+    --el-button-hover-text-color: var(--text-primary);
+    --el-button-hover-border-color: transparent;
+    --el-button-active-bg-color: rgba(0, 0, 0, 0.1);
+    --el-button-active-text-color: var(--text-primary);
+    --el-button-active-border-color: transparent;
+
+    &:hover {
+      --el-button-bg-color: rgba(0, 0, 0, 0.05);
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  // 使用 &-xxx 因为这是 element
+  &-theme-toggle {
+    width: $button-size;
+    height: $button-size;
+    border-radius: $button-border-radius;
+
+    // Element Plus 按钮样式覆盖
+    --el-button-bg-color: transparent;
+    --el-button-border-color: transparent;
+    --el-button-text-color: var(--text-primary);
+    --el-button-hover-bg-color: rgba(0, 0, 0, 0.05);
+    --el-button-hover-text-color: var(--text-primary);
+    --el-button-hover-border-color: transparent;
+    --el-button-active-bg-color: rgba(0, 0, 0, 0.1);
+    --el-button-active-text-color: var(--text-primary);
+    --el-button-active-border-color: transparent;
+
+    &:hover {
+      --el-button-bg-color: rgba(0, 0, 0, 0.05);
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+// ========== 响应式设计 ==========
 @media (max-width: 1024px) {
-  .chonglou-global__header {
-    &-content {
-      gap: 16px;
-    }
+  .chonglou-global__header-content {
+    padding: 0 20px;
+  }
 
-    &-nav {
-      gap: 4px; /* 减少导航项间距 */
-
-      &-item {
-        padding: 4px 8px; /* 减少导航项内边距 */
-        font-size: var(--font-size-xs);
-      }
-    }
+  .chonglou-global__header-nav-item {
+    padding: 0 $nav-item-padding-mobile;
+    font-size: $nav-font-size-mobile;
   }
 }
 
 @media (max-width: 768px) {
   .chonglou-global__header {
-    &-content {
-      padding: 0 16px;
-      gap: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: saturate(180%) blur(20px);
+
+    .chonglou-global__header-content {
+      padding: 0 $header-padding-mobile;
     }
 
-    &-logo {
-      &-text {
-        font-size: var(--font-size-sm);
+    .chonglou-global__header-logo-text {
+      font-size: $logo-font-size-mobile;
+    }
+
+    .chonglou-global__header-nav {
+      display: none;
+    }
+
+    .chonglou-global__header-actions {
+      gap: 6px;
+
+      .chonglou-global__header-actions-mobile-menu {
+        display: flex;
       }
-    }
-
-    &-nav {
-      display: none; /* 移动端隐藏导航菜单 */
-    }
-
-    &-actions {
-      flex-shrink: 0;
-      min-width: 40px; /* 确保操作按钮有最小宽度 */
     }
   }
 }
 
 @media (max-width: 480px) {
   .chonglou-global__header {
-    &-content {
-      padding: 0 12px;
-      gap: 8px;
+    .chonglou-global__header-content {
+      padding: 0 $header-padding-small;
     }
 
-    &-logo {
-      &-text {
-        font-size: var(--font-size-xs);
-      }
+    .chonglou-global__header-logo-text {
+      font-size: $logo-font-size-small;
     }
 
-    &-actions {
-      min-width: 36px; /* 小屏幕下进一步减小 */
+    .chonglou-global__header-actions {
+      gap: 4px;
     }
   }
 }
 
-/* ========== Dark Mode Support ========== */
-:deep(.dark) .chonglou-global__header {
-  background: rgba(18, 18, 18, 0.95);
+// ========== 暗黑模式支持 ==========
+.dark .chonglou-global__header {
+  --header-bg: rgba(0, 0, 0, 0.9);
+  --header-border: rgba(255, 255, 255, 0.1);
+  --header-shadow: rgba(255, 255, 255, 0.1);
+  backdrop-filter: saturate(180%) blur(20px);
+
+  .chonglou-global__header-logo-text {
+    color: #ffffff;
+  }
+
+  .chonglou-global__header-nav-item {
+    color: #ffffff;
+
+    &:hover {
+      color: var(--primary-color);
+    }
+
+    &--active {
+      color: var(--primary-color);
+    }
+  }
+}
+
+// ========== 移动端暗黑模式 ==========
+@media (max-width: 768px) {
+  .dark .chonglou-global__header {
+    --header-bg: rgba(0, 0, 0, 0.95);
+    backdrop-filter: saturate(180%) blur(20px);
+
+    .chonglou-global__header-logo-text {
+      color: #ffffff;
+    }
+  }
 }
