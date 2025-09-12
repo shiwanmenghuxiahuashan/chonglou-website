@@ -11,7 +11,7 @@
   backdrop-filter: blur(12px);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-
+  pointer-events: none;
   &-content {
     max-width: 1280px;
     width: 100%;
@@ -36,6 +36,7 @@
 
       &:hover .chonglou-global__header-logo-text {
         color: var(--primary-color);
+        user-select: none;
       }
     }
 
@@ -53,6 +54,7 @@
     gap: 8px;
     flex: 1;
     justify-content: center;
+    min-width: 0; /* 允许导航菜单收缩 */
 
     &-item {
       padding: 6px 12px;
@@ -107,6 +109,67 @@
         --el-button-text-color: var(--primary-color);
         outline: none;
       }
+    }
+  }
+}
+
+/* ========== 响应式设计 ========== */
+@media (max-width: 1024px) {
+  .chonglou-global__header {
+    &-content {
+      gap: 16px;
+    }
+
+    &-nav {
+      gap: 4px; /* 减少导航项间距 */
+
+      &-item {
+        padding: 4px 8px; /* 减少导航项内边距 */
+        font-size: var(--font-size-xs);
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .chonglou-global__header {
+    &-content {
+      padding: 0 16px;
+      gap: 12px;
+    }
+
+    &-logo {
+      &-text {
+        font-size: var(--font-size-sm);
+      }
+    }
+
+    &-nav {
+      display: none; /* 移动端隐藏导航菜单 */
+    }
+
+    &-actions {
+      flex-shrink: 0;
+      min-width: 40px; /* 确保操作按钮有最小宽度 */
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .chonglou-global__header {
+    &-content {
+      padding: 0 12px;
+      gap: 8px;
+    }
+
+    &-logo {
+      &-text {
+        font-size: var(--font-size-xs);
+      }
+    }
+
+    &-actions {
+      min-width: 36px; /* 小屏幕下进一步减小 */
     }
   }
 }
