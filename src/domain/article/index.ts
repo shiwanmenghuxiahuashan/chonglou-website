@@ -4,7 +4,7 @@
  */
 import { ArticleMapper } from './mapper'
 
-import type { ApiArticleData, ViewArticleData } from './mapper'
+import type { ViewArticleData, jsonApiArticleData } from './mapper'
 
 import type { ArticleQueryParams, PaginatedResponse } from '@/types/article'
 
@@ -55,7 +55,7 @@ class ArticleService {
   async getArticleDetail(id: number): Promise<ViewArticleData> {
     try {
       // 1. 获取文章详情
-      const response: HttpResponse<ApiArticleData> =
+      const response: HttpResponse<jsonApiArticleData> =
         await chonglouDataLayer.get(`${__RESOURCE_CONFIG__.ARTICLE}/${id}`, {
           cache: true,
           cacheTime: 10 * 60 * 1000,
@@ -71,6 +71,15 @@ class ArticleService {
       return mappedArticle
     } catch (error) {
       console.error('API请求失败，使用模拟数据:', error)
+    }
+  }
+
+  async createArticle(data: Partial<jsonApiArticleData>): Promise<void> {
+    try {
+      await chonglouDataLayer.post(__RESOURCE_CONFIG__.ARTICLE, data)
+    } catch (error) {
+      console.error('API请求失败，无法创建文章:', error)
+      throw error
     }
   }
 }

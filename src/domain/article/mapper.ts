@@ -3,7 +3,7 @@
  * 将API返回的文章数据映射为视图组件需要的格式
  */
 
-import type { ApiArticleData, ViewArticleData } from './types'
+import type { ViewArticleData, jsonApiArticleData } from './types'
 
 import type { MapperRule } from '@/lib/projectDomain'
 
@@ -12,7 +12,7 @@ import { MapperBase } from '@/lib/projectDomain'
  * 文章映射器
  * 实现从 API 数据到视图数据的转换
  */
-class ArticleMapper extends MapperBase<ApiArticleData, ViewArticleData> {
+class ArticleMapper extends MapperBase<jsonApiArticleData, ViewArticleData> {
   constructor() {
     super('ArticleMapper', '1.0.0', {
       deep: true,
@@ -21,7 +21,7 @@ class ArticleMapper extends MapperBase<ApiArticleData, ViewArticleData> {
     })
   }
 
-  protected defineMapping(): MapperRule<ApiArticleData, ViewArticleData>[] {
+  protected defineMapping(): MapperRule<jsonApiArticleData, ViewArticleData>[] {
     return [
       // 基础字段直接映射
       this.createRule('id', 'id'),
@@ -30,7 +30,7 @@ class ArticleMapper extends MapperBase<ApiArticleData, ViewArticleData> {
 
       // 摘要字段，有默认值
       this.createRule('summary', 'summary', {
-        defaultValue: (source: ApiArticleData) =>
+        defaultValue: (source: jsonApiArticleData) =>
           source.content ? `${source.content.slice(0, 200)}...` : '暂无摘要',
         required: true
       }),
@@ -130,7 +130,7 @@ class ArticleMapper extends MapperBase<ApiArticleData, ViewArticleData> {
         ['view_count', 'like_count', 'comment_count'],
         'popularity',
         {
-          transform: (_, source: ApiArticleData) => {
+          transform: (_, source: jsonApiArticleData) => {
             const score =
               source.view_count +
               source.like_count * 5 +
@@ -148,7 +148,7 @@ class ArticleMapper extends MapperBase<ApiArticleData, ViewArticleData> {
    * 映射文章列表，添加排序功能
    */
   public mapArticleList(
-    apiArticles: ApiArticleData[],
+    apiArticles: jsonApiArticleData[],
     sortBy?: 'popularity' | 'date' | 'featured'
   ): ViewArticleData[] {
     let mapped = this.mapArray(apiArticles)
@@ -165,7 +165,7 @@ class ArticleMapper extends MapperBase<ApiArticleData, ViewArticleData> {
    * 映射单篇文章，添加相关文章
    */
   public mapArticleDetail(
-    apiArticle: ApiArticleData
+    apiArticle: jsonApiArticleData
   ): ViewArticleData & { relatedArticles?: ViewArticleData[] } {
     const mapped = this.map(apiArticle)
 
@@ -287,4 +287,4 @@ class ArticleMapper extends MapperBase<ApiArticleData, ViewArticleData> {
   }
 }
 
-export { ArticleMapper, ApiArticleData, ViewArticleData }
+export { ArticleMapper, jsonApiArticleData, ViewArticleData }

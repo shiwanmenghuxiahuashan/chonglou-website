@@ -45,6 +45,14 @@ const router = createRouter({
       meta: {
         title: '编辑器'
       }
+    },
+    {
+      path: '/demo',
+      name: 'demo',
+      component: () => import('@/views/DemoView.vue'),
+      meta: {
+        title: '演示'
+      }
     }
   ]
 })
