@@ -10,6 +10,11 @@ const router = createRouter({
       component: HomeView
     },
     {
+      path: '/article',
+      name: 'article-detail',
+      component: () => import('@/views/AboutView.vue')
+    },
+    {
       path: '/article/:id',
       name: 'article-detail',
       component: () => import('@/views/ArticleDetailView.vue')
@@ -20,6 +25,14 @@ const router = createRouter({
       component: () => import('@/views/AboutView.vue'),
       meta: {
         title: '关于我们'
+      }
+    },
+    {
+      path: '/editor',
+      name: 'editor',
+      component: () => import('@/views/EditorView.vue'),
+      meta: {
+        title: '编辑器'
       }
     }
   ]
