@@ -9,11 +9,18 @@
   padding: 0;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
 html {
   font-size: 16px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; /* 防止横向滚动 */
 }
 
 body {
@@ -22,6 +29,7 @@ body {
   font-size: var(--font-size-base);
   color: var(--text-primary);
   background-color: var(--bg-primary);
+  overflow-x: hidden; /* 防止横向滚动 */
   transition:
     background-color var(--transition-normal),
     color var(--transition-normal);
