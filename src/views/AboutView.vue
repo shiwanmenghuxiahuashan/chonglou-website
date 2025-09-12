@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import Icon from '@/components/common/Icon.vue'
 
 const techStack = ref([
   'Vue 3',
@@ -17,25 +16,29 @@ const techStack = ref([
 
 const features = ref([
   {
-    icon: 'Lightning',
+    icon: '⚡',
     title: '现代技术栈',
     description:
-      '采用 Vue 3 + TypeScript + Vite 构建，确保最佳的开发体验和性能。'
+      '采用 Vue 3 + TypeScript + Vite 构建，确保最佳的开发体验和性能。',
+    color: '#4fc08d'
   },
   {
-    icon: 'Mobile',
+    icon: '📱',
     title: '响应式设计',
-    description: '完美适配桌面端和移动端，提供一致的用户体验。'
+    description: '完美适配桌面端和移动端，提供一致的用户体验。',
+    color: '#42b883'
   },
   {
-    icon: 'Moon',
+    icon: '🌙',
     title: '深色模式',
-    description: '支持明暗主题切换，保护用户视力，提升阅读体验。'
+    description: '支持明暗主题切换，保护用户视力，提升阅读体验。',
+    color: '#35495e'
   },
   {
-    icon: 'Trophy',
+    icon: '🚀',
     title: 'PWA 支持',
-    description: '支持离线访问和安装到桌面，提供类原生应用体验。'
+    description: '支持离线访问和安装到桌面，提供类原生应用体验。',
+    color: '#6dd4a3'
   }
 ])
 </script>
@@ -56,7 +59,7 @@ const features = ref([
         <el-col :xs="24" :md="12">
           <el-card class="chonglou-about__card">
             <template #header>
-              <h3><Icon name="User" /> 关于我</h3>
+              <h3>👤 关于我</h3>
             </template>
             <div class="chonglou-about__card-content">
               <p>我是重楼，一名前端开发工程师，热爱技术，喜欢分享。</p>
@@ -71,7 +74,7 @@ const features = ref([
         <el-col :xs="24" :md="12">
           <el-card class="chonglou-about__card">
             <template #header>
-              <h3><Icon name="Monitor" /> 技术栈</h3>
+              <h3>💻 技术栈</h3>
             </template>
             <div class="chonglou-about__card-content">
               <div class="chonglou-about__tech-stack">
@@ -92,7 +95,7 @@ const features = ref([
         <el-col :xs="24" :md="12">
           <el-card class="chonglou-about__card">
             <template #header>
-              <h3><Icon name="Target" /> 网站目标</h3>
+              <h3>🎯 网站目标</h3>
             </template>
             <div class="chonglou-about__card-content">
               <ul class="chonglou-about__goal-list">
@@ -108,20 +111,17 @@ const features = ref([
         <el-col :xs="24" :md="12">
           <el-card class="chonglou-about__card">
             <template #header>
-              <h3><Icon name="Link" /> 联系方式</h3>
+              <h3>📞 联系方式</h3>
             </template>
             <div class="chonglou-about__card-content">
               <div class="chonglou-about__contact-item">
-                <Icon name="Message" />
-                <span>邮箱：contact@example.com</span>
+                <span>📧 邮箱：contact@example.com</span>
               </div>
               <div class="chonglou-about__contact-item">
-                <Icon name="Star" />
-                <span>GitHub：github.com/example</span>
+                <span>⭐ GitHub：github.com/example</span>
               </div>
               <div class="chonglou-about__contact-item">
-                <Icon name="ChatDotSquare" />
-                <span>微信：example_wechat</span>
+                <span>💬 微信：example_wechat</span>
               </div>
             </div>
           </el-card>
@@ -140,8 +140,11 @@ const features = ref([
           :lg="6"
         >
           <div class="chonglou-about__feature-card">
-            <div class="chonglou-about__feature-icon">
-              <Icon :name="feature.icon" :size="32" />
+            <div
+              class="chonglou-about__feature-icon"
+              :style="{ backgroundColor: feature.color }"
+            >
+              {{ feature.icon }}
             </div>
             <h4>{{ feature.title }}</h4>
             <p>{{ feature.description }}</p>
@@ -295,9 +298,10 @@ const features = ref([
     width: 64px;
     height: 64px;
     margin: 0 auto var(--spacing-lg);
-    background: var(--primary-color-light);
     border-radius: var(--border-radius-round);
-    color: var(--primary-color);
+    color: white;
+    font-size: 1.5rem;
+    box-shadow: var(--shadow-light);
   }
 
   h4 {
