@@ -13,7 +13,7 @@ import {
 
 import type { HttpConfig, HttpResponse, Plugin, RequestConfig } from './types'
 
-export class DataLayer {
+class DataLayer {
   private coreClient: CoreClient
   private pluginManager: PluginManager
   private authManager: AuthManager
@@ -185,3 +185,4 @@ export class DataLayer {
     return this.requestEnhancer
   }
 }
+export { DataLayer }

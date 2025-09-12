@@ -18,12 +18,12 @@ function createDataLayer(config: HttpConfig = {}): DataLayer {
 
   // 添加默认插件
   // const cachePlugin = new CachePlugin()
-  const retryPlugin = new RetryPlugin()
-  const errorHandlerPlugin = new ErrorHandlerPlugin()
+  // const retryPlugin = new RetryPlugin()
+  // const errorHandlerPlugin = new ErrorHandlerPlugin()
 
   // _datalayer.use(cachePlugin)
-  _datalayer.use(retryPlugin)
-  _datalayer.use(errorHandlerPlugin)
+  // _datalayer.use(retryPlugin)
+  // _datalayer.use(errorHandlerPlugin)
 
   return _datalayer
 }
