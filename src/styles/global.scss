@@ -1,8 +1,16 @@
-// 使用 @use 语法导入
+/* ========== Global Styles ========== */
+/* 
+ * 文件说明：全局基础样式和工具类
+ * 命名规范：使用 BEM 命名法，chonglou- 作为项目前缀
+ * 语法规范：只允许 modifier 使用 &-xxx 语法，elements 使用完整类名
+ * 维护说明：按功能模块分组，每个模块都有清晰的注释说明
+ */
+
+/* ========== 导入依赖 ========== */
 @use './variables' as vars;
 @use './mixins' as mix;
 
-// 全局重置样式
+/* ========== 全局重置样式 ========== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -15,6 +23,7 @@
   box-sizing: inherit;
 }
 
+/* ========== 基础元素样式 ========== */
 html {
   font-size: 16px;
   line-height: 1.5;
@@ -35,7 +44,7 @@ body {
     color var(--transition-normal);
 }
 
-// 标题样式
+/* ========== 标题样式 ========== */
 h1,
 h2,
 h3,
@@ -84,13 +93,14 @@ h6 {
   font-size: var(--font-size-base);
 }
 
-// 段落样式
+/* ========== 段落样式 ========== */
 p {
   margin-bottom: var(--spacing-md);
   line-height: var(--line-height-normal);
   color: var(--text-secondary);
 }
-// 链接样式
+
+/* ========== 链接样式 ========== */
 a {
   color: inherit;
   text-decoration: none;
@@ -99,12 +109,13 @@ a {
   &:hover {
     color: var(--primary-dark);
   }
+
   &:focus {
     outline: none;
   }
 }
 
-// 列表样式
+/* ========== 列表样式 ========== */
 ul,
 ol {
   margin-bottom: var(--spacing-md);
@@ -116,7 +127,7 @@ li {
   line-height: var(--line-height-normal);
 }
 
-// 代码样式
+/* ========== 代码样式 ========== */
 code {
   font-family: var(--font-family-code);
   font-size: 0.9em;
@@ -141,7 +152,7 @@ pre {
   }
 }
 
-// 表格样式
+/* ========== 表格样式 ========== */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -161,14 +172,14 @@ th {
   color: var(--text-primary);
 }
 
-// 图片样式
+/* ========== 图片样式 ========== */
 img {
   max-width: 100%;
   height: auto;
   border-radius: var(--border-radius-md);
 }
 
-// 分割线样式
+/* ========== 分割线样式 ========== */
 hr {
   border: none;
   height: 1px;
@@ -176,7 +187,7 @@ hr {
   margin: var(--spacing-xl) 0;
 }
 
-// 引用样式
+/* ========== 引用样式 ========== */
 blockquote {
   border-left: 4px solid var(--primary-color);
   padding-left: var(--spacing-md);
@@ -188,32 +199,37 @@ blockquote {
   border-radius: var(--border-radius-md);
 }
 
-// 选择状态样式
+/* ========== 选择状态样式 ========== */
 ::selection {
   background-color: var(--primary-light);
   color: white;
 }
 
-// 焦点样式
+/* ========== 焦点样式 ========== */
 :focus {
   outline: 2px solid var(--primary-color);
   outline-offset: 2px;
 }
 
-// 滚动条样式
+/* ========== 滚动条样式 ========== */
 html {
   @include mix.custom-scrollbar;
 }
 
-// 通用工具类 - 遵循 chonglou- 前缀 + BEM 命名法
+/* ========== 通用工具类 ========== */
+/* 遵循 chonglou- 前缀 + BEM 命名法 */
+
+/* 视觉隐藏工具类 */
 .chonglou-sr-only {
   @include mix.visually-hidden;
 }
 
+/* 清除浮动工具类 */
 .chonglou-clearfix {
   @include mix.clearfix;
 }
 
+/* 文本对齐工具类 */
 .chonglou-text--center {
   text-align: center;
 }
@@ -226,60 +242,78 @@ html {
   text-align: right;
 }
 
-// 间距工具类
+/* ========== 间距工具类 ========== */
+/* 下边距工具类 */
 .chonglou-margin-bottom--0 {
   margin-bottom: 0;
 }
+
 .chonglou-margin-bottom--xs {
   margin-bottom: var(--spacing-xs);
 }
+
 .chonglou-margin-bottom--sm {
   margin-bottom: var(--spacing-sm);
 }
+
 .chonglou-margin-bottom--md {
   margin-bottom: var(--spacing-md);
 }
+
 .chonglou-margin-bottom--lg {
   margin-bottom: var(--spacing-lg);
 }
+
 .chonglou-margin-bottom--xl {
   margin-bottom: var(--spacing-xl);
 }
 
+/* 上边距工具类 */
 .chonglou-margin-top--0 {
   margin-top: 0;
 }
+
 .chonglou-margin-top--xs {
   margin-top: var(--spacing-xs);
 }
+
 .chonglou-margin-top--sm {
   margin-top: var(--spacing-sm);
 }
+
 .chonglou-margin-top--md {
   margin-top: var(--spacing-md);
 }
+
 .chonglou-margin-top--lg {
   margin-top: var(--spacing-lg);
 }
+
 .chonglou-margin-top--xl {
   margin-top: var(--spacing-xl);
 }
 
+/* 内边距工具类 */
 .chonglou-padding--0 {
   padding: 0;
 }
+
 .chonglou-padding--xs {
   padding: var(--spacing-xs);
 }
+
 .chonglou-padding--sm {
   padding: var(--spacing-sm);
 }
+
 .chonglou-padding--md {
   padding: var(--spacing-md);
 }
+
 .chonglou-padding--lg {
   padding: var(--spacing-lg);
 }
+
 .chonglou-padding--xl {
   padding: var(--spacing-xl);
 }

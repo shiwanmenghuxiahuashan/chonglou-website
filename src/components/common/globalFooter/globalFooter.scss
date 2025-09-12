@@ -1,14 +1,47 @@
-/* ========== Global Footer  ========== */
+/* ========== Global Footer Styles ========== */
+/* 
+ * 文件说明：全局页脚组件样式
+ * 命名规范：使用 BEM 命名法，chonglou-global__footer 作为 block
+ * 语法规范：只允许 modifier 使用 &-xxx 语法，elements 使用完整类名
+ * 维护说明：按功能模块分组，每个模块都有清晰的注释说明
+ */
+
+/* ========== 变量定义 ========== */
+$footer-bg: #1f1f1f;
+$footer-video-opacity: 0.7;
+$footer-video-opacity-mobile: 0.6;
+$footer-video-opacity-small: 0.5;
+
+$mobile-menu-bg: rgba(255, 255, 255, 0.05);
+$mobile-menu-border: rgba(255, 255, 255, 0.1);
+$mobile-menu-border-radius: 12px;
+$mobile-menu-padding: 20px;
+
+$mobile-section-border: rgba(255, 255, 255, 0.1);
+$mobile-section-border-radius: 8px;
+$mobile-section-header-bg: rgba(255, 255, 255, 0.05);
+$mobile-section-header-bg-hover: rgba(255, 255, 255, 0.1);
+$mobile-section-links-bg: rgba(255, 255, 255, 0.02);
+
+$text-primary: #ffffff;
+$text-secondary: rgba(255, 255, 255, 0.8);
+$border-color: rgba(255, 255, 255, 0.2);
+
+$transition-fast: 0.3s ease;
+$transition-cubic: cubic-bezier(0.4, 0, 0.2, 1);
+
+/* ========== 主容器样式 ========== */
 .chonglou-global__footer {
   position: relative;
-  background: #1f1f1f;
+  background: $footer-bg;
   border-top: 1px solid var(--border-color);
   margin-top: auto;
   font-size: var(--font-size-xs);
   line-height: var(--line-height-normal);
   overflow: hidden;
 
-  &-video {
+  /* ========== 视频背景 ========== */
+  .chonglou-global__footer-video {
     position: absolute;
     top: 0;
     left: 0;
@@ -16,10 +49,11 @@
     height: 100%;
     object-fit: cover;
     z-index: 1;
-    opacity: 0.7;
+    opacity: $footer-video-opacity;
   }
 
-  &-content {
+  /* ========== 内容容器 ========== */
+  .chonglou-global__footer-content {
     position: relative;
     z-index: 2;
     max-width: 1280px;
@@ -27,46 +61,54 @@
     padding: 0 var(--spacing-lg);
   }
 
-  &-main {
+  /* ========== 主要内容区域 ========== */
+  .chonglou-global__footer-main {
     padding: var(--spacing-3xl) 0 var(--spacing-2xl);
   }
 
-  &-sections {
+  /* ========== 桌面端网格布局 ========== */
+  .chonglou-global__footer-sections {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: var(--spacing-2xl);
     max-width: 1000px;
+
+    /* 桌面端显示修饰符 */
+    &--desktop {
+      display: grid;
+    }
   }
 
-  &-section {
-    &-title {
+  /* ========== 桌面端 section 样式 ========== */
+  .chonglou-global__footer-section {
+    .chonglou-global__footer-section-title {
       font-size: var(--font-size-xs);
       font-weight: var(--font-weight-semibold);
-      color: #ffffff;
+      color: $text-primary;
       margin: 0 0 var(--spacing-md) 0;
       letter-spacing: 0.5px;
     }
   }
 
-  &-links {
+  .chonglou-global__footer-links {
     list-style: none;
     margin: 0;
     padding: 0;
   }
 
-  &-link-item {
+  .chonglou-global__footer-link-item {
     margin-bottom: var(--spacing-sm);
   }
 
-  &-link {
-    color: rgba(255, 255, 255, 0.8);
+  .chonglou-global__footer-link {
+    color: $text-secondary;
     text-decoration: none;
     font-size: var(--font-size-xs);
-    transition: color var(--transition-fast);
+    transition: color $transition-fast;
     display: inline-block;
 
     &:hover {
-      color: #ffffff;
+      color: $text-primary;
       text-decoration: underline;
     }
 
@@ -75,8 +117,107 @@
     }
   }
 
-  &-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  /* ========== 移动端折叠菜单 ========== */
+  .chonglou-global__footer-mobile-menu {
+    display: none;
+
+    @media (max-width: 768px) {
+      display: block;
+    }
+  }
+
+  .chonglou-global__footer-mobile-menu-content {
+    background: $mobile-menu-bg;
+    border-radius: $mobile-menu-border-radius;
+    padding: $mobile-menu-padding;
+    backdrop-filter: blur(10px);
+    border: 1px solid $mobile-menu-border;
+  }
+
+  /* ========== 移动端 section 样式 ========== */
+  .chonglou-global__footer-mobile-section {
+    margin-bottom: 16px;
+    border: 1px solid $mobile-section-border;
+    border-radius: $mobile-section-border-radius;
+    overflow: hidden;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .chonglou-global__footer-mobile-section-header {
+    width: 100%;
+    background: $mobile-section-header-bg;
+    border: none;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $mobile-section-header-bg-hover;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  .chonglou-global__footer-mobile-section-title {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: $text-primary;
+    margin: 0;
+    letter-spacing: 0.5px;
+    text-align: left;
+  }
+
+  .chonglou-global__footer-mobile-section-icon {
+    font-size: 12px;
+    color: $text-secondary;
+    transition: transform $transition-fast;
+    flex-shrink: 0;
+  }
+
+  .chonglou-global__footer-mobile-links {
+    list-style: none;
+    margin: 0;
+    padding: 0 20px 16px 20px;
+    background: $mobile-section-links-bg;
+  }
+
+  .chonglou-global__footer-mobile-link-item {
+    margin-bottom: 8px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .chonglou-global__footer-mobile-link {
+    color: $text-secondary;
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    transition: color $transition-fast;
+    display: block;
+    padding: 6px 0;
+
+    &:hover {
+      color: $text-primary;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  /* ========== 底部信息区域 ========== */
+  .chonglou-global__footer-bottom {
+    border-top: 1px solid $border-color;
     padding: var(--spacing-lg) 0;
     display: flex;
     flex-direction: column;
@@ -92,15 +233,17 @@
     }
   }
 
-  &-copyright {
-    &-text {
+  /* ========== 版权信息 ========== */
+  .chonglou-global__footer-copyright {
+    .chonglou-global__footer-copyright-text {
       margin: 0;
-      color: rgba(255, 255, 255, 0.8);
+      color: $text-secondary;
       font-size: var(--font-size-xs);
     }
   }
 
-  &-legal {
+  /* ========== 法律链接 ========== */
+  .chonglou-global__footer-legal {
     display: flex;
     flex-wrap: wrap;
     gap: var(--spacing-md);
@@ -110,15 +253,15 @@
       justify-content: flex-end;
     }
 
-    &-link {
-      color: rgba(255, 255, 255, 0.8);
+    .chonglou-global__footer-legal-link {
+      color: $text-secondary;
       text-decoration: none;
       font-size: var(--font-size-xs);
-      transition: color var(--transition-fast);
+      transition: color $transition-fast;
       white-space: nowrap;
 
       &:hover {
-        color: #ffffff;
+        color: $text-primary;
         text-decoration: underline;
       }
 
@@ -128,7 +271,8 @@
     }
   }
 
-  &-icp {
+  /* ========== 备案信息 ========== */
+  .chonglou-global__footer-icp {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -139,15 +283,15 @@
       order: 3;
     }
 
-    &-link {
-      color: rgba(255, 255, 255, 0.8);
+    .chonglou-global__footer-icp-link {
+      color: $text-secondary;
       text-decoration: none;
       font-size: var(--font-size-xs);
       font-weight: var(--font-weight-normal);
       white-space: nowrap;
 
       &:hover {
-        color: #ffffff;
+        color: $text-primary;
         text-decoration: underline;
       }
 
@@ -156,6 +300,51 @@
       }
     }
   }
+
+  /* ========== 响应式设计 - 移动端隐藏桌面布局 ========== */
+  @media (max-width: 768px) {
+    .chonglou-global__footer-sections--desktop {
+      display: none;
+    }
+  }
+}
+
+/* ========== 动画效果 ========== */
+/* 移动端菜单整体动画 */
+.footer-mobile-menu-enter-active,
+.footer-mobile-menu-leave-active {
+  transition: all $transition-fast $transition-cubic;
+}
+
+.footer-mobile-menu-enter-from {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.footer-mobile-menu-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+/* Section 折叠动画 */
+.footer-section-enter-active,
+.footer-section-leave-active {
+  transition: all $transition-fast $transition-cubic;
+  overflow: hidden;
+}
+
+.footer-section-enter-from {
+  opacity: 0;
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.footer-section-leave-to {
+  opacity: 0;
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 /* ========== 暗黑模式适配 ========== */
@@ -166,95 +355,95 @@
     opacity: 0.5;
   }
 
-  // 暗黑模式下保持白色字体
+  /* 暗黑模式下保持白色字体 */
   .chonglou-global__footer-section-title {
-    color: #ffffff;
+    color: $text-primary;
   }
 
   .chonglou-global__footer-link {
-    color: rgba(255, 255, 255, 0.8);
+    color: $text-secondary;
 
     &:hover {
-      color: #ffffff;
+      color: $text-primary;
     }
   }
 
   .chonglou-global__footer-copyright-text {
-    color: rgba(255, 255, 255, 0.8);
+    color: $text-secondary;
   }
 
   .chonglou-global__footer-legal-link {
-    color: rgba(255, 255, 255, 0.8);
+    color: $text-secondary;
 
     &:hover {
-      color: #ffffff;
+      color: $text-primary;
     }
   }
 
-  .chonglou-global__footer-icp {
-    &-link {
-      color: rgba(255, 255, 255, 0.8);
+  .chonglou-global__footer-icp-link {
+    color: $text-secondary;
 
-      &:hover {
-        color: #ffffff;
-      }
+    &:hover {
+      color: $text-primary;
     }
   }
 }
 
 /* ========== 响应式设计 ========== */
+/* 平板端适配 */
 @media (max-width: 768px) {
   .chonglou-global__footer {
-    &-video {
-      opacity: 0.6;
+    .chonglou-global__footer-video {
+      opacity: $footer-video-opacity-mobile;
     }
 
-    &-content {
+    .chonglou-global__footer-content {
       padding: 0 var(--spacing-md);
     }
 
-    &-main {
+    .chonglou-global__footer-main {
       padding: var(--spacing-2xl) 0 var(--spacing-lg);
     }
 
-    &-sections {
+    .chonglou-global__footer-sections {
       grid-template-columns: 1fr;
       gap: var(--spacing-xl);
     }
 
-    &-section {
-      &-title {
+    .chonglou-global__footer-section {
+      .chonglou-global__footer-section-title {
         font-size: var(--font-size-xs);
         margin-bottom: var(--spacing-sm);
       }
     }
 
-    &-link {
+    .chonglou-global__footer-link {
       font-size: var(--font-size-xs);
     }
 
-    &-icp {
-      &-link {
+    .chonglou-global__footer-icp {
+      .chonglou-global__footer-icp-link {
         font-size: var(--font-size-sm);
       }
     }
   }
 }
 
+/* 手机端适配 */
 @media (max-width: 480px) {
   .chonglou-global__footer {
-    &-video {
-      opacity: 0.5;
+    .chonglou-global__footer-video {
+      opacity: $footer-video-opacity-small;
     }
 
-    &-legal {
+    .chonglou-global__footer-legal {
       flex-direction: column;
       align-items: center;
       gap: var(--spacing-sm);
     }
 
-    &-icp {
-      &-link {
+    .chonglou-global__footer-icp {
+      .chonglou-global__footer-icp-link {
         font-size: var(--font-size-xs);
       }
     }

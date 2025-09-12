@@ -66,7 +66,6 @@ const closeMobileMenu = () => {
         >
           <el-button
             :icon="isDark ? 'Sunny' : 'Moon'"
-            circle
             size="small"
             class="chonglou-global__header-actions-theme-toggle"
             @click="toggleTheme"

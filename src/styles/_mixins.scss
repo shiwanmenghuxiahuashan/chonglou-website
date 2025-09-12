@@ -1,7 +1,15 @@
-// 使用 @use 语法导入变量
+/* ========== Mixins Styles ========== */
+/* 
+ * 文件说明：全局 SCSS mixins 和工具函数
+ * 命名规范：使用语义化的 mixin 名称，遵循 BEM 和功能导向
+ * 语法规范：使用 @mixin 定义，@include 调用，参数使用 $ 前缀
+ * 维护说明：按功能类型分组，每个 mixin 都有清晰的注释说明
+ */
+
+/* ========== 导入依赖 ========== */
 @use './variables' as vars;
 
-// Flexbox mixins
+/* ========== Flexbox 布局 Mixins ========== */
 @mixin flex-center {
   display: flex;
   align-items: center;
@@ -37,7 +45,7 @@
   justify-content: center;
 }
 
-// 响应式设计 mixins
+/* ========== 响应式设计 Mixins ========== */
 @mixin mobile {
   @media (max-width: 767px) {
     @content;
@@ -62,7 +70,7 @@
   }
 }
 
-// 文本样式 mixins
+/* ========== 文本样式 Mixins ========== */
 @mixin text-ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -76,7 +84,7 @@
   overflow: hidden;
 }
 
-// 阴影 mixins
+/* ========== 阴影效果 Mixins ========== */
 @mixin card-shadow {
   box-shadow: var(--shadow-light);
   transition: box-shadow var(--transition-normal);
@@ -90,7 +98,7 @@
   box-shadow: var(--shadow-heavy);
 }
 
-// 按钮样式 mixins
+/* ========== 按钮样式 Mixins ========== */
 @mixin button-base {
   display: inline-flex;
   align-items: center;
@@ -137,7 +145,7 @@
   }
 }
 
-// 输入框样式 mixins
+/* ========== 输入框样式 Mixins ========== */
 @mixin input-base {
   width: 100%;
   padding: var(--spacing-sm) var(--spacing-md);
@@ -159,7 +167,7 @@
   }
 }
 
-// 卡片样式 mixins
+/* ========== 卡片样式 Mixins ========== */
 @mixin card-base {
   background: var(--bg-primary);
   border: 1px solid var(--border-light);
@@ -168,7 +176,7 @@
   @include card-shadow;
 }
 
-// 滚动条样式 mixins
+/* ========== 滚动条样式 Mixins ========== */
 @mixin custom-scrollbar {
   &::-webkit-scrollbar {
     width: 8px;
@@ -190,7 +198,7 @@
   }
 }
 
-// 动画 mixins
+/* ========== 动画效果 Mixins ========== */
 @mixin fade-in($duration: var(--transition-normal)) {
   animation: fadeIn $duration ease-out;
 }
@@ -199,7 +207,7 @@
   animation: slideUp $duration ease-out;
 }
 
-// 动画关键帧
+/* ========== 动画关键帧 ========== */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -220,7 +228,7 @@
   }
 }
 
-// 工具类 mixins
+/* ========== 工具类 Mixins ========== */
 @mixin visually-hidden {
   position: absolute;
   width: 1px;

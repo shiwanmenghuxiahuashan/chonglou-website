@@ -1,25 +1,34 @@
-/* ========== Element Plus 暗黑模式样式覆盖 ========== */
+/* ========== Element Plus Dark Mode Override Styles ========== */
+/* 
+ * 文件说明：Element Plus 暗黑模式样式覆盖和定制
+ * 命名规范：使用 Element Plus 原生类名和 CSS 变量
+ * 语法规范：只允许 modifier 使用 &-xxx 语法，elements 使用完整类名
+ * 维护说明：按主题模式分组，每个模式都有清晰的注释说明
+ */
 
-/* 暗黑模式下的自定义变量 */
+/* ========== 暗黑模式主题变量 ========== */
 html.dark {
-  /* 覆盖 Element Plus 的暗黑模式变量 */
+  /* 背景色变量 */
   --el-bg-color: var(--bg-primary);
   --el-bg-color-page: var(--bg-secondary);
   --el-bg-color-overlay: var(--bg-tertiary);
 
+  /* 文本颜色变量 */
   --el-text-color-primary: var(--text-primary);
   --el-text-color-regular: var(--text-secondary);
   --el-text-color-secondary: var(--text-placeholder);
 
+  /* 边框颜色变量 */
   --el-border-color: var(--border-color);
   --el-border-color-light: var(--border-light);
   --el-border-color-lighter: var(--border-medium);
 
+  /* 填充颜色变量 */
   --el-fill-color: var(--bg-tertiary);
   --el-fill-color-light: var(--bg-secondary);
   --el-fill-color-lighter: var(--bg-primary);
 
-  /* 按钮样式 */
+  /* 按钮样式变量 */
   --el-button-bg-color: transparent;
   --el-button-border-color: var(--border-color);
   --el-button-text-color: var(--text-secondary);
@@ -27,31 +36,35 @@ html.dark {
   --el-button-hover-text-color: var(--primary-color);
   --el-button-hover-border-color: var(--primary-color);
 
-  /* 工具提示样式 */
+  /* 工具提示样式变量 */
   --el-tooltip-bg-color: var(--bg-tertiary);
   --el-tooltip-text-color: var(--text-primary);
   --el-tooltip-border-color: var(--border-color);
 }
 
-/* 浅色模式下的自定义变量 */
+/* ========== 浅色模式主题变量 ========== */
 html:not(.dark) {
+  /* 背景色变量 */
   --el-bg-color: var(--bg-primary);
   --el-bg-color-page: var(--bg-secondary);
   --el-bg-color-overlay: var(--bg-tertiary);
 
+  /* 文本颜色变量 */
   --el-text-color-primary: var(--text-primary);
   --el-text-color-regular: var(--text-secondary);
   --el-text-color-secondary: var(--text-placeholder);
 
+  /* 边框颜色变量 */
   --el-border-color: var(--border-color);
   --el-border-color-light: var(--border-light);
   --el-border-color-lighter: var(--border-medium);
 
+  /* 填充颜色变量 */
   --el-fill-color: var(--bg-tertiary);
   --el-fill-color-light: var(--bg-secondary);
   --el-fill-color-lighter: var(--bg-primary);
 
-  /* 按钮样式 */
+  /* 按钮样式变量 */
   --el-button-bg-color: transparent;
   --el-button-border-color: var(--border-color);
   --el-button-text-color: var(--text-secondary);
@@ -59,7 +72,7 @@ html:not(.dark) {
   --el-button-hover-text-color: var(--primary-color);
   --el-button-hover-border-color: var(--primary-color);
 
-  /* 工具提示样式 */
+  /* 工具提示样式变量 */
   --el-tooltip-bg-color: var(--bg-tertiary);
   --el-tooltip-text-color: var(--text-primary);
   --el-tooltip-border-color: var(--border-color);

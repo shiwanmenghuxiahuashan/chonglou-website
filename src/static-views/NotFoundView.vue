@@ -138,6 +138,9 @@ const goBack = () => {
     gap: var(--spacing-lg);
     justify-content: center;
     flex-wrap: wrap;
+    .el-button + .el-button {
+      margin-left: 0;
+    }
   }
 
   &__button {
