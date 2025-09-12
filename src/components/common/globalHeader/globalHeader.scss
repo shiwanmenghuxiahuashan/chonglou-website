@@ -1,0 +1,116 @@
+/* ========== Global Header - 横向撑满，顶部固定，高度50px ========== */
+.chonglou-global__header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 50px;
+  z-index: 1000;
+  background: transparent;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+
+  &-content {
+    max-width: 1280px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  &-logo {
+    flex-shrink: 0;
+
+    &-link {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      align-items: center;
+      height: 50px;
+
+      &:hover .chonglou-global__header-logo-text {
+        color: var(--primary-color);
+      }
+    }
+
+    &-text {
+      font-size: var(--font-size-base);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-color);
+      transition: color 0.3s ease;
+    }
+  }
+
+  &-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    justify-content: center;
+
+    &-item {
+      padding: 6px 12px;
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 500;
+      font-size: var(--font-size-xs);
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      position: relative;
+      height: 40px;
+      display: flex;
+      align-items: center;
+
+      &:hover {
+        color: var(--primary-color);
+        background: var(--bg-hover);
+      }
+
+      &--active {
+        color: var(--primary-color);
+        background: var(--bg-hover);
+      }
+    }
+  }
+
+  &-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+
+    &-theme-toggle {
+      // Element Plus 按钮样式覆盖
+      --el-button-bg-color: transparent;
+      --el-button-border-color: transparent;
+      --el-button-text-color: var(--text-secondary);
+      --el-button-hover-bg-color: var(--bg-hover);
+      --el-button-hover-text-color: var(--primary-color);
+      --el-button-hover-border-color: transparent;
+      --el-button-active-bg-color: var(--bg-hover);
+      --el-button-active-text-color: var(--primary-color);
+      --el-button-active-border-color: transparent;
+
+      &:hover {
+        --el-button-bg-color: var(--bg-hover);
+        --el-button-text-color: var(--primary-color);
+      }
+
+      &:focus {
+        --el-button-bg-color: var(--bg-hover);
+        --el-button-text-color: var(--primary-color);
+      }
+    }
+  }
+}
+
+/* ========== Dark Mode Support ========== */
+:deep(.dark) .chonglou-global__header {
+  background: rgba(18, 18, 18, 0.95);
+}
