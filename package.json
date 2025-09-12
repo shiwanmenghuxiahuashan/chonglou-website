@@ -13,6 +13,7 @@
     "lint:style": "stylelint \"src/**/*.{css,scss,vue}\" --fix"
   },
   "dependencies": {
+    "@bytemd/vue-next": "^1.22.0",
     "axios": "^1.11.0",
     "element-plus": "^2.11.2",
     "lodash-unified": "^1.0.3",
