@@ -6,6 +6,7 @@
   "packageManager": "pnpm@9.0.0",
   "scripts": {
     "dev": "vite",
+    "dev:static": "vite --mode static",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "test": "vitest",
@@ -21,6 +22,7 @@
     "@bytemd/plugin-highlight": "^1.22.0",
     "@bytemd/plugin-math": "^1.22.0",
     "@bytemd/vue-next": "^1.22.0",
+    "@element-plus/icons-vue": "^2.3.2",
     "axios": "^1.11.0",
     "bytemd": "^1.22.0",
     "element-plus": "^2.11.2",
