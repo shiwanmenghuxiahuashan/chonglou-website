@@ -2,7 +2,7 @@ import { computed, ref, watch } from 'vue'
 import { defineStore } from 'pinia'
 
 // 主题类型
-export type Theme = 'light' | 'dark' | 'auto'
+export type Theme = 'light' | 'dark'
 
 // 语言类型
 export type Language = 'zh-CN' | 'en-US'
@@ -36,9 +36,6 @@ export const useSettingsStore = defineStore('settings', () => {
 
   // 计算属性
   const isDark = computed(() => {
-    if (settings.value.theme === 'auto') {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches
-    }
     return settings.value.theme === 'dark'
   })
 
@@ -61,12 +58,6 @@ export const useSettingsStore = defineStore('settings', () => {
 
     // 应用主题
     applyTheme()
-
-    // 监听系统主题变化
-    if (settings.value.theme === 'auto') {
-      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-      mediaQuery.addEventListener('change', applyTheme)
-    }
   }
 
   // 应用主题
@@ -98,10 +89,8 @@ export const useSettingsStore = defineStore('settings', () => {
 
   // 动作：切换主题
   const toggleTheme = () => {
-    const themes: Theme[] = ['light', 'dark', 'auto']
-    const currentIndex = themes.indexOf(settings.value.theme)
-    const nextIndex = (currentIndex + 1) % themes.length
-    setTheme(themes[nextIndex])
+    const newTheme: Theme = settings.value.theme === 'light' ? 'dark' : 'light'
+    setTheme(newTheme)
   }
 
   // 动作：设置主题

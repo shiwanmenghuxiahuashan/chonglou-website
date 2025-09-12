@@ -1,12 +1,27 @@
 /* ========== Global Footer  ========== */
 .chonglou-global__footer {
+  position: relative;
   background: var(--bg-secondary);
   border-top: 1px solid var(--border-color);
   margin-top: auto;
   font-size: var(--font-size-xs);
   line-height: var(--line-height-normal);
+  overflow: hidden;
+
+  &-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    opacity: 0.7;
+  }
 
   &-content {
+    position: relative;
+    z-index: 2;
     max-width: 1280px;
     margin: 0 auto;
     padding: 0 var(--spacing-lg);
@@ -27,7 +42,7 @@
     &-title {
       font-size: var(--font-size-xs);
       font-weight: var(--font-weight-semibold);
-      color: var(--text-primary);
+      color: #ffffff;
       margin: 0 0 var(--spacing-md) 0;
       letter-spacing: 0.5px;
     }
@@ -44,26 +59,26 @@
   }
 
   &-link {
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
     font-size: var(--font-size-xs);
     transition: color var(--transition-fast);
     display: inline-block;
 
     &:hover {
-      color: var(--primary-color);
+      color: #ffffff;
       text-decoration: underline;
     }
 
     &:focus {
-      outline: 2px solid var(--primary-color);
+      outline: 2px solid #ffffff;
       outline-offset: 2px;
       border-radius: var(--border-radius-sm);
     }
   }
 
   &-bottom {
-    border-top: 1px solid var(--border-light);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
     padding: var(--spacing-lg) 0;
     display: flex;
     flex-direction: column;
@@ -82,7 +97,7 @@
   &-copyright {
     &-text {
       margin: 0;
-      color: var(--text-secondary);
+      color: rgba(255, 255, 255, 0.8);
       font-size: var(--font-size-xs);
     }
   }
@@ -98,19 +113,19 @@
     }
 
     &-link {
-      color: var(--text-secondary);
+      color: rgba(255, 255, 255, 0.8);
       text-decoration: none;
       font-size: var(--font-size-xs);
       transition: color var(--transition-fast);
       white-space: nowrap;
 
       &:hover {
-        color: var(--primary-color);
+        color: #ffffff;
         text-decoration: underline;
       }
 
       &:focus {
-        outline: 2px solid var(--primary-color);
+        outline: 2px solid #ffffff;
         outline-offset: 2px;
         border-radius: var(--border-radius-sm);
       }
@@ -129,19 +144,19 @@
     }
 
     &-link {
-      color: var(--text-secondary);
+      color: rgba(255, 255, 255, 0.8);
       text-decoration: none;
       font-size: var(--font-size-xs);
       font-weight: var(--font-weight-normal);
       white-space: nowrap;
 
       &:hover {
-        color: var(--text-primary);
+        color: #ffffff;
         text-decoration: underline;
       }
 
       &:focus {
-        outline: 1px solid var(--primary-color);
+        outline: 1px solid #ffffff;
         outline-offset: 2px;
         border-radius: var(--border-radius-sm);
       }
@@ -154,36 +169,41 @@
   background: var(--bg-secondary);
   border-top-color: var(--border-light);
 
+  .chonglou-global__footer-video {
+    opacity: 0.5;
+  }
+
+  // 暗黑模式下保持白色字体
   .chonglou-global__footer-section-title {
-    color: var(--text-primary);
+    color: #ffffff;
   }
 
   .chonglou-global__footer-link {
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.8);
 
     &:hover {
-      color: var(--primary-color);
+      color: #ffffff;
     }
   }
 
   .chonglou-global__footer-copyright-text {
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.8);
   }
 
   .chonglou-global__footer-legal-link {
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.8);
 
     &:hover {
-      color: var(--primary-color);
+      color: #ffffff;
     }
   }
 
   .chonglou-global__footer-icp {
     &-link {
-      color: var(--text-secondary);
+      color: rgba(255, 255, 255, 0.8);
 
       &:hover {
-        color: var(--text-primary);
+        color: #ffffff;
       }
     }
   }
@@ -192,6 +212,10 @@
 /* ========== 响应式设计 ========== */
 @media (max-width: 768px) {
   .chonglou-global__footer {
+    &-video {
+      opacity: 0.6;
+    }
+
     &-content {
       padding: 0 var(--spacing-md);
     }
@@ -226,6 +250,10 @@
 
 @media (max-width: 480px) {
   .chonglou-global__footer {
+    &-video {
+      opacity: 0.5;
+    }
+
     &-legal {
       flex-direction: column;
       align-items: center;

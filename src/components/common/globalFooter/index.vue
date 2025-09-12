@@ -13,6 +13,17 @@ const currentYear = computed(() => new Date().getFullYear())
 
 <template>
   <footer class="chonglou-global__footer">
+    <!-- 视频背景 -->
+    <video
+      class="chonglou-global__footer-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      src="/public/video/footer-wave.mp4"
+    />
+
     <div class="chonglou-global__footer-content">
       <!-- 主要内容区域 -->
       <div class="chonglou-global__footer-main">
