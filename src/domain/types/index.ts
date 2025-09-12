@@ -1,5 +1,7 @@
 /**
  * 域类型统一导出文件
+ * JSON:API 数据 → 扁平化数据 → 视图数据
+ * JsonApiArticleData → FlattenedArticleData → ViewArticleData
  */
 
 // 基础 JSON:API 类型
