@@ -9,34 +9,36 @@ articleService.getArticle({ page: 1, pageSize: 3 }).then(response => {
 </script>
 
 <template>
-  <div class="chonglou-home">
-    <div class="chonglou-home__hero">
-      <h1 class="chonglou-home__hero-title">重楼网站</h1>
-      <p class="chonglou-home__hero-subtitle">探索重楼的药用价值与种植技术</p>
+  <div class="chonglou-article">
+    <div class="chonglou-article__hero">
+      <h1 class="chonglou-article__hero-title">重楼网站</h1>
+      <p class="chonglou-article__hero-subtitle">
+        探索重楼的药用价值与种植技术
+      </p>
       <el-button type="primary" size="large" @click="$router.push('/article')">
         浏览文章
       </el-button>
     </div>
 
-    <div class="chonglou-home__articles">
-      <h2 class="chonglou-home__articles-title">最新文章</h2>
+    <div class="chonglou-article__articles">
+      <h2 class="chonglou-article__articles-title">最新文章</h2>
       <div
         v-loading="articleList.length === 0"
         element-loading-text="加载中..."
         element-loading-spinner="el-icon-loading"
-        class="chonglou-home__articles-grid"
+        class="chonglou-article__articles-grid"
       >
         <el-card
           v-for="article in articleList"
           :key="article.id"
-          class="chonglou-home__article-card"
+          class="chonglou-article__article-card"
           shadow="hover"
         >
-          <h3 class="chonglou-home__article-title">{{ article.title }}</h3>
-          <p class="chonglou-home__article-summary">{{ article.summary }}</p>
-          <div class="chonglou-home__article-meta">
+          <h3 class="chonglou-article__article-title">{{ article.title }}</h3>
+          <p class="chonglou-article__article-summary">{{ article.summary }}</p>
+          <div class="chonglou-article__article-meta">
             <el-tag size="small">{{ article.author }}</el-tag>
-            <span class="chonglou-home__article-date">
+            <span class="chonglou-article__article-date">
               {{ article.publishDate }}
             </span>
           </div>
@@ -56,11 +58,11 @@ articleService.getArticle({ page: 1, pageSize: 3 }).then(response => {
 @use '@/styles/variables' as vars;
 @use '@/styles/mixins' as mix;
 
-.chonglou-home {
+.chonglou-article {
   padding: var(--spacing-2xl) var(--spacing-lg);
 }
 
-.chonglou-home__hero {
+.chonglou-article__hero {
   text-align: center;
   margin-bottom: var(--spacing-3xl);
   padding: var(--spacing-3xl) 0;
@@ -73,7 +75,7 @@ articleService.getArticle({ page: 1, pageSize: 3 }).then(response => {
   border-radius: var(--border-radius-lg);
 }
 
-.chonglou-home__hero-title {
+.chonglou-article__hero-title {
   font-size: var(--font-size-5xl);
   font-weight: var(--font-weight-bold);
   margin-bottom: var(--spacing-lg);
@@ -83,7 +85,7 @@ articleService.getArticle({ page: 1, pageSize: 3 }).then(response => {
   }
 }
 
-.chonglou-home__hero-subtitle {
+.chonglou-article__hero-subtitle {
   font-size: var(--font-size-xl);
   margin-bottom: var(--spacing-xl);
   opacity: 0.9;
@@ -93,12 +95,12 @@ articleService.getArticle({ page: 1, pageSize: 3 }).then(response => {
   }
 }
 
-.chonglou-home__articles {
+.chonglou-article__articles {
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.chonglou-home__articles-title {
+.chonglou-article__articles-title {
   text-align: center;
   margin-bottom: var(--spacing-xl);
   font-size: var(--font-size-3xl);
@@ -109,13 +111,13 @@ articleService.getArticle({ page: 1, pageSize: 3 }).then(response => {
   }
 }
 
-.chonglou-home__articles-grid {
+.chonglou-article__articles-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: var(--spacing-lg);
 }
 
-.chonglou-home__article-card {
+.chonglou-article__article-card {
   cursor: pointer;
   transition: transform var(--transition-normal);
 
@@ -124,24 +126,24 @@ articleService.getArticle({ page: 1, pageSize: 3 }).then(response => {
   }
 }
 
-.chonglou-home__article-title {
+.chonglou-article__article-title {
   font-size: var(--font-size-lg);
   margin-bottom: var(--spacing-sm);
   color: var(--text-primary);
 }
 
-.chonglou-home__article-summary {
+.chonglou-article__article-summary {
   color: var(--text-secondary);
   line-height: var(--line-height-normal);
   margin-bottom: var(--spacing-md);
 }
 
-.chonglou-home__article-meta {
+.chonglou-article__article-meta {
   @include mix.flex-between;
   margin-bottom: var(--spacing-md);
 }
 
-.chonglou-home__article-date {
+.chonglou-article__article-date {
   color: var(--text-placeholder);
   font-size: var(--font-size-xs);
 }

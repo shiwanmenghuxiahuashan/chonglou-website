@@ -10,7 +10,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  title: '李重楼前端',
+  title: '李重楼',
   keepAliveComponents: () => ['ArticleList', 'Home']
 })
 
@@ -25,11 +25,9 @@ const currentYear = computed(() => new Date().getFullYear())
 
 // 导航菜单项
 const navItems = [
-  { path: '/', label: '首页' },
-  { path: '/article', label: '文章' },
-  { path: '/about', label: '关于' },
-  { path: '/demo', label: '演示' },
-  { path: '/editor', label: 'Editor' }
+  { path: 'article', label: '文章' },
+  { path: 'about', label: '关于' },
+  { path: '/editor', label: '编辑器' }
 ]
 
 // 切换主题
@@ -40,13 +38,13 @@ const toggleTheme = () => {
 
 <template>
   <div class="main-layout">
-    <!-- 顶部导航栏 -->
+    <!-- 顶部导航栏 - 固定在顶部，撑满屏幕 -->
     <header class="main-layout__header">
-      <div class="main-layout__header-container">
+      <div class="main-layout__header-content">
         <!-- Logo 区域 -->
         <div class="main-layout__logo">
           <router-link to="/" class="main-layout__logo-link">
-            <h1 class="main-layout__logo-text">{{ title }}</h1>
+            <span class="main-layout__logo-text">{{ title }}</span>
           </router-link>
         </div>
 
@@ -56,6 +54,7 @@ const toggleTheme = () => {
             v-for="item in navItems"
             :key="item.path"
             :to="item.path"
+            :target="item.label === 'editor' ? '_blank' : '_self'"
             class="main-layout__nav-item"
             active-class="main-layout__nav-item--active"
           >
@@ -70,7 +69,7 @@ const toggleTheme = () => {
             class="main-layout__theme-toggle"
             @click="toggleTheme"
           >
-            <Icon :name="isDark ? 'Sunny' : 'Moon'" :size="20" />
+            <Icon :name="isDark ? 'Sunny' : 'Moon'" :size="18" />
           </button>
         </div>
       </div>
@@ -92,7 +91,7 @@ const toggleTheme = () => {
 
     <!-- 底部 Footer -->
     <footer class="main-layout__footer">
-      <div class="main-layout__footer-container">
+      <div class="main-layout__footer-content">
         <div class="main-layout__footer-info">
           <p>© {{ currentYear }} {{ title }} 基于 Vue 3 + TypeScript 构建</p>
         </div>
@@ -114,9 +113,7 @@ const toggleTheme = () => {
 </template>
 
 <style lang="scss" scoped>
-@use '@/styles/_variables' as vars;
-@use '@/styles/_mixins' as mix;
-
+/* ========== 布局基础 ========== */
 .main-layout {
   min-height: 100vh;
   display: flex;
@@ -124,32 +121,38 @@ const toggleTheme = () => {
   background: var(--bg-color);
 }
 
-/* ========== Header ========== */
+/* ========== Header - 横向撑满，顶部固定，高度50px ========== */
 .main-layout__header {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 100;
-  background: rgba(255, 255, 255, 0.9);
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 50px;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-color);
   transition: all 0.3s ease;
 }
 
 :deep(.dark) .main-layout__header {
-  background: rgba(20, 20, 20, 0.9);
+  background: rgba(18, 18, 18, 0.95);
 }
 
-.main-layout__header-container {
-  max-width: 1200px;
+.main-layout__header-content {
+  max-width: 1280px;
+  width: 100%;
+  height: 100%;
   margin: 0 auto;
-  padding: 0 var(--spacing-lg);
-  height: 64px;
+  padding: 0 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--spacing-lg);
+  gap: 24px;
 }
 
+/* ========== Logo 区域 ========== */
 .main-layout__logo {
   flex-shrink: 0;
 }
@@ -157,6 +160,9 @@ const toggleTheme = () => {
 .main-layout__logo-link {
   text-decoration: none;
   color: inherit;
+  display: flex;
+  align-items: center;
+  height: 50px;
 
   &:hover .main-layout__logo-text {
     color: var(--primary-color);
@@ -164,29 +170,33 @@ const toggleTheme = () => {
 }
 
 .main-layout__logo-text {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
   color: var(--text-color);
   transition: color 0.3s ease;
 }
 
+/* ========== 导航菜单 ========== */
 .main-layout__nav {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
+  gap: 8px;
   flex: 1;
   justify-content: center;
 }
 
 .main-layout__nav-item {
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: 6px 12px;
   text-decoration: none;
   color: var(--text-secondary);
   font-weight: 500;
-  border-radius: var(--border-radius);
+  font-size: 14px;
+  border-radius: 6px;
   transition: all 0.3s ease;
   position: relative;
+  height: 32px;
+  display: flex;
+  align-items: center;
 
   &:hover {
     color: var(--primary-color);
@@ -195,36 +205,27 @@ const toggleTheme = () => {
 
   &--active {
     color: var(--primary-color);
-
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -1px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 20px;
-      height: 2px;
-      background: var(--primary-color);
-      border-radius: 1px;
-    }
+    background: var(--bg-hover);
   }
 }
 
+/* ========== 操作按钮区域 ========== */
 .main-layout__actions {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 .main-layout__theme-toggle {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border: none;
   background: transparent;
-  border-radius: var(--border-radius);
+  border-radius: 6px;
   color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.3s ease;
@@ -235,19 +236,20 @@ const toggleTheme = () => {
   }
 }
 
-/* ========== Main Content ========== */
+/* ========== 主内容区域 - 预留header空间 ========== */
 .main-layout__main {
   flex: 1;
   display: flex;
   flex-direction: column;
+  margin-top: 50px; /* 为固定header预留空间 */
 }
 
 .main-layout__content {
   flex: 1;
-  max-width: 1200px;
   width: 100%;
+  height: 100%;
   margin: 0 auto;
-  padding: var(--spacing-xl) var(--spacing-lg);
+  padding: 24px;
 }
 
 /* ========== Footer ========== */
@@ -257,20 +259,20 @@ const toggleTheme = () => {
   margin-top: auto;
 }
 
-.main-layout__footer-container {
-  max-width: 1200px;
+.main-layout__footer-content {
+  max-width: 1280px;
   margin: 0 auto;
-  padding: var(--spacing-lg);
+  padding: 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: var(--spacing-md);
+  gap: 16px;
 }
 
 .main-layout__footer-info {
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: 14px;
 
   p {
     margin: 0;
@@ -280,12 +282,12 @@ const toggleTheme = () => {
 .main-layout__footer-links {
   display: flex;
   align-items: center;
-  gap: var(--spacing-lg);
+  gap: 24px;
 
   a {
     color: var(--text-secondary);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 14px;
     transition: color 0.3s ease;
 
     &:hover {
@@ -294,7 +296,7 @@ const toggleTheme = () => {
   }
 }
 
-/* ========== Page Transitions ========== */
+/* ========== 页面切换动画 ========== */
 .page-enter-active,
 .page-leave-active {
   transition: all 0.3s ease;
@@ -302,48 +304,66 @@ const toggleTheme = () => {
 
 .page-enter-from {
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(8px);
 }
 
 .page-leave-to {
   opacity: 0;
-  transform: translateY(-10px);
+  transform: translateY(-8px);
 }
 
-/* ========== Responsive Design ========== */
+/* ========== 响应式设计 ========== */
+@media (max-width: 1280px) {
+  .main-layout__header-content,
+  .main-layout__content,
+  .main-layout__footer-content {
+    margin: 0 16px;
+  }
+}
+
 @media (max-width: 768px) {
-  .main-layout__header-container {
-    padding: 0 var(--spacing-md);
-    height: 56px;
+  .main-layout__header-content {
+    padding: 0 16px;
+    gap: 16px;
   }
 
   .main-layout__nav {
-    display: none; // 移动端隐藏导航，可以后续添加移动菜单
+    display: none; /* 移动端隐藏导航菜单 */
   }
 
   .main-layout__logo-text {
-    font-size: 1.25rem;
+    font-size: 16px;
   }
 
   .main-layout__content {
-    padding: var(--spacing-lg) var(--spacing-md);
+    padding: 16px;
   }
 
-  .main-layout__footer-container {
+  .main-layout__footer-content {
     flex-direction: column;
     text-align: center;
-    padding: var(--spacing-md);
+    padding: 16px;
+    gap: 12px;
   }
 
   .main-layout__footer-links {
     justify-content: center;
+    gap: 16px;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 480px) {
+  .main-layout__header-content {
+    padding: 0 12px;
+  }
+
+  .main-layout__content {
+    padding: 12px;
+  }
+
   .main-layout__footer-links {
     flex-direction: column;
-    gap: var(--spacing-sm);
+    gap: 8px;
   }
 }
 </style>

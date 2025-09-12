@@ -5,15 +5,12 @@ import math from '@bytemd/plugin-math'
 import gfm from '@bytemd/plugin-gfm'
 import highlight from '@bytemd/plugin-highlight'
 import frontmatter from '@bytemd/plugin-frontmatter'
-import zhHans from 'bytemd/locales/zh-Hans.json'
 
 import 'bytemd/dist/index.css'
 import 'katex/dist/katex.css'
 import 'highlight.js/styles/default.css'
 import 'juejin-markdown-themes/dist/juejin.min.css'
 
-// 导入简体中文语言包
-// https://codemirror.net/5/doc/manual.html#config
 const content = ref('')
 
 const plugins = [gfm(), frontmatter(), math(), highlight()]
@@ -29,7 +26,7 @@ const editorConfig = {
 <template>
   <div class="chonglou-editor-layout">
     <Editor
-      :locale="zhHans"
+      locale="zh"
       class="chonglou-editor__instance"
       :editor-config="editorConfig"
       :value="content"

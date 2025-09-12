@@ -13,9 +13,18 @@
     "lint:style": "stylelint \"src/**/*.{css,scss,vue}\" --fix"
   },
   "dependencies": {
+    "@bytemd/plugin-breaks": "^1.22.0",
+    "@bytemd/plugin-frontmatter": "^1.22.0",
+    "@bytemd/plugin-gfm": "^1.22.0",
+    "@bytemd/plugin-highlight": "^1.22.0",
+    "@bytemd/plugin-math": "^1.22.0",
     "@bytemd/vue-next": "^1.22.0",
     "axios": "^1.11.0",
+    "bytemd": "^1.22.0",
     "element-plus": "^2.11.2",
+    "highlight.js": "^11.11.1",
+    "juejin-markdown-themes": "^1.34.0",
+    "katex": "^0.16.22",
     "lodash-unified": "^1.0.3",
     "pinia": "^3.0.3",
     "vite-plugin-pwa": "^1.0.3",
