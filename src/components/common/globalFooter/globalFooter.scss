@@ -71,9 +71,7 @@
     }
 
     &:focus {
-      outline: 2px solid #ffffff;
-      outline-offset: 2px;
-      border-radius: var(--border-radius-sm);
+      outline: none;
     }
   }
 
@@ -125,9 +123,7 @@
       }
 
       &:focus {
-        outline: 2px solid #ffffff;
-        outline-offset: 2px;
-        border-radius: var(--border-radius-sm);
+        outline: none;
       }
     }
   }
@@ -156,9 +152,7 @@
       }
 
       &:focus {
-        outline: 1px solid #ffffff;
-        outline-offset: 2px;
-        border-radius: var(--border-radius-sm);
+        outline: none;
       }
     }
   }

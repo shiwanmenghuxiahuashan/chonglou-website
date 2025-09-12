@@ -15,6 +15,16 @@
   box-sizing: inherit;
 }
 
+// 全局禁用 outline 效果
+*:focus {
+  outline: none;
+}
+
+// 特别针对 a 标签禁用 outline
+a:focus {
+  outline: none;
+}
+
 html {
   font-size: 16px;
   line-height: 1.5;

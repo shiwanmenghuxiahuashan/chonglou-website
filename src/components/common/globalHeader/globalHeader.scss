@@ -105,6 +105,7 @@
       &:focus {
         --el-button-bg-color: var(--bg-hover);
         --el-button-text-color: var(--primary-color);
+        outline: none;
       }
     }
   }
