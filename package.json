@@ -26,6 +26,7 @@
     "axios": "^1.11.0",
     "bytemd": "^1.22.0",
     "element-plus": "^2.11.2",
+    "gsap": "^3.13.0",
     "highlight.js": "^11.11.1",
     "juejin-markdown-themes": "^1.34.0",
     "katex": "^0.16.22",

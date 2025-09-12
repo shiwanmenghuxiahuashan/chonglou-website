@@ -211,11 +211,6 @@ blockquote {
   outline-offset: 2px;
 }
 
-/* ========== 滚动条样式 ========== */
-html {
-  @include mix.custom-scrollbar;
-}
-
 /* ========== 通用工具类 ========== */
 /* 遵循 chonglou- 前缀 + BEM 命名法 */
 
