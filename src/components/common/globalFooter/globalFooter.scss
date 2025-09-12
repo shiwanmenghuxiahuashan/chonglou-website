@@ -1,0 +1,241 @@
+/* ========== Global Footer  ========== */
+.chonglou-global__footer {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  margin-top: auto;
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-normal);
+
+  &-content {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+  }
+
+  &-main {
+    padding: var(--spacing-3xl) 0 var(--spacing-2xl);
+  }
+
+  &-sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-2xl);
+    max-width: 1000px;
+  }
+
+  &-section {
+    &-title {
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-primary);
+      margin: 0 0 var(--spacing-md) 0;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  &-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &-link-item {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  &-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: var(--font-size-xs);
+    transition: color var(--transition-fast);
+    display: inline-block;
+
+    &:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    &:focus {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+      border-radius: var(--border-radius-sm);
+    }
+  }
+
+  &-bottom {
+    border-top: 1px solid var(--border-light);
+    padding: var(--spacing-lg) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    align-items: center;
+    text-align: center;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+    }
+  }
+
+  &-copyright {
+    &-text {
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: var(--font-size-xs);
+    }
+  }
+
+  &-legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    justify-content: center;
+
+    @media (min-width: 768px) {
+      justify-content: flex-end;
+    }
+
+    &-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: var(--font-size-xs);
+      transition: color var(--transition-fast);
+      white-space: nowrap;
+
+      &:hover {
+        color: var(--primary-color);
+        text-decoration: underline;
+      }
+
+      &:focus {
+        outline: 2px solid var(--primary-color);
+        outline-offset: 2px;
+        border-radius: var(--border-radius-sm);
+      }
+    }
+  }
+
+  &-icp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: var(--spacing-sm);
+
+    @media (min-width: 768px) {
+      margin-top: 0;
+      order: 3;
+    }
+
+    &-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-normal);
+      white-space: nowrap;
+
+      &:hover {
+        color: var(--text-primary);
+        text-decoration: underline;
+      }
+
+      &:focus {
+        outline: 1px solid var(--primary-color);
+        outline-offset: 2px;
+        border-radius: var(--border-radius-sm);
+      }
+    }
+  }
+}
+
+/* ========== 暗黑模式适配 ========== */
+:deep(.dark) .chonglou-global__footer {
+  background: var(--bg-secondary);
+  border-top-color: var(--border-light);
+
+  .chonglou-global__footer-section-title {
+    color: var(--text-primary);
+  }
+
+  .chonglou-global__footer-link {
+    color: var(--text-secondary);
+
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+
+  .chonglou-global__footer-copyright-text {
+    color: var(--text-secondary);
+  }
+
+  .chonglou-global__footer-legal-link {
+    color: var(--text-secondary);
+
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+
+  .chonglou-global__footer-icp {
+    &-link {
+      color: var(--text-secondary);
+
+      &:hover {
+        color: var(--text-primary);
+      }
+    }
+  }
+}
+
+/* ========== 响应式设计 ========== */
+@media (max-width: 768px) {
+  .chonglou-global__footer {
+    &-content {
+      padding: 0 var(--spacing-md);
+    }
+
+    &-main {
+      padding: var(--spacing-2xl) 0 var(--spacing-lg);
+    }
+
+    &-sections {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-xl);
+    }
+
+    &-section {
+      &-title {
+        font-size: var(--font-size-xs);
+        margin-bottom: var(--spacing-sm);
+      }
+    }
+
+    &-link {
+      font-size: var(--font-size-xs);
+    }
+
+    &-icp {
+      &-link {
+        font-size: var(--font-size-sm);
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .chonglou-global__footer {
+    &-legal {
+      flex-direction: column;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+
+    &-icp {
+      &-link {
+        font-size: var(--font-size-xs);
+      }
+    }
+  }
+}
